@@ -103,21 +103,21 @@ Choose another option:
   // ==================== 2️⃣ REGISTRATION ASSISTANCE ====================
   "registration": `📝 REGISTRATION OPTIONS:
 
-Option 1️⃣: Online Self-Registration (Fastest)
+a) Online Self-Registration (Fastest)
 ➡️ 🔗 Register directly here: 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 https://edereva.aakenya.co.ke/students/
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Option 2️⃣: Contact AA Ngong Town Directly  
+b) Contact AA Ngong Town Directly  
 📞 Phone: 0759963210  
 📧 Email: aangongtown@aakenya.co.ke  
 ☎️ AA Call Center: 0709 933 000 / 999  
 
-Option 3️⃣: I Can Help You Get Started!  
+c) I Can Help You Get Started!  
 I'll open a registration form for you to fill out, and we'll contact you within 24 hours! 📋✨
 
-*(Opening registration form now...)*
+*(Type "form" or "start registration" to open the form)*
 
 Choose another option:
 1️⃣ Course Information & Fees  
@@ -266,8 +266,7 @@ function findBestResponse(userMessage: string): string {
   // ==================== MENU OPTION 2 - REGISTRATION ====================
   const registrationTriggers = [
     '2', 'register', 'join', 'apply', 'sign up', 'enroll', 'enrollment',
-    'admission', 'admissions', 'how to join', 'how to apply', 'start registration',
-    'registration form', 'help me register', 'option 3'
+    'admission', 'admissions', 'how to join', 'how to apply', 'registration assistance'
   ];
   
   if (registrationTriggers.some(trigger => lowerMessage.includes(trigger))) {
@@ -297,8 +296,8 @@ function findBestResponse(userMessage: string): string {
   
   // ==================== FORM TRIGGER ====================
   const formTriggers = [
-    'form', 'help me get started', 'option 3', 'get started', 'fill form',
-    'registration form', 'start registration'
+    'form', 'help me get started', 'get started', 'fill form',
+    'registration form', 'start registration', 'c)', 'option c'
   ];
   
   if (formTriggers.some(trigger => lowerMessage.includes(trigger))) {

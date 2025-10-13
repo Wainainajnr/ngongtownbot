@@ -74,13 +74,14 @@ export default function ChatPage() {
       };
       setMessages((prev) => [...prev, assistantMessage]);
 
-      // Show form when user triggers registration via option 3 or other triggers
-      if (content.toLowerCase().includes('form') || 
-          content.toLowerCase().includes('get started') || 
-          content === '3' || 
-          content.toLowerCase().includes('registration form') ||
-          content.toLowerCase().includes('option 3') ||
-          (content === '2' && response.data.reply.includes('Opening registration form'))) {
+      // Show form only for specific form triggers, NOT for option 3 (Payment & NTSA)
+      const formTriggers = [
+        'form', 'get started', 'start registration', 'c)', 'option c', 
+        'help me get started', 'registration form'
+      ];
+      
+      if (formTriggers.some(trigger => content.toLowerCase().includes(trigger)) ||
+          (content === '2' && response.data.reply.includes('Type "form"'))) {
         setShowRegistrationForm(true);
       }
     } catch (error) {
