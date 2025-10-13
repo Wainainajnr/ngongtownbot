@@ -166,6 +166,7 @@ Please choose an option:
       <Head>
         <title>EricBot Assistant - AA Ngong Town Driving School</title>
         <meta name="description" content="AI assistant for AA Ngong Town Driving School - Get information about driving courses, fees, registration, and NTSA requirements." />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         
         {/* Favicon Configuration */}
         <link rel="icon" href="/ericbot.png" type="image/png" />
@@ -177,15 +178,15 @@ Please choose an option:
         <meta name="msapplication-TileImage" content="/ericbot.png" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
-        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl flex flex-col h-[85vh] animate-fadeIn border border-gray-100 relative">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-2 sm:p-4">
+        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl flex flex-col h-[95vh] sm:h-[85vh] animate-fadeIn border border-gray-100 relative">
           
           {/* Registration Form Modal */}
           {showRegistrationForm && (
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-              <div className="bg-white rounded-2xl p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
+              <div className="bg-white rounded-2xl p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto mx-2">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold text-gray-800">📋 Registration Form</h2>
+                  <h2 className="text-lg sm:text-xl font-bold text-gray-800">📋 Registration Form</h2>
                   <button
                     onClick={() => setShowRegistrationForm(false)}
                     className="text-gray-400 hover:text-gray-600 text-2xl"
@@ -197,7 +198,7 @@ Please choose an option:
                 <form onSubmit={handleFormSubmit} className="space-y-4">
                   {/* Personal Information Section */}
                   <div className="border-b border-gray-200 pb-4">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">👤 Personal Information</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">👤 Personal Information</h3>
                     
                     <div className="space-y-4">
                       <div>
@@ -209,7 +210,7 @@ Please choose an option:
                           required
                           value={formData.fullName}
                           onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                           placeholder="Enter your full name"
                         />
                       </div>
@@ -223,7 +224,7 @@ Please choose an option:
                           required
                           value={formData.dateOfBirth}
                           onChange={(e) => setFormData({...formData, dateOfBirth: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
                       </div>
 
@@ -236,7 +237,7 @@ Please choose an option:
                           required
                           value={formData.idNumber}
                           onChange={(e) => setFormData({...formData, idNumber: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                           placeholder="Enter ID or passport number"
                         />
                       </div>
@@ -250,7 +251,7 @@ Please choose an option:
                           required
                           value={formData.phoneNumber}
                           onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                           placeholder="07XXXXXXXX"
                         />
                       </div>
@@ -263,7 +264,7 @@ Please choose an option:
                           type="email"
                           value={formData.email}
                           onChange={(e) => setFormData({...formData, email: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                           placeholder="your@email.com (optional)"
                         />
                       </div>
@@ -272,7 +273,7 @@ Please choose an option:
 
                   {/* Emergency Contact Section */}
                   <div className="border-b border-gray-200 pb-4">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">🆘 Emergency Contact</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">🆘 Emergency Contact</h3>
                     
                     <div className="space-y-4">
                       <div>
@@ -284,7 +285,7 @@ Please choose an option:
                           required
                           value={formData.emergencyContactName}
                           onChange={(e) => setFormData({...formData, emergencyContactName: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                           placeholder="Full name of emergency contact"
                         />
                       </div>
@@ -298,7 +299,7 @@ Please choose an option:
                           required
                           value={formData.emergencyContactPhone}
                           onChange={(e) => setFormData({...formData, emergencyContactPhone: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                           placeholder="07XXXXXXXX"
                         />
                       </div>
@@ -307,7 +308,7 @@ Please choose an option:
 
                   {/* Course Information Section */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">🎓 Course Information</h3>
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-3">🎓 Course Information</h3>
                     
                     <div className="space-y-4">
                       <div>
@@ -318,7 +319,7 @@ Please choose an option:
                           required
                           value={formData.preferredCourse}
                           onChange={(e) => setFormData({...formData, preferredCourse: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         >
                           <option value="">Select a course</option>
                           <option value="Motorcycle (Category A)">Motorcycle (Category A)</option>
@@ -341,7 +342,7 @@ Please choose an option:
                           required
                           value={formData.preferredIntake}
                           onChange={(e) => setFormData({...formData, preferredIntake: e.target.value})}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                         />
                       </div>
 
@@ -353,7 +354,7 @@ Please choose an option:
                           value={formData.additionalNotes}
                           onChange={(e) => setFormData({...formData, additionalNotes: e.target.value})}
                           rows={3}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                           placeholder="Any questions or specific requirements..."
                         />
                       </div>
@@ -364,14 +365,14 @@ Please choose an option:
                     <button
                       type="button"
                       onClick={() => setShowRegistrationForm(false)}
-                      className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="flex-1 px-4 py-3 text-base border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={formSubmitting}
-                      className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                      className="flex-1 px-4 py-3 text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
                     >
                       {formSubmitting ? "Submitting..." : "Submit Registration"}
                     </button>
@@ -382,11 +383,11 @@ Please choose an option:
           )}
 
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-t-2xl">
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 sm:p-6 rounded-t-2xl">
             <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3 sm:space-x-4">
                 {/* EricBot Logo */}
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
                   <Image 
                     src="/ericbot.png" 
                     alt="EricBot Assistant"
@@ -407,8 +408,8 @@ Please choose an option:
                   />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold">EricBot Assistant</h1>
-                  <p className="text-blue-100 text-sm opacity-90">
+                  <h1 className="text-lg sm:text-xl font-bold">EricBot Assistant</h1>
+                  <p className="text-blue-100 text-xs sm:text-sm opacity-90">
                     AA Ngong Town Driving School
                   </p>
                 </div>
@@ -421,7 +422,7 @@ Please choose an option:
                     setInput("");
                     setTimeout(() => sendMessage("hi"), 500);
                   }}
-                  className="px-4 py-2 text-sm bg-white text-blue-600 hover:bg-blue-50 border border-white border-opacity-30 rounded-xl transition-all duration-200 backdrop-blur-sm font-semibold shadow-sm hover:shadow-md"
+                  className="px-3 py-2 text-xs sm:text-sm bg-white text-blue-600 hover:bg-blue-50 border border-white border-opacity-30 rounded-xl transition-all duration-200 backdrop-blur-sm font-semibold shadow-sm hover:shadow-md"
                 >
                   New Chat
                 </button>
@@ -430,7 +431,7 @@ Please choose an option:
           </div>
 
           {/* Messages Container */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4 bg-gray-50">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -439,8 +440,8 @@ Please choose an option:
                 }`}
               >
                 {message.role === "assistant" && (
-                  <div className="flex-shrink-0 mr-3 self-end mb-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden shadow-sm">
+                  <div className="flex-shrink-0 mr-2 sm:mr-3 self-end mb-1 sm:mb-2">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden shadow-sm">
                       <Image 
                         src="/ericbot.png" 
                         alt="EricBot"
@@ -459,7 +460,7 @@ Please choose an option:
                   </div>
                 )}
                 <div
-                  className={`max-w-[85%] p-4 rounded-2xl whitespace-pre-wrap shadow-sm ${
+                  className={`max-w-[90%] sm:max-w-[85%] p-3 sm:p-4 rounded-2xl whitespace-pre-wrap shadow-sm text-sm sm:text-base ${
                     message.role === "user"
                       ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-br-none"
                       : "bg-white border border-gray-200 rounded-bl-none shadow-md"
@@ -468,8 +469,8 @@ Please choose an option:
                   {message.content}
                 </div>
                 {message.role === "user" && (
-                  <div className="flex-shrink-0 ml-3 self-end mb-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-sm">
+                  <div className="flex-shrink-0 ml-2 sm:ml-3 self-end mb-1 sm:mb-2">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-sm">
                       <span className="text-white text-xs font-bold">You</span>
                     </div>
                   </div>
@@ -479,8 +480,8 @@ Please choose an option:
 
             {loading && (
               <div className="flex justify-start">
-                <div className="flex-shrink-0 mr-3 self-end mb-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden shadow-sm">
+                <div className="flex-shrink-0 mr-2 sm:mr-3 self-end mb-1 sm:mb-2">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden shadow-sm">
                     <Image 
                       src="/ericbot.png" 
                       alt="EricBot"
@@ -497,8 +498,8 @@ Please choose an option:
                     />
                   </div>
                 </div>
-                <div className="bg-white border border-gray-200 rounded-2xl p-4 shadow-sm rounded-bl-none">
-                  <div className="flex items-center space-x-3">
+                <div className="bg-white border border-gray-200 rounded-2xl p-3 sm:p-4 shadow-sm rounded-bl-none">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
                     <div className="text-gray-600 text-sm font-medium">Thinking</div>
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"></div>
@@ -521,7 +522,7 @@ Please choose an option:
           {/* Quick Options */}
           {(messages.length === 0 || messages[messages.length - 1]?.role === "assistant") && (
             <div className="border-t border-gray-200 bg-white">
-              <div className="flex items-center justify-between p-3 border-b border-gray-100">
+              <div className="flex items-center justify-between p-2 sm:p-3 border-b border-gray-100">
                 <p className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
                   Quick Access
                 </p>
@@ -542,8 +543,8 @@ Please choose an option:
               </div>
 
               {showQuickOptions && (
-                <div className="p-3">
-                  <div className="grid grid-cols-5 gap-2">
+                <div className="p-2 sm:p-3">
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-1 sm:gap-2">
                     {quickOptions.map((option, index) => (
                       <button
                         key={index}
@@ -576,31 +577,31 @@ Please choose an option:
           )}
 
           {/* Input Form */}
-          <div className="p-6 border-t border-gray-200 bg-white rounded-b-2xl">
+          <div className="p-3 sm:p-6 border-t border-gray-200 bg-white rounded-b-2xl">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 sendMessage(input);
               }}
-              className="flex gap-4"
+              className="flex gap-2 sm:gap-4"
             >
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about driving courses or type 1-5 for instant info..."
-                className="flex-1 border-2 border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+                placeholder="Ask about driving courses..."
+                className="flex-1 border-2 border-gray-200 rounded-xl px-3 sm:px-4 py-3 text-base focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200"
                 disabled={loading}
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-400 disabled:to-gray-500 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-200 disabled:cursor-not-allowed min-w-[120px] shadow-md hover:shadow-lg disabled:shadow-none"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-400 disabled:to-gray-500 text-white px-4 sm:px-8 py-3 rounded-xl font-semibold transition-all duration-200 disabled:cursor-not-allowed min-w-[80px] sm:min-w-[120px] shadow-md hover:shadow-lg disabled:shadow-none text-sm sm:text-base"
               >
                 {loading ? (
-                  <div className="flex items-center justify-center space-x-2">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Sending</span>
+                  <div className="flex items-center justify-center space-x-1 sm:space-x-2">
+                    <div className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span className="text-xs sm:text-sm">Sending</span>
                   </div>
                 ) : (
                   "Send"
@@ -608,8 +609,8 @@ Please choose an option:
               </button>
             </form>
 
-            <div className="mt-4 text-center">
-              <p className="text-sm text-gray-500">
+            <div className="mt-3 sm:mt-4 text-center">
+              <p className="text-xs sm:text-sm text-gray-500">
                 💡 <span className="font-semibold">Tip:</span> Type numbers 1–5 for instant access
               </p>
             </div>
