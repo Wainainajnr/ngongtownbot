@@ -1,5 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
+// Define proper interfaces for form data
+interface RegistrationFormData {
+  fullName: string;
+  dateOfBirth: string;
+  idNumber: string;
+  phoneNumber: string;
+  email: string;
+  emergencyContactName: string;
+  emergencyContactPhone: string;
+  preferredCourse: string;
+  preferredIntake: string;
+  additionalNotes: string;
+}
+
+interface ChatRequestBody {
+  messages?: Array<{ role: string; content: string }>;
+  formData?: RegistrationFormData;
+  action?: string;
+}
+
 // Comprehensive response database for AA Ngong Town Driving School
 const responseDatabase: { [key: string]: string } = {
   // ==================== GREETING TRIGGER ====================
@@ -32,23 +52,23 @@ Course Fee: KSh 18,780
 NTSA Fee: KSh 2,450 (via eCitizen)  
 Duration: 5 weeks
 
-🚐 Passenger Light Vehicle (Category B3)
+🚐 Passenger Light Vehicle (Category D1)
 Course Fee: KSh 10,780  
 NTSA Fee: KSh 2,350  
-Duration: 3 weeks  
-Requires Category B license with 2 years experience.
+Duration: 5 weeks  
+Requires Category B license
 
 🚚 Light & Medium Trucks (Category C1/C)
 Course Fee: KSh 12,780  
 NTSA Fee: KSh 2,350  
-Duration: 3 weeks  
-Requires Category B license with 2 years experience.
+Duration: 5 weeks  
+Requires Category B license
 
 🚌 Public Service Vehicle (Category D1/D)
 Course Fee: KSh 12,780  
 NTSA Fee: KSh 2,350  
-Duration: 3 weeks  
-Requires Category B and C license with 2 years experience.
+Duration: 5 weeks  
+Requires Category B license
 
 ⭐ Premier Driving
 Course Fee: KSh 50,000  
@@ -61,7 +81,7 @@ Light Vehicle: KSh 10,000
 Light & Medium Truck: KSh 11,500  
 Premier Refresher: KSh 20,000
 
-📋 ASSESSMENT COURSES (1 Days)
+📋 ASSESSMENT COURSES (1-2 Days)
 Class B (Saloon): KSh 5,000  
 Class C (Trucks): KSh 6,000
 
@@ -147,7 +167,9 @@ Payment:
 
 📋 NTSA REQUIREMENTS
 ✅ National ID or Passport Copy  
-✅ Passport Photo softcopy  
+✅ 2 Passport Photos  
+✅ Eye Test Results (from AA or approved center)  
+✅ NTSA TIMS Account  
 ✅ eCitizen login for NTSA payments  
 
 For help with NTSA setup or eye test booking, call 0759963210.
@@ -172,29 +194,27 @@ Minimum Age: 18 years
 No prior license needed  
 
 🧾 REQUIRES CATEGORY B FIRST:
-🔹 Category B3 – Light Trucks  
-Minimum Age: 18 years  
-Must have: Category B license with 2 year experience
-
-🧾 REQUIRES CATEGORY B FIRST:
 🔹 Category C1 – Light Trucks  
 Minimum Age: 18 years  
-Must have: Category B license with 2 year experience
+Must have: Category B license  
 
 🔹 Category D1 – Small Passenger Vans (PSV)  
 Minimum Age: 21 years  
-Must have: Category B and C license with 2 year experience
+Must have: Category B license  
 
 🚚 REQUIRES LOWER TRUCK CATEGORY:
 🔹 Category C – Medium Trucks  
 Minimum Age: 21 years  
-Must have: Category C1 license with 2 year experience 
+Must have: Category C1 license  
 
+🔹 Category CE – Heavy Trucks/Articulated  
+Minimum Age: 24 years  
+Must have: Category C license  
 
 🚌 REQUIRES LOWER PSV CATEGORY:
-🔹 Category D2 – Large Passenger Vehicles  
+🔹 Category D – Large Passenger Vehicles  
 Minimum Age: 24 years  
-Must have: Category D1 license with 2 year experience
+Must have: Category D1 license  
 
 ⚙️ SPECIAL VEHICLES:
 🔹 Category G – Industrial/Construction Vehicles  
@@ -235,7 +255,7 @@ Please choose an option:
 };
 
 // Function to generate WhatsApp URL
-function generateWhatsAppURL(formData: any): string {
+function generateWhatsAppURL(formData: RegistrationFormData): string {
   const message = `🚗 NEW DRIVING SCHOOL REGISTRATION
 
 👤 PERSONAL DETAILS:
@@ -345,7 +365,7 @@ function findBestResponse(userMessage: string): string {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
-      const { messages, formData, action } = req.body;
+      const { messages, formData, action }: ChatRequestBody = req.body;
       
       // Handle form submission
       if (action === 'submitRegistration' && formData) {
@@ -397,7 +417,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       
       res.status(200).json({ reply });
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("💥 Error in chat handler:", error);
       
       res.status(200).json({ 

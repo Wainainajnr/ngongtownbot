@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 import Head from "next/head";
+import Image from "next/image";
 
 interface Message {
   role: "user" | "assistant";
@@ -52,7 +53,7 @@ export default function ChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const sendMessage = async (content: string) => {
+  const sendMessage = useCallback(async (content: string) => {
     if (!content.trim() || loading) return;
 
     const userMessage: Message = { role: "user", content: content.trim() };
@@ -96,7 +97,7 @@ Please choose an option:
     } finally {
       setLoading(false);
     }
-  };
+  }, [loading, messages]);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -158,7 +159,7 @@ Please choose an option:
     if (messages.length === 0) {
       sendMessage("hi");
     }
-  }, []);
+  }, [messages.length, sendMessage]);
 
   return (
     <>
@@ -386,12 +387,13 @@ Please choose an option:
               <div className="flex items-center space-x-4">
                 {/* EricBot Logo */}
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
-                  <img 
+                  <Image 
                     src="/ericbot.png" 
                     alt="EricBot Assistant"
+                    width={48}
+                    height={48}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      // Fallback if image fails to load
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
                       target.parentElement!.innerHTML = `
@@ -439,12 +441,13 @@ Please choose an option:
                 {message.role === "assistant" && (
                   <div className="flex-shrink-0 mr-3 self-end mb-2">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden shadow-sm">
-                      <img 
+                      <Image 
                         src="/ericbot.png" 
                         alt="EricBot"
+                        width={32}
+                        height={32}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          // Fallback if image fails to load
                           const target = e.target as HTMLImageElement;
                           target.style.display = 'none';
                           target.parentElement!.innerHTML = `
@@ -478,9 +481,11 @@ Please choose an option:
               <div className="flex justify-start">
                 <div className="flex-shrink-0 mr-3 self-end mb-2">
                   <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden shadow-sm">
-                    <img 
+                    <Image 
                       src="/ericbot.png" 
                       alt="EricBot"
+                      width={32}
+                      height={32}
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
