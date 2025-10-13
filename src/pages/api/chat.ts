@@ -52,23 +52,23 @@ Course Fee: KSh 18,780
 NTSA Fee: KSh 2,450 (via eCitizen)  
 Duration: 5 weeks
 
-🚐 Passenger Light Vehicle (Category D1)
+🚐 Passenger Light Vehicle (Category B3)
 Course Fee: KSh 10,780  
 NTSA Fee: KSh 2,350  
-Duration: 5 weeks  
-Requires Category B license
+Duration: 3 weeks  
+Requires Category B license with 2 years experience.
 
 🚚 Light & Medium Trucks (Category C1/C)
 Course Fee: KSh 12,780  
 NTSA Fee: KSh 2,350  
 Duration: 5 weeks  
-Requires Category B license
+Requires Category B license with 2 years experience.
 
 🚌 Public Service Vehicle (Category D1/D)
 Course Fee: KSh 12,780  
 NTSA Fee: KSh 2,350  
 Duration: 5 weeks  
-Requires Category B license
+Requires Category B and C license
 
 ⭐ Premier Driving
 Course Fee: KSh 50,000  
@@ -196,30 +196,25 @@ No prior license needed
 🧾 REQUIRES CATEGORY B FIRST:
 🔹 Category C1 – Light Trucks  
 Minimum Age: 18 years  
-Must have: Category B license  
+Must have: Category B license with 2 years experience 
 
 🔹 Category D1 – Small Passenger Vans (PSV)  
 Minimum Age: 21 years  
-Must have: Category B license  
+Must have: Category B and C1 license  
 
 🚚 REQUIRES LOWER TRUCK CATEGORY:
 🔹 Category C – Medium Trucks  
 Minimum Age: 21 years  
-Must have: Category C1 license  
+Must have: Category C1 license with 2 years experience
 
 🔹 Category CE – Heavy Trucks/Articulated  
 Minimum Age: 24 years  
-Must have: Category C license  
+Must have: Category C license with 2 years experience
 
 🚌 REQUIRES LOWER PSV CATEGORY:
 🔹 Category D – Large Passenger Vehicles  
 Minimum Age: 24 years  
-Must have: Category D1 license  
-
-⚙️ SPECIAL VEHICLES:
-🔹 Category G – Industrial/Construction Vehicles  
-Minimum Age: 21 years  
-Must have: Category B or C (depending on vehicle type)
+Must have: Category D1 license 2 years experience 
 
 Choose another option:
 1️⃣ Course Information & Fees  
