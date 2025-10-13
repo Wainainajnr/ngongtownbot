@@ -74,11 +74,13 @@ export default function ChatPage() {
       };
       setMessages((prev) => [...prev, assistantMessage]);
 
-      // Show form when user triggers registration
+      // Show form when user triggers registration via option 3 or other triggers
       if (content.toLowerCase().includes('form') || 
           content.toLowerCase().includes('get started') || 
           content === '3' || 
-          content.toLowerCase().includes('registration form')) {
+          content.toLowerCase().includes('registration form') ||
+          content.toLowerCase().includes('option 3') ||
+          (content === '2' && response.data.reply.includes('Opening registration form'))) {
         setShowRegistrationForm(true);
       }
     } catch (error) {
@@ -89,9 +91,8 @@ export default function ChatPage() {
 Please choose an option:  
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Local Branch Services  
-4️⃣ Payment & NTSA Requirements  
-5️⃣ License Prerequisites`,
+3️⃣ Payment & NTSA Requirements  
+4️⃣ License Prerequisites`,
       };
       setMessages((prev) => [...prev, fallbackMessage]);
     } finally {
@@ -150,9 +151,9 @@ Please choose an option:
   const quickOptions = [
     { label: "1️⃣ Courses", message: "1", description: "Course Info & Fees" },
     { label: "2️⃣ Register", message: "2", description: "Registration Help" },
-    { label: "3️⃣ Start Form", message: "start registration", description: "Begin Registration" },
-    { label: "4️⃣ NTSA", message: "4", description: "Requirements" },
-    { label: "5️⃣ License", message: "5", description: "Prerequisites" },
+    { label: "3️⃣ NTSA", message: "3", description: "Requirements" },
+    { label: "4️⃣ License", message: "4", description: "Prerequisites" },
+    { label: "📋 Start Form", message: "start registration", description: "Begin Registration" },
   ];
 
   useEffect(() => {
@@ -611,7 +612,7 @@ Please choose an option:
 
             <div className="mt-3 sm:mt-4 text-center">
               <p className="text-xs sm:text-sm text-gray-500">
-                💡 <span className="font-semibold">Tip:</span> Type numbers 1–5 for instant access
+                💡 <span className="font-semibold">Tip:</span> Type numbers 1–4 for instant access
               </p>
             </div>
           </div>

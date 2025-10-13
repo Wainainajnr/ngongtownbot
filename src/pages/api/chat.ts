@@ -35,9 +35,8 @@ We offer comprehensive driving courses (5 weeks for main courses, 3 weeks for re
 Please choose an option:  
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Local Branch Services  
-4️⃣ Payment & NTSA Requirements  
-5️⃣ License Prerequisites`,
+3️⃣ Payment & NTSA Requirements  
+4️⃣ License Prerequisites`,
 
   // ==================== 1️⃣ COURSE INFORMATION & FEES ====================
   "course_info": `📚 STANDARD COURSES (5 Weeks Duration)
@@ -61,13 +60,13 @@ Requires Category B license with 2 years experience.
 🚚 Light & Medium Trucks (Category C1/C)
 Course Fee: KSh 12,780  
 NTSA Fee: KSh 2,350  
-Duration: 5 weeks  
+Duration: 3 weeks  
 Requires Category B license with 2 years experience.
 
 🚌 Public Service Vehicle (Category D1/D)
 Course Fee: KSh 12,780  
 NTSA Fee: KSh 2,350  
-Duration: 5 weeks  
+Duration: 3 weeks  
 Requires Category B and C license
 
 ⭐ Premier Driving
@@ -98,9 +97,8 @@ Afternoon: 12:00 PM - 1:00 PM
 Choose another option:
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Local Branch Services  
-4️⃣ Payment & NTSA Requirements  
-5️⃣ License Prerequisites`,
+3️⃣ Payment & NTSA Requirements  
+4️⃣ License Prerequisites`,
 
   // ==================== 2️⃣ REGISTRATION ASSISTANCE ====================
   "registration": `📝 REGISTRATION OPTIONS:
@@ -117,47 +115,17 @@ Option 2️⃣: Contact AA Ngong Town Directly
 ☎️ AA Call Center: 0709 933 000 / 999  
 
 Option 3️⃣: I Can Help You Get Started!  
-Click the "Start Registration" button below to fill out a simple form, and we'll contact you within 24 hours! 📋✨
+I'll open a registration form for you to fill out, and we'll contact you within 24 hours! 📋✨
+
+*(Opening registration form now...)*
 
 Choose another option:
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Local Branch Services  
-4️⃣ Payment & NTSA Requirements  
-5️⃣ License Prerequisites`,
+3️⃣ Payment & NTSA Requirements  
+4️⃣ License Prerequisites`,
 
-  // ==================== 3️⃣ LOCAL BRANCH SERVICES ====================
-  "branch_services": `🏢 LOCAL NGONG TOWN BRANCH SERVICES
-
-We offer:
-✅ Certified experienced instructors  
-✅ 5-week curriculum (3-week refresher)  
-✅ Smart driving license processing  
-✅ NTSA test booking assistance  
-✅ Evening/weekend classes  
-✅ All NTSA license categories  
-✅ Well-maintained training vehicles  
-✅ Personalized local attention  
-✅ Part of AA Kenya's 60+ branch network  
-
-📍 Branch Details:
-AA Ngong Town Driving School  
-Phone: 0759963210  
-Email: aangongtown@aakenya.co.ke  
-AA Call Center: 0709 933 000 / 999  
-
-📅 Intakes every Wednesday:  
-Morning: 9:00 AM - 10:00 AM  
-Afternoon: 12:00 PM - 1:00 PM
-
-Choose another option:
-1️⃣ Course Information & Fees  
-2️⃣ Registration Assistance  
-3️⃣ Local Branch Services  
-4️⃣ Payment & NTSA Requirements  
-5️⃣ License Prerequisites`,
-
-  // ==================== 4️⃣ PAYMENT & NTSA REQUIREMENTS ====================
+  // ==================== 3️⃣ PAYMENT & NTSA REQUIREMENTS ====================
   "payment_ntsa": `💳 PAYMENT & NTSA REQUIREMENTS
 
 Payment:
@@ -167,21 +135,17 @@ Payment:
 
 📋 NTSA REQUIREMENTS
 ✅ National ID or Passport Copy  
-✅ 2 Passport Photos  
-✅ Eye Test Results (from AA or approved center)  
-✅ NTSA TIMS Account  
-✅ eCitizen login for NTSA payments  
+✅ Passport Photos softcopy
 
 For help with NTSA setup or eye test booking, call 0759963210.
 
 Choose another option:
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Local Branch Services  
-4️⃣ Payment & NTSA Requirements  
-5️⃣ License Prerequisites`,
+3️⃣ Payment & NTSA Requirements  
+4️⃣ License Prerequisites`,
 
-  // ==================== 5️⃣ LICENSE PREREQUISITES ====================
+  // ==================== 4️⃣ LICENSE PREREQUISITES ====================
   "license_prerequisites": `📋 LICENSE PREREQUISITES
 
 🚦 NO PREREQUISITES (Entry-Level):
@@ -219,9 +183,8 @@ Must have: Category D1 license 2 years experience
 Choose another option:
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Local Branch Services  
-4️⃣ Payment & NTSA Requirements  
-5️⃣ License Prerequisites`,
+3️⃣ Payment & NTSA Requirements  
+4️⃣ License Prerequisites`,
 
   // ==================== FORM TRIGGER RESPONSE ====================
   "start_registration": `📋 REGISTRATION FORM
@@ -244,9 +207,8 @@ You can also continue browsing other options while the form is open.`,
 Please choose an option:  
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Local Branch Services  
-4️⃣ Payment & NTSA Requirements  
-5️⃣ License Prerequisites`
+3️⃣ Payment & NTSA Requirements  
+4️⃣ License Prerequisites`
 };
 
 // Function to generate WhatsApp URL
@@ -305,26 +267,16 @@ function findBestResponse(userMessage: string): string {
   const registrationTriggers = [
     '2', 'register', 'join', 'apply', 'sign up', 'enroll', 'enrollment',
     'admission', 'admissions', 'how to join', 'how to apply', 'start registration',
-    'registration form', 'help me register'
+    'registration form', 'help me register', 'option 3'
   ];
   
   if (registrationTriggers.some(trigger => lowerMessage.includes(trigger))) {
     return responseDatabase["registration"];
   }
   
-  // ==================== MENU OPTION 3 - BRANCH SERVICES ====================
-  const branchTriggers = [
-    '3', 'branch', 'ngong', 'services', 'location', 'address', 'where',
-    'contact', 'phone', 'email', 'office', 'facilities', 'instructors'
-  ];
-  
-  if (branchTriggers.some(trigger => lowerMessage.includes(trigger))) {
-    return responseDatabase["branch_services"];
-  }
-  
-  // ==================== MENU OPTION 4 - PAYMENT & NTSA ====================
+  // ==================== MENU OPTION 3 - PAYMENT & NTSA ====================
   const paymentTriggers = [
-    '4', 'ntsa', 'payment', 'requirements', 'documents', 'what do i need',
+    '3', 'ntsa', 'payment', 'requirements', 'documents', 'what do i need',
     'requirements', 'prerequisites', 'documents needed', 'eye test'
   ];
   
@@ -332,9 +284,9 @@ function findBestResponse(userMessage: string): string {
     return responseDatabase["payment_ntsa"];
   }
   
-  // ==================== MENU OPTION 5 - LICENSE PREREQUISITES ====================
+  // ==================== MENU OPTION 4 - LICENSE PREREQUISITES ====================
   const licenseTriggers = [
-    '5', 'license', 'prerequisite', 'requirement', 'eligibility', 
+    '4', 'license', 'prerequisite', 'requirement', 'eligibility', 
     'qualified', 'qualifications', 'what do i need for license',
     'license requirements', 'driving license', 'categories'
   ];
