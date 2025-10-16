@@ -6,7 +6,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useLanguage } from '../contexts/LanguageContext';
 
-// Interfaces (keep your existing interfaces the same)
+// Interfaces
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -51,6 +51,14 @@ interface ChatResponse {
   };
 }
 
+interface AxiosError {
+  response?: {
+    data: ChatResponse;
+    status: number;
+  };
+  request?: unknown;
+}
+
 export default function ChatPage() {
   const { language, setLanguage, t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -76,7 +84,7 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Validation functions (keep your existing validation functions the same)
+  // Validation functions
   const validateField = (name: keyof FormData, value: string): string => {
     switch (name) {
       case 'fullName':
@@ -154,7 +162,7 @@ export default function ChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const sendMessage = useCallback(async (content: string, isQuickOption = false) => {
+  const sendMessage = useCallback(async (content: string, _isQuickOption = false) => { // FIXED: Added underscore to unused parameter
     if (!content.trim() || loading) return;
 
     const userMessage: Message = { role: "user", content: content.trim() };
@@ -195,22 +203,21 @@ export default function ChatPage() {
           (content === '2' && response.data.reply.includes('Type "form"'))) {
         setShowRegistrationForm(true);
       }
-    } catch (error: any) {
+    } catch (error: unknown) { // FIXED: Replaced 'any' with 'unknown'
       console.error("Chat error:", error);
       
       let errorMessage = t('greeting');
 
-      // Fixed axios error checking
-      if (error.response) {
-        const response = error.response.data as ChatResponse;
-        if (error.response.status === 429) {
+      if (typeof error === 'object' && error !== null && 'response' in error) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response?.status === 429) {
           errorMessage = "⏳ " + t('rateLimitExceeded');
-        } else if (response?.message) {
-          errorMessage = `❌ ${response.message}`;
-        } else if (error.response.status === 400) {
+        } else if (axiosError.response?.data?.message) {
+          errorMessage = `❌ ${axiosError.response.data.message}`;
+        } else if (axiosError.response?.status === 400) {
           errorMessage = "❌ " + t('invalidMessage');
         }
-      } else if (error.request) {
+      } else if (typeof error === 'object' && error !== null && 'request' in error) {
         // Network error
         errorMessage = "🌐 Network error. Please check your connection and try again.";
       }
@@ -291,20 +298,19 @@ export default function ChatPage() {
         preferredIntake: "",
         additionalNotes: ""
       });
-    } catch (error: any) {
+    } catch (error: unknown) { // FIXED: Replaced 'any' with 'unknown'
       console.error("Form submission error:", error);
       
       let errorMessage = t('submissionFailed');
 
-      // Fixed axios error checking
-      if (error.response) {
-        const response = error.response.data as ChatResponse;
-        if (response?.errors) {
-          errorMessage = `❌ ${t('validationFailed')}: ${response.errors.join(', ')}`;
-        } else if (response?.message) {
-          errorMessage = `❌ ${response.message}`;
+      if (typeof error === 'object' && error !== null && 'response' in error) {
+        const axiosError = error as AxiosError;
+        if (axiosError.response?.data?.errors) {
+          errorMessage = `❌ ${t('validationFailed')}: ${axiosError.response.data.errors.join(', ')}`;
+        } else if (axiosError.response?.data?.message) {
+          errorMessage = `❌ ${axiosError.response.data.message}`;
         }
-      } else if (error.request) {
+      } else if (typeof error === 'object' && error !== null && 'request' in error) {
         // Network error
         errorMessage = "🌐 Network error. Please check your connection and try again.";
       }
