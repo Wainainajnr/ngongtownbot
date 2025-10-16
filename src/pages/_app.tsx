@@ -1,6 +1,11 @@
-import type { AppProps } from "next/app";
-import "@/styles/globals.css"; // ✅ Make sure this path matches your folder structure
+import { LanguageProvider } from '../contexts/LanguageContext';
+import type { AppProps } from 'next/app';
+import '../styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <LanguageProvider>
+      <Component {...pageProps} />
+    </LanguageProvider>
+  );
 }

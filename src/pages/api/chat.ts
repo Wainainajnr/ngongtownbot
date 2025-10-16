@@ -25,7 +25,12 @@ const responseDatabase: { [key: string]: string } = {
   // ==================== GREETING TRIGGER ====================
   "greeting": `Hello! 👋 Welcome to AA Ngong Town Driving School! 🚗
 
-We offer comprehensive driving courses (5 weeks for main courses, 3 weeks for refresher) with certified instructors right here in Ngong Town.
+We offer comprehensive driving courses with certified instructors right here in Ngong Town.
+
+🚗 BEGINNER'S STARTING POINT:
+If you're just getting started, you'll begin with a saloon car—either automatic or manual. The training fee is KSh 18,780, with an option to pay a deposit of KSh 12,000 and settle the balance after one week. Additionally, NTSA charges of KSh 2,450 apply, covering the PDL, driving test, and interim driving license.
+
+The course runs for 5 weeks, with new intakes every Wednesday. You can choose between two time slots: 9:00–10:00 AM or 12:00–1:00 PM.
 
 ⚠️ Important: Check NTSA requirements before applying for any class.
 
@@ -41,13 +46,22 @@ Please choose an option:
   // ==================== 1️⃣ COURSE INFORMATION & FEES ====================
   "course_info": `📚 STANDARD COURSES (5 Weeks Duration)
 
+🚗 Saloon Car (Category B) - Beginner's Course
+Course Fee: KSh 18,780  
+Deposit Option: KSh 12,000 (balance after 1 week)  
+NTSA Fee: KSh 2,450 (via eCitizen)  
+Duration: 5 weeks  
+Intake: Every Wednesday  
+Time Slots: 9:00–10:00 AM or 12:00–1:00 PM  
+Transmission: Automatic or Manual
+
+🏍️ Motorcycle (Category A-Riders who know how to ride)
+Course Fee: KSh 3,000  
+NTSA Fee: KSh 2,450 (via eCitizen)  
+Duration: 3 weeks
+
 🏍️ Motorcycle (Category A)
 Course Fee: KSh 5,780  
-NTSA Fee: KSh 2,450 (via eCitizen)  
-Duration: 5 weeks
-
-🚗 Saloon Car (Category B)
-Course Fee: KSh 18,780  
 NTSA Fee: KSh 2,450 (via eCitizen)  
 Duration: 5 weeks
 
@@ -83,11 +97,6 @@ Premier Refresher: KSh 20,000
 📋 ASSESSMENT COURSES (1-2 Days)
 Class B (Saloon): KSh 5,000  
 Class C (Trucks): KSh 6,000
-
-📅 INTAKE SCHEDULE
-Every Wednesday  
-Morning: 9:00 AM - 10:00 AM  
-Afternoon: 12:00 PM - 1:00 PM
 
 💳 PAYMENT METHODS
 • Course Fees — M-Pesa / Bank Transfer ONLY  
@@ -137,7 +146,7 @@ Payment:
 ✅ National ID or Passport Copy  
 ✅ Passport Photos softcopy
 
-For help with NTSA setup or eye test booking, call 0759963210.
+For help with NTSA setup, call 0759963210.
 
 Choose another option:
 1️⃣ Course Information & Fees  
