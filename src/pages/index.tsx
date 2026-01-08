@@ -5,53 +5,10 @@ import axios from "axios";
 import Head from "next/head";
 import Image from "next/image";
 import { useLanguage } from '../contexts/LanguageContext';
+import RegistrationForm from '../components/RegistrationForm';
+import { Message, RegistrationFormData, ChatResponse } from '../types';
 
-// Interfaces
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
-
-interface FormData {
-  fullName: string;
-  dateOfBirth: string;
-  idNumber: string;
-  phoneNumber: string;
-  email: string;
-  emergencyContactName: string;
-  emergencyContactPhone: string;
-  preferredCourse: string;
-  preferredIntake: string;
-  additionalNotes: string;
-}
-
-interface FormErrors {
-  fullName?: string;
-  dateOfBirth?: string;
-  idNumber?: string;
-  phoneNumber?: string;
-  email?: string;
-  emergencyContactName?: string;
-  emergencyContactPhone?: string;
-  preferredCourse?: string;
-  preferredIntake?: string;
-  additionalNotes?: string;
-}
-
-interface ChatResponse {
-  reply: string;
-  whatsappUrl?: string;
-  error?: string;
-  message?: string;
-  errors?: string[];
-  fieldErrors?: string[];
-  rateLimit?: {
-    remaining: number;
-    reset: number;
-  };
-}
-
-interface AxiosError {
+interface LocalAxiosError {
   response?: {
     data: ChatResponse;
     status: number;
@@ -59,112 +16,351 @@ interface AxiosError {
   request?: unknown;
 }
 
+const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
+  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[90%] w-full">
+    <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10">
+      <h3 className="font-semibold text-primary-blue text-sm">Welcome to AA Ngong Town Driving School</h3>
+    </div>
+    <div className="p-4 space-y-3">
+      <ul className="space-y-2 text-sm text-gray-600">
+        {[
+          "Course Information & Fees",
+          "Registration Assistance",
+          "Payment & NTSA Requirements",
+          "License Prerequisites"
+        ].map((item, idx) => (
+          <li key={idx}>
+            <button
+              onClick={() => onOptionSelect(item)}
+              className="flex items-start gap-2 w-full text-left hover:bg-gray-50 p-1.5 -ml-1.5 rounded-lg transition-colors group"
+            >
+              <span className="text-cta-green mt-0.5 group-hover:scale-110 transition-transform">✓</span>
+              <span className="group-hover:text-primary-blue transition-colors">{item}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
+
+const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
+  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[95%] w-full">
+    <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10">
+      <h3 className="font-semibold text-primary-blue text-sm">Course Information & Fees</h3>
+    </div>
+    <div className="p-4 space-y-4 text-sm text-gray-700 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300">
+
+      {/* Saloon Car */}
+      <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+        <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2">🚗 Saloon Car (Category B) <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Beginner's Course</span></h4>
+        <div className="space-y-1.5 text-xs">
+          <p><span className="font-semibold">Course Fee:</span> KSh 18,780</p>
+          <p><span className="font-semibold">Deposit Option:</span> KSh 12,000 (balance after 1 week)</p>
+          <p><span className="font-semibold">NTSA Fee:</span> KSh 2,450 (via eCitizen)</p>
+          <p><span className="font-semibold">Duration:</span> 5 weeks</p>
+          <p><span className="font-semibold">Intake:</span> Every Wednesday</p>
+          <p><span className="font-semibold">Time Slots:</span> 9:00–10:00 AM or 12:00–1:00 PM</p>
+          <p><span className="font-semibold">Transmission:</span> Automatic or Manual</p>
+        </div>
+      </div>
+
+      {/* Premier Driving */}
+      <div className="bg-amber-50 border border-amber-100 p-3 rounded-xl">
+        <h4 className="font-bold text-amber-900 mb-1 flex items-center gap-2">⭐ Premier Driving <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">Beginner</span></h4>
+        <div className="space-y-1 text-xs">
+          <p className="text-amber-800"><span className="font-semibold">Course Fee:</span> KSh 50,000</p>
+          <p className="text-amber-800"><span className="font-semibold">NTSA Fee:</span> Included in fees + smart driving license</p>
+          <p className="text-amber-800"><span className="font-semibold">Duration:</span> 5 weeks</p>
+          <p className="text-amber-800 italic">Private lessons</p>
+        </div>
+      </div>
+
+      {/* Motorcycle */}
+      <div className="grid grid-cols-1 gap-3">
+        <div className="border border-gray-100 p-3 rounded-xl">
+          <h4 className="font-bold text-gray-900 mb-1">🏍️ Motorcycle (Category A-Riders who know how to ride)</h4>
+          <div className="space-y-1 text-xs">
+            <p><span className="font-semibold">Course Fee:</span> KSh 3,000</p>
+            <p><span className="font-semibold">NTSA Fee:</span> KSh 2,450 (via eCitizen)</p>
+            <p><span className="font-semibold">Duration:</span> 3 weeks</p>
+          </div>
+        </div>
+        <div className="border border-gray-100 p-3 rounded-xl">
+          <h4 className="font-bold text-gray-900 mb-1">🏍️ Motorcycle (Category A)</h4>
+          <div className="space-y-1 text-xs">
+            <p><span className="font-semibold">Course Fee:</span> KSh 5,780</p>
+            <p><span className="font-semibold">NTSA Fee:</span> KSh 2,450 (via eCitizen)</p>
+            <p><span className="font-semibold">Duration:</span> 5 weeks</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Other Categories */}
+      <div className="space-y-3">
+        <div className="border border-gray-100 p-3 rounded-xl">
+          <h4 className="font-bold text-gray-900 mb-1">🚐 Passenger Light Vehicle (Category B3)</h4>
+          <div className="space-y-1 text-xs">
+            <p><span className="font-semibold">Course Fee:</span> KSh 10,780</p>
+            <p><span className="font-semibold">NTSA Fee:</span> KSh 2,350</p>
+            <p><span className="font-semibold">Duration:</span> 3 weeks</p>
+            <p className="text-amber-700 italic">Requires Category B license with 2 years experience.</p>
+          </div>
+        </div>
+
+        <div className="border border-gray-100 p-3 rounded-xl">
+          <h4 className="font-bold text-gray-900 mb-1">🚚 Light & Medium Trucks (Category C1/C)</h4>
+          <div className="space-y-1 text-xs">
+            <p><span className="font-semibold">Course Fee:</span> KSh 12,780</p>
+            <p><span className="font-semibold">NTSA Fee:</span> KSh 2,350</p>
+            <p><span className="font-semibold">Duration:</span> 3 weeks</p>
+            <p className="text-amber-700 italic">Requires Category B license with 2 years experience.</p>
+          </div>
+        </div>
+
+        <div className="border border-gray-100 p-3 rounded-xl">
+          <h4 className="font-bold text-gray-900 mb-1">🚌 Public Service Vehicle (Category D1/D)</h4>
+          <div className="space-y-1 text-xs">
+            <p><span className="font-semibold">Course Fee:</span> KSh 12,780</p>
+            <p><span className="font-semibold">NTSA Fee:</span> KSh 2,350</p>
+            <p><span className="font-semibold">Duration:</span> 3 weeks</p>
+            <p className="text-amber-700 italic">Requires Category B and C license</p>
+          </div>
+        </div>
+
+
+      </div>
+
+      {/* Refresher & Assessment */}
+      <div className="grid grid-cols-1 gap-3 pt-2">
+        <div className="bg-gray-50 p-2.5 rounded-lg border border-gray-100">
+          <h5 className="font-semibold text-xs mb-1.5">🔄 REFRESHER COURSES (3 Weeks)</h5>
+          <div className="grid grid-cols-2 gap-2 text-[10px]">
+            <p>Light Vehicle: KSh 10,000</p>
+            <p>Light & Medium Truck: KSh 11,500</p>
+            <p className="col-span-2">Premier Refresher: KSh 20,000</p>
+          </div>
+        </div>
+        <div className="bg-gray-50 p-2.5 rounded-lg border border-gray-100">
+          <h5 className="font-semibold text-xs mb-1.5">📋 ASSESSMENT COURSES (1-2 Days)</h5>
+          <div className="grid grid-cols-2 gap-2 text-[10px]">
+            <p>Class B (Saloon): KSh 5,000</p>
+            <p>Class C (Trucks): KSh 6,000</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-green-50 p-3 rounded-xl border border-green-100 text-xs">
+        <h4 className="font-bold text-green-800 mb-1">💳 PAYMENT METHODS</h4>
+        <p>• Course Fees — M-Pesa / Bank Transfer ONLY</p>
+        <p>• NTSA Fees — via eCitizen</p>
+        <p className="text-green-700 italic mt-1">(Cash NOT accepted at branch)</p>
+      </div>
+
+    </div>
+    {/* Navigation Footer */}
+    <div className="bg-gray-50 p-3 border-t border-gray-100">
+      <p className="text-[10px] text-gray-400 font-medium uppercase mb-2 tracking-wider">Choose another option</p>
+      <div className="flex flex-wrap gap-2">
+        {[
+          "Registration",
+          "Payment & NTSA"
+        ].map((opt, i) => (
+          <button
+            key={i}
+            onClick={() => onOptionSelect(opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt)}
+            className="px-3 py-1.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-medium text-gray-600 hover:text-primary-blue hover:border-primary-blue/30 transition-all"
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSelect: (opt: string) => void, onStartForm: () => void }) => (
+  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[90%] w-full">
+    <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10">
+      <h3 className="font-semibold text-primary-blue text-sm">Registration Assistance</h3>
+    </div>
+    <div className="p-4 space-y-4">
+
+      <div className="space-y-2">
+        <h4 className="text-sm font-semibold text-gray-800">a) Online Self-Registration (Fastest)</h4>
+        <a
+          href="https://edereva.aakenya.co.ke/students/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full text-center py-2.5 bg-white border-2 border-cta-green text-cta-green rounded-xl text-sm font-bold shadow-sm hover:bg-green-50 transition-colors"
+        >
+          🔗 Register Online Here
+        </a>
+      </div>
+
+      <div className="h-px bg-gray-100"></div>
+
+      {/* Option B */}
+      <div className="space-y-2">
+        <h4 className="text-sm font-semibold text-gray-800">b) Contact AA Ngong Town Directly</h4>
+        <div className="bg-slate-50 rounded-xl p-3 text-sm space-y-2 border border-slate-100">
+          <a href="tel:0759963210" className="flex items-center gap-2 text-gray-600 hover:text-primary-blue transition-colors">
+            <span>📞</span> <span className="font-medium">0759963210</span>
+          </a>
+          <a href="mailto:aangongtown@aakenya.co.ke" className="flex items-center gap-2 text-gray-600 hover:text-primary-blue transition-colors">
+            <span>📧</span> <span className="font-medium">aangongtown@aakenya.co.ke</span>
+          </a>
+        </div>
+      </div>
+
+      <div className="h-px bg-gray-100"></div>
+
+      {/* Option C */}
+      <div className="space-y-2">
+        <h4 className="text-sm font-semibold text-gray-800">c) I Can Help You Get Started!</h4>
+        <p className="text-xs text-gray-500">I'll open a form for you, and we'll contact you within 24 hours.</p>
+        <button
+          onClick={onStartForm}
+          className="w-full py-2.5 border-2 border-primary-blue text-primary-blue rounded-xl text-sm font-bold hover:bg-blue-50 transition-colors"
+        >
+          📋 Open Registration Form
+        </button>
+      </div>
+
+    </div>
+    {/* Navigation Footer */}
+    <div className="bg-gray-50 p-3 border-t border-gray-100">
+      <div className="flex flex-wrap gap-2 justify-center">
+        {[
+          "Course Info",
+          "Payment & NTSA"
+        ].map((opt, i) => (
+          <button
+            key={i}
+            onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt)}
+            className="px-3 py-1.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-medium text-gray-600 hover:text-primary-blue hover:border-primary-blue/30 transition-all"
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
+  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[90%] w-full">
+    <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10">
+      <h3 className="font-semibold text-primary-blue text-sm">💳 Payment & NTSA Requirements</h3>
+    </div>
+    <div className="p-4 space-y-4">
+
+      {/* Payment Methods */}
+      <div className="bg-green-50 p-4 rounded-xl border border-green-100">
+        <h4 className="text-sm font-bold text-green-800 mb-3">💳 PAYMENT METHODS</h4>
+        <div className="space-y-2 text-sm text-green-900">
+          <p><span className="font-semibold">• Course Fees</span> — M-Pesa / Bank Transfer ONLY</p>
+          <p><span className="font-semibold">• NTSA Fees</span> — via eCitizen</p>
+          <p className="text-green-700 italic mt-2">(Cash NOT accepted at branch)</p>
+        </div>
+      </div>
+
+      {/* NTSA Requirements */}
+      <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
+        <h4 className="text-sm font-bold text-blue-800 mb-3">📋 NTSA REQUIREMENTS</h4>
+        <div className="space-y-2 text-sm text-blue-900">
+          <p className="flex items-start gap-2">
+            <span className="text-green-600 font-bold">✅</span>
+            <span>National ID or Passport Copy</span>
+          </p>
+          <p className="flex items-start gap-2">
+            <span className="text-green-600 font-bold">✅</span>
+            <span>Passport Photos softcopy</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Help Section */}
+      <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
+        <p className="text-xs text-gray-600">
+          <span className="font-semibold">Need help with NTSA setup?</span> Call us at{' '}
+          <a href="tel:0759963210" className="text-primary-blue font-bold hover:underline">0759963210</a>
+        </p>
+      </div>
+
+    </div>
+    {/* Navigation Footer */}
+    <div className="bg-gray-50 p-3 border-t border-gray-100">
+      <p className="text-[10px] text-gray-400 font-medium uppercase mb-2 tracking-wider">Choose another option</p>
+      <div className="flex flex-wrap gap-2">
+        {[
+          "Course Info",
+          "Registration"
+        ].map((opt, i) => (
+          <button
+            key={i}
+            onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt)}
+            className="px-3 py-1.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-medium text-gray-600 hover:text-primary-blue hover:border-primary-blue/30 transition-all"
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+
+const BeginnerCourseCard = ({ onAction }: { onAction: () => void }) => (
+  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[90%] w-full">
+    <div className="bg-primary-blue p-4">
+      <h3 className="font-semibold text-white text-sm">Beginner Driving Course</h3>
+    </div>
+    <div className="p-4 grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
+      <div>
+        <span className="block text-xs text-gray-400 uppercase tracking-wide">Duration</span>
+        <span className="font-medium text-gray-800">5 Weeks</span>
+      </div>
+      <div>
+        <span className="block text-xs text-gray-400 uppercase tracking-wide">Fee</span>
+        <span className="font-medium text-gray-800">KSh 18,780</span>
+      </div>
+      <div>
+        <span className="block text-xs text-gray-400 uppercase tracking-wide">Deposit</span>
+        <span className="font-medium text-gray-800">KSh 12,000</span>
+      </div>
+      <div>
+        <span className="block text-xs text-gray-400 uppercase tracking-wide">NTSA</span>
+        <span className="font-medium text-gray-800">KSh 2,450</span>
+      </div>
+    </div>
+    <div className="p-4 pt-0">
+      <button onClick={onAction} className="w-full py-2 border border-primary-blue text-primary-blue rounded-lg text-sm font-medium hover:bg-blue-50 transition-colors">
+        View Full Details
+      </button>
+    </div>
+  </div>
+);
+
 export default function ChatPage() {
   const { language, setLanguage, t } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showQuickOptions, setShowQuickOptions] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
-  const [formData, setFormData] = useState<FormData>({
-    fullName: "",
-    dateOfBirth: "",
-    idNumber: "",
-    phoneNumber: "",
-    email: "",
-    emergencyContactName: "",
-    emergencyContactPhone: "",
-    preferredCourse: "",
-    preferredIntake: "",
-    additionalNotes: ""
-  });
-  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [rateLimit, setRateLimit] = useState<{ remaining: number; reset: number } | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
-
-  // Validation functions
-  const validateField = (name: keyof FormData, value: string): string => {
-    switch (name) {
-      case 'fullName':
-        if (!value.trim()) return t('fullName') + " is required";
-        if (value.trim().length < 2) return t('fullName') + " must be at least 2 characters";
-        if (value.trim().length > 100) return t('fullName') + " must be less than 100 characters";
-        break;
-      
-      case 'phoneNumber':
-        if (!value.trim()) return t('phoneNumber') + " is required";
-        if (!/^(\+?254|0)?[17]\d{8}$/.test(value.trim().replace(/\s/g, ''))) {
-          return "Please enter a valid Kenyan phone number";
-        }
-        break;
-      
-      case 'email':
-        if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          return "Please enter a valid email address";
-        }
-        break;
-      
-      case 'idNumber':
-        if (!value.trim()) return t('idNumber') + " is required";
-        if (!/^[A-Z0-9]{5,20}$/i.test(value.trim())) {
-          return "ID/Passport must be 5-20 alphanumeric characters";
-        }
-        break;
-      
-      case 'emergencyContactPhone':
-        if (!value.trim()) return t('emergencyPhone') + " is required";
-        if (!/^(\+?254|0)?[17]\d{8}$/.test(value.trim().replace(/\s/g, ''))) {
-          return "Please enter a valid emergency contact phone number";
-        }
-        break;
-      
-      case 'preferredIntake':
-        if (!value) return t('preferredIntake') + " is required";
-        if (new Date(value) < new Date(new Date().toDateString())) {
-          return "Intake date cannot be in the past";
-        }
-        break;
-      
-      default:
-        // Check required fields
-        const requiredFields: (keyof FormData)[] = [
-          'fullName', 'dateOfBirth', 'idNumber', 'phoneNumber', 
-          'emergencyContactName', 'emergencyContactPhone', 
-          'preferredCourse', 'preferredIntake'
-        ];
-        
-        if (requiredFields.includes(name) && !value.trim()) {
-          const fieldName = name.charAt(0).toUpperCase() + name.slice(1).replace(/([A-Z])/g, ' $1');
-          return fieldName + " is required";
-        }
-    }
-    return "";
-  };
-
-  const handleFieldChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    
-    // Clear error when user starts typing
-    if (formErrors[field]) {
-      const error = validateField(field, value);
-      setFormErrors(prev => ({ ...prev, [field]: error }));
-    }
-  };
-
-  const handleFieldBlur = (field: keyof FormData, value: string) => {
-    const error = validateField(field, value);
-    setFormErrors(prev => ({ ...prev, [field]: error }));
-  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const sendMessage = useCallback(async (content: string, _isQuickOption = false) => { // FIXED: Added underscore to unused parameter
-    if (!content.trim() || loading) return;
+  const sendMessage = useCallback(async (content: string, type: Message['type'] = 'text') => {
+    if (!content.trim() && type === 'text') return;
+    if (loading) return;
 
+    // For special buttons that act as user messages
     const userMessage: Message = { role: "user", content: content.trim() };
     const updatedMessages = [...messages, userMessage];
 
@@ -182,46 +378,39 @@ export default function ChatPage() {
         throw new Error(response.data.message || response.data.error);
       }
 
+      // Automatically detect type from backend response if possible, or fallback to text
       const assistantMessage: Message = {
         role: "assistant",
         content: response.data.reply,
+        type: 'text'
       };
       setMessages((prev) => [...prev, assistantMessage]);
 
-      // Update rate limit info
       if (response.data.rateLimit) {
         setRateLimit(response.data.rateLimit);
       }
 
-      // Show form only for specific form triggers
       const formTriggers = [
-        'form', 'get started', 'start registration', 'c)', 'option c', 
-        'help me get started', 'registration form'
+        'fill form', 'get started', 'start registration', 'c)', 'option c',
+        'help me get started', 'registration form', 'open form'
       ];
-      
+
       if (formTriggers.some(trigger => content.toLowerCase().includes(trigger)) ||
-          (content === '2' && response.data.reply.includes('Type "form"'))) {
+        content.toLowerCase() === 'form' ||
+        (content === '2' && response.data.reply.includes('Type "form"'))) {
         setShowRegistrationForm(true);
       }
-    } catch (error: unknown) { // FIXED: Replaced 'any' with 'unknown'
+    } catch (error: unknown) {
       console.error("Chat error:", error);
-      
       let errorMessage = t('greeting');
-
       if (typeof error === 'object' && error !== null && 'response' in error) {
-        const axiosError = error as AxiosError;
+        const axiosError = error as LocalAxiosError;
         if (axiosError.response?.status === 429) {
           errorMessage = "⏳ " + t('rateLimitExceeded');
         } else if (axiosError.response?.data?.message) {
           errorMessage = `❌ ${axiosError.response.data.message}`;
-        } else if (axiosError.response?.status === 400) {
-          errorMessage = "❌ " + t('invalidMessage');
         }
-      } else if (typeof error === 'object' && error !== null && 'request' in error) {
-        // Network error
-        errorMessage = "🌐 Network error. Please check your connection and try again.";
       }
-
       const fallbackMessage: Message = {
         role: "assistant",
         content: errorMessage,
@@ -232,35 +421,8 @@ export default function ChatPage() {
     }
   }, [loading, messages, language, t]);
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleFormSubmit = async (formData: RegistrationFormData) => {
     setFormSubmitting(true);
-    setFormErrors({});
-
-    // Validate all fields before submission
-    const errors: FormErrors = {};
-    let hasErrors = false;
-
-    (Object.keys(formData) as Array<keyof FormData>).forEach(key => {
-      const error = validateField(key, formData[key]);
-      if (error) {
-        errors[key] = error;
-        hasErrors = true;
-      }
-    });
-
-    if (hasErrors) {
-      setFormErrors(errors);
-      setFormSubmitting(false);
-      
-      // Focus on first error field
-      const firstErrorField = Object.keys(errors)[0] as keyof FormData;
-      const errorElement = document.querySelector(`[name="${firstErrorField}"]`) as HTMLElement;
-      errorElement?.focus();
-      
-      return;
-    }
-
     try {
       const response = await axios.post<ChatResponse>("/api/chat", {
         action: 'submitRegistration',
@@ -277,47 +439,17 @@ export default function ChatPage() {
         content: t('registrationSuccess', { phoneNumber: formData.phoneNumber }),
       };
       setMessages((prev) => [...prev, assistantMessage]);
-      
-      // Open WhatsApp with pre-filled message
+
       if (response.data.whatsappUrl) {
         window.open(response.data.whatsappUrl, '_blank');
       }
-      
+
       setShowRegistrationForm(false);
-      
-      // Reset form
-      setFormData({
-        fullName: "",
-        dateOfBirth: "",
-        idNumber: "",
-        phoneNumber: "",
-        email: "",
-        emergencyContactName: "",
-        emergencyContactPhone: "",
-        preferredCourse: "",
-        preferredIntake: "",
-        additionalNotes: ""
-      });
-    } catch (error: unknown) { // FIXED: Replaced 'any' with 'unknown'
+    } catch (error) {
       console.error("Form submission error:", error);
-      
-      let errorMessage = t('submissionFailed');
-
-      if (typeof error === 'object' && error !== null && 'response' in error) {
-        const axiosError = error as AxiosError;
-        if (axiosError.response?.data?.errors) {
-          errorMessage = `❌ ${t('validationFailed')}: ${axiosError.response.data.errors.join(', ')}`;
-        } else if (axiosError.response?.data?.message) {
-          errorMessage = `❌ ${axiosError.response.data.message}`;
-        }
-      } else if (typeof error === 'object' && error !== null && 'request' in error) {
-        // Network error
-        errorMessage = "🌐 Network error. Please check your connection and try again.";
-      }
-
       const errorMessageObj: Message = {
         role: "assistant",
-        content: errorMessage,
+        content: t('submissionFailed'),
       };
       setMessages((prev) => [...prev, errorMessageObj]);
     } finally {
@@ -325,26 +457,22 @@ export default function ChatPage() {
     }
   };
 
-  const quickOptions = [
-    { label: "1️⃣ " + t('courses'), message: "1", description: t('courses') },
-    { label: "2️⃣ " + t('register'), message: "2", description: t('register') },
-    { label: "3️⃣ " + t('ntsa'), message: "3", description: t('ntsa') },
-    { label: "4️⃣ " + t('license'), message: "4", description: t('license') },
-    { label: "📋 " + t('startForm'), message: "start registration", description: t('startForm') },
-  ];
-
   const handleLanguageChange = (newLanguage: 'en' | 'sw') => {
     setLanguage(newLanguage);
   };
 
   useEffect(() => {
     if (messages.length === 0) {
+      // Initialize with a hidden "hi" to trigger the backend greeting
       sendMessage("hi");
     }
   }, [messages.length, sendMessage]);
 
-  // Footer note with clickable link
-  const footerNote = "Powered by <a href='https://ericwainaina.netlify.app/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200'>Nexeric Innovations</a> - AA Ngong Town Driving School";
+  const primaryActions = [
+    { label: t('courses'), message: "1" },
+    { label: t('register'), message: "2" },
+    { label: t('ntsa'), message: "3" },
+  ];
 
   return (
     <>
@@ -353,623 +481,173 @@ export default function ChatPage() {
         <meta name="description" content={t('metaDescription')} />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-2 sm:p-4">
-        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl flex flex-col h-[95vh] sm:h-[85vh] animate-fadeIn border border-gray-100 relative">
-          
-          {/* Header with properly spaced buttons */}
-          <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 sm:p-6 rounded-t-2xl relative">
+      <div className="min-h-screen bg-bg-slate flex items-center justify-center p-0 sm:p-4 font-sans text-gray-900">
+        <div className="w-full max-w-[480px] bg-white sm:rounded-2xl shadow-xl flex flex-col h-[100dvh] sm:h-[85vh] border-x sm:border border-gray-200 relative overflow-hidden">
+
+          {/* Header */}
+          <header className="bg-gradient-to-r from-primary-blue to-indigo-600 text-white p-4 shadow-md z-10 shrink-0">
             <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-3 sm:space-x-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg overflow-hidden">
-                  <Image 
-                    src="/ericbot.png" 
-                    alt="EricBot Assistant Logo"
-                    width={48}
-                    height={48}
-                    className="w-full h-full object-cover"
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden shrink-0">
+                  <Image
+                    src="/ericbot.png"
+                    alt="EricBot"
+                    width={40}
+                    height={40}
+                    className="object-cover"
                     onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.parentElement!.innerHTML = `
-                        <div class="flex space-x-1">
-                          <div class="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                          <div class="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                          <div class="w-2 h-2 bg-white rounded-full opacity-80"></div>
-                        </div>
-                      `;
+                      (e.target as HTMLImageElement).style.display = 'none';
                     }}
                   />
+                  <div className="absolute w-2 h-2 bg-green-500 rounded-full bottom-0 right-0 border-2 border-white"></div>
                 </div>
-                <div>
-                  <h1 className="text-lg sm:text-xl font-bold">EricBot Assistant</h1>
-                  <p className="text-blue-100 text-xs sm:text-sm opacity-90">
-                    AA Ngong Town Driving School
-                  </p>
+                <div className="flex flex-col">
+                  <h1 className="text-[16px] font-semibold leading-tight">EricBot Assistant</h1>
+                  <span className="text-[11px] text-blue-100 opacity-90 font-medium">AA Ngong Town Driving School</span>
                 </div>
               </div>
-
-              {/* Header buttons container with proper spacing */}
               <div className="flex items-center gap-2">
-                {/* Language Switcher */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 shadow-sm border">
-                  <div className="flex gap-1">
-                    <button
-                      onClick={() => handleLanguageChange('en')}
-                      className={`px-2 py-1 text-xs rounded-md transition-colors ${
-                        language === 'en' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'text-gray-600 hover:bg-gray-100'
-                      }`}
-                    >
-                      EN
-                    </button>
-                    <button
-                      onClick={() => handleLanguageChange('sw')}
-                      className={`px-2 py-1 text-xs rounded-md transition-colors ${
-                        language === 'sw' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'text-gray-600 hover:bg-gray-100'
-                      }`}
-                    >
-                      SW
-                    </button>
-                  </div>
+                <div className="flex bg-white/10 rounded-full p-0.5 backdrop-blur-sm border border-white/20">
+                  <button onClick={() => handleLanguageChange('en')} className={`px-2 py-0.5 text-[10px] font-medium rounded-full transition-colors ${language === 'en' ? 'bg-white text-primary-blue' : 'text-white hover:bg-white/10'}`}>EN</button>
+                  <button onClick={() => handleLanguageChange('sw')} className={`px-2 py-0.5 text-[10px] font-medium rounded-full transition-colors ${language === 'sw' ? 'bg-white text-primary-blue' : 'text-white hover:bg-white/10'}`}>SW</button>
                 </div>
-
-                {/* Clear Chat Button */}
-                {messages.length > 0 && (
-                  <button
-                    onClick={() => {
-                      setMessages([]);
-                      setInput("");
-                      setTimeout(() => sendMessage("hi"), 500);
-                    }}
-                    className="px-3 py-2 text-xs sm:text-sm bg-white text-blue-600 hover:bg-blue-50 border border-white border-opacity-30 rounded-xl transition-all duration-200 backdrop-blur-sm font-semibold shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600 whitespace-nowrap"
-                  >
-                    New Chat
-                  </button>
-                )}
+                <button
+                  onClick={() => { setMessages([]); setInput(""); }}
+                  className="p-1.5 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+                  title="New Chat"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                </button>
               </div>
             </div>
           </header>
 
           {/* Registration Form Modal */}
           {showRegistrationForm && (
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 sm:p-4">
-              <div className="bg-white rounded-2xl p-4 sm:p-6 w-full max-w-md max-h-[95vh] overflow-y-auto mx-2">
-                <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-lg sm:text-xl font-bold text-gray-800">
-                    📋 {t('registrationForm')}
-                  </h2>
-                  <button
-                    onClick={() => setShowRegistrationForm(false)}
-                    className="text-gray-400 hover:text-gray-600 text-2xl p-1 rounded-full hover:bg-gray-100 transition-colors"
-                    aria-label="Close registration form"
-                  >
-                    ×
-                  </button>
-                </div>
-                
-                <form ref={formRef} onSubmit={handleFormSubmit} className="space-y-4" noValidate>
-                  {/* Personal Information Section */}
-                  <fieldset className="border-b border-gray-200 pb-4">
-                    <legend className="text-base sm:text-lg font-semibold text-gray-800 mb-3">
-                      {t('personalInfo')}
-                    </legend>
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('fullName')}
-                        </label>
-                        <input
-                          id="fullName"
-                          name="fullName"
-                          type="text"
-                          required
-                          value={formData.fullName}
-                          onChange={(e) => handleFieldChange('fullName', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('fullName', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.fullName ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                          placeholder={t('fullName')}
-                        />
-                        {formErrors.fullName && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.fullName}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('dateOfBirth')}
-                        </label>
-                        <input
-                          id="dateOfBirth"
-                          name="dateOfBirth"
-                          type="date"
-                          required
-                          value={formData.dateOfBirth}
-                          onChange={(e) => handleFieldChange('dateOfBirth', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('dateOfBirth', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.dateOfBirth ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                        />
-                        {formErrors.dateOfBirth && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.dateOfBirth}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label htmlFor="idNumber" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('idNumber')}
-                        </label>
-                        <input
-                          id="idNumber"
-                          name="idNumber"
-                          type="text"
-                          required
-                          value={formData.idNumber}
-                          onChange={(e) => handleFieldChange('idNumber', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('idNumber', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.idNumber ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                          placeholder={t('idNumber')}
-                        />
-                        {formErrors.idNumber && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.idNumber}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('phoneNumber')}
-                        </label>
-                        <input
-                          id="phoneNumber"
-                          name="phoneNumber"
-                          type="tel"
-                          required
-                          value={formData.phoneNumber}
-                          onChange={(e) => handleFieldChange('phoneNumber', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('phoneNumber', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.phoneNumber ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                          placeholder="07XXXXXXXX"
-                        />
-                        {formErrors.phoneNumber && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.phoneNumber}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('email')}
-                        </label>
-                        <input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => handleFieldChange('email', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('email', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                          placeholder="your@email.com (optional)"
-                        />
-                        {formErrors.email && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.email}</p>
-                        )}
-                      </div>
-                    </div>
-                  </fieldset>
-
-                  {/* Emergency Contact Section */}
-                  <fieldset className="border-b border-gray-200 pb-4">
-                    <legend className="text-base sm:text-lg font-semibold text-gray-800 mb-3">
-                      {t('emergencyContact')}
-                    </legend>
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <label htmlFor="emergencyContactName" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('emergencyName')}
-                        </label>
-                        <input
-                          id="emergencyContactName"
-                          name="emergencyContactName"
-                          type="text"
-                          required
-                          value={formData.emergencyContactName}
-                          onChange={(e) => handleFieldChange('emergencyContactName', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('emergencyContactName', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.emergencyContactName ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                          placeholder={t('emergencyName')}
-                        />
-                        {formErrors.emergencyContactName && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.emergencyContactName}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label htmlFor="emergencyContactPhone" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('emergencyPhone')}
-                        </label>
-                        <input
-                          id="emergencyContactPhone"
-                          name="emergencyContactPhone"
-                          type="tel"
-                          required
-                          value={formData.emergencyContactPhone}
-                          onChange={(e) => handleFieldChange('emergencyContactPhone', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('emergencyContactPhone', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.emergencyContactPhone ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                          placeholder="07XXXXXXXX"
-                        />
-                        {formErrors.emergencyContactPhone && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.emergencyContactPhone}</p>
-                        )}
-                      </div>
-                    </div>
-                  </fieldset>
-
-                  {/* Course Information Section */}
-                  <fieldset>
-                    <legend className="text-base sm:text-lg font-semibold text-gray-800 mb-3">
-                      {t('courseInfo')}
-                    </legend>
-                    
-                    <div className="space-y-4">
-                      <div>
-                        <label htmlFor="preferredCourse" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('preferredCourse')}
-                        </label>
-                        <select
-                          id="preferredCourse"
-                          name="preferredCourse"
-                          required
-                          value={formData.preferredCourse}
-                          onChange={(e) => handleFieldChange('preferredCourse', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('preferredCourse', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.preferredCourse ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                        >
-                          <option value="">{t('preferredCourse')}</option>
-                          <option value="Motorcycle (Category A)">Motorcycle (Category A)</option>
-                          <option value="Saloon Car (Category B-Manual)">Saloon Car (Category B-Manual)</option>
-                          <option value="Saloon Car (Category B-Automatic)">Saloon Car (Category B-Automatic)</option>
-                          <option value="Passenger Vehicle (Category D1)">Passenger Vehicle (Category D1)</option>
-                          <option value="Light Truck (Category C1)">Light Truck (Category C1)</option>
-                          <option value="PSV (Category D1/D)">PSV (Category D1/D)</option>
-                          <option value="Premier Driving">Premier Driving</option>
-                          <option value="Refresher Course">Refresher Course</option>
-                        </select>
-                        {formErrors.preferredCourse && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.preferredCourse}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label htmlFor="preferredIntake" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('preferredIntake')}
-                        </label>
-                        <input
-                          id="preferredIntake"
-                          name="preferredIntake"
-                          type="date"
-                          required
-                          value={formData.preferredIntake}
-                          onChange={(e) => handleFieldChange('preferredIntake', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('preferredIntake', e.target.value)}
-                          className={`w-full border rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ${
-                            formErrors.preferredIntake ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-blue-500'
-                          }`}
-                        />
-                        {formErrors.preferredIntake && (
-                          <p className="mt-1 text-sm text-red-600">{formErrors.preferredIntake}</p>
-                        )}
-                      </div>
-
-                      <div>
-                        <label htmlFor="additionalNotes" className="block text-sm font-medium text-gray-700 mb-1">
-                          {t('additionalNotes')}
-                        </label>
-                        <textarea
-                          id="additionalNotes"
-                          name="additionalNotes"
-                          value={formData.additionalNotes}
-                          onChange={(e) => handleFieldChange('additionalNotes', e.target.value)}
-                          onBlur={(e) => handleFieldBlur('additionalNotes', e.target.value)}
-                          rows={3}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-3 sm:py-2 text-base focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition-all duration-200"
-                          placeholder={t('additionalNotes')}
-                        />
-                      </div>
-                    </div>
-                  </fieldset>
-
-                  <div className="flex gap-3 pt-2">
-                    <button
-                      type="button"
-                      onClick={() => setShowRegistrationForm(false)}
-                      className="flex-1 px-4 py-3 text-base border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
-                    >
-                      {t('cancel')}
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={formSubmitting}
-                      className="flex-1 px-4 py-3 text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    >
-                      {formSubmitting ? (
-                        <span className="flex items-center justify-center">
-                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          {t('submitting')}
-                        </span>
-                      ) : t('submitRegistration')}
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
+            <RegistrationForm
+              onSubmit={handleFormSubmit}
+              onCancel={() => setShowRegistrationForm(false)}
+              isSubmitting={formSubmitting}
+            />
           )}
 
-          {/* Messages Container */}
-          <main className="flex-1 overflow-y-auto p-3 sm:p-6 space-y-3 sm:space-y-4 bg-gray-50">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  message.role === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                {message.role === "assistant" && (
-                  <div className="flex-shrink-0 mr-2 sm:mr-3 self-end mb-1 sm:mb-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden shadow-sm">
-                      <Image 
-                        src="/ericbot.png" 
-                        alt="EricBot"
-                        width={32}
-                        height={32}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          target.parentElement!.innerHTML = `
-                            <div class="text-white text-xs font-bold">EB</div>
-                          `;
-                        }}
-                      />
-                    </div>
-                  </div>
-                )}
-                <div
-                  className={`max-w-[90%] sm:max-w-[85%] p-3 sm:p-4 rounded-2xl whitespace-pre-wrap shadow-sm text-sm sm:text-base ${
-                    message.role === "user"
-                      ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-br-none"
-                      : "bg-white border border-gray-200 rounded-bl-none shadow-md"
-                  }`}
-                >
-                  {message.content}
+          {/* Messages */}
+          <main className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+            {messages.map((message, index) => {
+              // Formatting Logic
+              const isUser = message.role === "user";
+              let Content = (
+                <div className={`max-w-[85%] text-sm leading-relaxed shadow-sm ${isUser
+                  ? "bg-blue-600 text-white font-medium rounded-2xl rounded-tr-none px-4 py-3"
+                  : "bg-white text-gray-800 border border-gray-200 rounded-2xl rounded-tl-none px-4 py-3"
+                  }`}>
+                  <div className="whitespace-pre-wrap font-regular">{message.content}</div>
                 </div>
-                {message.role === "user" && (
-                  <div className="flex-shrink-0 ml-2 sm:ml-3 self-end mb-1 sm:mb-2">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center shadow-sm">
-                      <span className="text-white text-xs font-bold">You</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
+              );
 
-            {loading && (
-              <div className="flex justify-start">
-                <div className="flex-shrink-0 mr-2 sm:mr-3 self-end mb-1 sm:mb-2">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center overflow-hidden shadow-sm">
-                    <Image 
-                      src="/ericbot.png" 
-                      alt="EricBot"
-                      width={32}
-                      height={32}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        target.parentElement!.innerHTML = `
-                          <div class="text-white text-xs font-bold">EB</div>
-                        `;
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="bg-white border border-gray-200 rounded-2xl p-3 sm:p-4 shadow-sm rounded-bl-none">
-                  <div className="flex items-center space-x-2 sm:space-x-3">
-                    <div className="text-gray-600 text-sm font-medium">{t('thinking')}</div>
-                    <div className="flex space-x-1">
-                      <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"></div>
-                      <div
-                        className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.1s" }}
-                      ></div>
-                      <div
-                        className="w-2 h-2 bg-orange-500 rounded-full animate-bounce"
-                        style={{ animationDelay: "0.2s" }}
-                      ></div>
+              if (!isUser) {
+                const lowerContent = message.content.toLowerCase();
+                // Broader matching for Welcome
+                if (lowerContent.includes("welcome to aa ngong town") || lowerContent.includes("driving school!")) {
+                  Content = <WelcomeCard onOptionSelect={(opt) => sendMessage(opt, 'text')} />;
+                }
+                // Custom Card for Course Info
+                else if (lowerContent.includes("standard courses (5 weeks duration)")) {
+                  Content = <CourseInfoCard onOptionSelect={(opt) => sendMessage(opt, 'text')} />;
+                }
+                // Custom Card for Registration
+                else if (lowerContent.includes("registration options")) {
+                  Content = <RegistrationOptionsCard
+                    onOptionSelect={(opt) => sendMessage(opt, 'text')}
+                    onStartForm={() => { sendMessage('start registration', 'text'); }}
+                  />;
+                }
+                // Custom Card for Payment & NTSA
+                else if (lowerContent.includes("payment & ntsa requirements") || lowerContent.includes("payment methods")) {
+                  Content = <PaymentInfoCard onOptionSelect={(opt) => sendMessage(opt, 'text')} />;
+                }
+                // Broader matching for Beginner Course - matching "18,780" which is in the backend response "KSh 18,780"
+                else if (lowerContent.includes("beginner's course") || lowerContent.includes("18,780")) {
+                  Content = <BeginnerCourseCard onAction={() => sendMessage('Tell me more about the fee structure', 'text')} />;
+                }
+              }
+
+              return (
+                <div key={index} className={`flex w-full ${isUser ? "justify-end" : "justify-start"}`}>
+                  {!isUser && (
+                    <div className="w-8 h-8 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center mr-2 shrink-0 self-end mb-1 overflow-hidden">
+                      <Image src="/ericbot.png" alt="Bot" width={32} height={32} className="object-cover" />
                     </div>
-                  </div>
+                  )}
+                  {Content}
+                </div>
+              );
+            })}
+            {loading && (
+              <div className="flex justify-start w-full">
+                <div className="w-8 h-8 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center mr-2 shrink-0 self-end mb-1 overflow-hidden">
+                  <Image src="/ericbot.png" alt="Bot" width={32} height={32} className="object-cover" />
+                </div>
+                <div className="bg-white border border-gray-200 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm flex items-center gap-1.5 h-10">
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                  <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
                 </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </main>
 
-          {/* Quick Options */}
-          <section aria-labelledby="quick-options-title">
-            <div className="border-t border-gray-200 bg-white">
-              <div className="flex items-center justify-between p-2 sm:p-3 border-b border-gray-100">
-                <h2 id="quick-options-title" className="text-xs text-gray-600 font-semibold uppercase tracking-wide">
-                  {t('quickAccess')}
-                </h2>
+          {/* Primary Action Buttons */}
+          <div className="bg-white border-t border-gray-100 p-3 pb-0">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
+              {primaryActions.map((action, idx) => (
                 <button
-                  onClick={() => setShowQuickOptions(!showQuickOptions)}
-                  className="text-gray-400 hover:text-gray-600 transition-colors p-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  aria-expanded={showQuickOptions}
-                  aria-controls="quick-options-content"
+                  key={idx}
+                  onClick={() => sendMessage(action.message, 'text')}
+                  disabled={loading}
+                  className="flex-1 min-w-[100px] bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white text-xs font-bold py-3 px-4 rounded-xl shadow-md transition-all transform hover:scale-[1.02] whitespace-nowrap text-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {showQuickOptions ? (
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                    </svg>
-                  ) : (
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  )}
-                  <span className="sr-only">{showQuickOptions ? "Collapse" : "Expand"} quick options</span>
+                  {action.label}
                 </button>
-              </div>
-
-              {showQuickOptions && (
-                <div id="quick-options-content" className="p-2 sm:p-3">
-                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
-                    {quickOptions.map((option, index) => (
-                      <button
-                        key={index}
-                        onClick={() => sendMessage(option.message, true)}
-                        disabled={loading}
-                        className="flex flex-col items-center p-2 sm:p-3 bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-100 rounded-xl hover:from-blue-100 hover:to-purple-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed group"
-                        title={option.description}
-                      >
-                        <span className="text-xs sm:text-sm font-medium text-gray-800 group-hover:text-blue-700 text-center mb-1">
-                          {option.label.split(' ')[0]}
-                        </span>
-                        <span className="text-xs text-gray-600 group-hover:text-blue-600 text-center leading-tight">
-                          {option.label.split(' ').slice(1).join(' ')}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
+              ))}
             </div>
-          </section>
+          </div>
 
           {/* Input Area */}
-          <footer className="border-t border-gray-200 bg-white p-3 sm:p-4 rounded-b-2xl">
+          <footer className="bg-white p-3 pt-2">
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                sendMessage(input);
-              }}
-              className="flex space-x-2 sm:space-x-3"
+              onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
+              className="flex items-center gap-2 relative"
             >
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={t('typeMessage')}
+                placeholder="Ask about courses, fees, or NTSA..."
                 disabled={loading}
-                className="flex-1 border border-gray-300 rounded-xl px-4 py-3 sm:py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed text-sm sm:text-base"
-                aria-label="Type your message"
+                className="w-full bg-white border border-gray-300 text-gray-900 font-medium text-sm rounded-full py-3 pl-4 pr-12 focus:ring-2 focus:ring-primary-blue/20 focus:border-primary-blue transition-all placeholder:text-gray-500 shadow-sm"
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="px-4 sm:px-6 py-3 sm:py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm hover:shadow-md flex items-center justify-center min-w-[80px]"
+                className="absolute right-1.5 p-2 bg-cta-green text-white rounded-full hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm"
               >
-                {loading ? (
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ) : (
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 5l7 7-7 7M5 5l7 7-7 7"
-                    />
-                  </svg>
-                )}
-                <span className="sr-only">Send message</span>
+                <svg className="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19V5m0 0l-7 7m7-7l7 7" /></svg>
               </button>
             </form>
 
-            {/* Rate Limit Info */}
-            {rateLimit && (
-              <div className="mt-2 text-center">
-                <div className="text-xs text-gray-500 bg-gray-50 rounded-lg py-1 px-2 inline-block">
-                  <span className="font-medium">Requests remaining:</span> {rateLimit.remaining}
-                  {rateLimit.reset > 0 && (
-                    <span className="ml-2">
-                      • Resets in {Math.ceil(rateLimit.reset / 60)} minutes
-                    </span>
-                  )}
-                </div>
+            <div className="mt-4 mb-1">
+              <div className="flex justify-center gap-4 text-[10px] text-gray-400 font-medium uppercase tracking-wider">
+                <span className="flex items-center gap-1"><svg className="w-3 h-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>NTSA Approved</span>
+                <span>•</span>
+                <span>Certified Instructors</span>
               </div>
-            )}
-
-            {/* Footer Note with Clickable Link */}
-            <div className="mt-3 text-center">
-              <p 
-                className="text-xs text-gray-500"
-                dangerouslySetInnerHTML={{ __html: footerNote }}
-              />
             </div>
           </footer>
+
         </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-          width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-          background: #f1f1f1;
-          border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: #c1c1c1;
-          border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background: #a8a8a8;
-        }
-        
-        /* Focus styles for accessibility */
-        button:focus-visible,
-        input:focus-visible,
-        select:focus-visible,
-        textarea:focus-visible {
-          outline: 2px solid #3b82f6;
-          outline-offset: 2px;
-        }
-      `}</style>
     </>
   );
 }

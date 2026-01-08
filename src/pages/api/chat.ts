@@ -1,21 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import OpenAI from "openai";
+import { db } from "../../lib/db";
+import { RegistrationFormData } from "../../types";
 
-// Define proper interfaces for form data
-interface RegistrationFormData {
-  fullName: string;
-  dateOfBirth: string;
-  idNumber: string;
-  phoneNumber: string;
-  email: string;
-  emergencyContactName: string;
-  emergencyContactPhone: string;
-  preferredCourse: string;
-  preferredIntake: string;
-  additionalNotes: string;
-}
+// Initialize OpenAI
+// Initialize OpenAI with a safe fallback to prevent build-time/runtime crashes
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || "dummy-key",
+});
 
 interface ChatRequestBody {
-  messages?: Array<{ role: string; content: string }>;
+  messages?: Array<{ role: "user" | "assistant" | "system"; content: string }>;
   formData?: RegistrationFormData;
   action?: string;
 }
@@ -40,99 +35,97 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
 Please choose an option:  
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Payment & NTSA Requirements  
-4️⃣ License Prerequisites`,
+3️⃣ Payment & NTSA Requirements`,
 
   // ==================== 1️⃣ COURSE INFORMATION & FEES ====================
   "course_info": `📚 STANDARD COURSES (5 Weeks Duration)
+  
+  🚗 Saloon Car (Category B) - Beginner's Course
+  Course Fee: KSh 18,780  
+  Deposit Option: KSh 12,000 (balance after 1 week)  
+  NTSA Fee: KSh 2,450 (via eCitizen)  
+  Duration: 5 weeks  
+  Intake: Every Wednesday  
+  Time Slots: 9:00–10:00 AM or 12:00–1:00 PM  
+  Transmission: Automatic or Manual
+  
+  ⭐ Premier Driving (Beginner Course)
+  Course Fee: KSh 50,000  
+  NTSA Fee: Included in fees + smart driving license  
+  Duration: 5 weeks  
+  Private lessons
+  
+  🏍️ Motorcycle (Category A-Riders who know how to ride)
+  Course Fee: KSh 3,000  
+  NTSA Fee: KSh 2,450 (via eCitizen)  
+  Duration: 3 weeks
+  
+  🏍️ Motorcycle (Category A)
+  Course Fee: KSh 5,780  
+  NTSA Fee: KSh 2,450 (via eCitizen)  
+  Duration: 5 weeks
+  
+  🚐 Passenger Light Vehicle (Category B3)
+  Course Fee: KSh 10,780  
+  NTSA Fee: KSh 2,350  
+  Duration: 3 weeks  
+  Requires Category B license with 2 years experience.
+  
+  🚚 Light & Medium Trucks (Category C1/C)
+  Course Fee: KSh 12,780  
+  NTSA Fee: KSh 2,350  
+  Duration: 3 weeks  
+  Requires Category B license with 2 years experience.
+  
+  🚌 Public Service Vehicle (Category D1/D)
+  Course Fee: KSh 12,780  
+  NTSA Fee: KSh 2,350  
+  Duration: 3 weeks  
+  Requires Category B and C license
+  
 
-🚗 Saloon Car (Category B) - Beginner's Course
-Course Fee: KSh 18,780  
-Deposit Option: KSh 12,000 (balance after 1 week)  
-NTSA Fee: KSh 2,450 (via eCitizen)  
-Duration: 5 weeks  
-Intake: Every Wednesday  
-Time Slots: 9:00–10:00 AM or 12:00–1:00 PM  
-Transmission: Automatic or Manual
-
-🏍️ Motorcycle (Category A-Riders who know how to ride)
-Course Fee: KSh 3,000  
-NTSA Fee: KSh 2,450 (via eCitizen)  
-Duration: 3 weeks
-
-🏍️ Motorcycle (Category A)
-Course Fee: KSh 5,780  
-NTSA Fee: KSh 2,450 (via eCitizen)  
-Duration: 5 weeks
-
-🚐 Passenger Light Vehicle (Category B3)
-Course Fee: KSh 10,780  
-NTSA Fee: KSh 2,350  
-Duration: 3 weeks  
-Requires Category B license with 2 years experience.
-
-🚚 Light & Medium Trucks (Category C1/C)
-Course Fee: KSh 12,780  
-NTSA Fee: KSh 2,350  
-Duration: 3 weeks  
-Requires Category B license with 2 years experience.
-
-🚌 Public Service Vehicle (Category D1/D)
-Course Fee: KSh 12,780  
-NTSA Fee: KSh 2,350  
-Duration: 3 weeks  
-Requires Category B and C license
-
-⭐ Premier Driving
-Course Fee: KSh 50,000  
-NTSA Fee: Included in fees + smart driving license  
-Duration: 5 weeks  
-Advanced training course
-
-🔄 REFRESHER COURSES (3 Weeks)
-Light Vehicle: KSh 10,000  
-Light & Medium Truck: KSh 11,500  
-Premier Refresher: KSh 20,000
-
-📋 ASSESSMENT COURSES (1-2 Days)
-Class B (Saloon): KSh 5,000  
-Class C (Trucks): KSh 6,000
-
-💳 PAYMENT METHODS
-• Course Fees — M-Pesa / Bank Transfer ONLY  
-• NTSA Fees — via eCitizen  
-(Cash NOT accepted at branch)
-
-Choose another option:
-1️⃣ Course Information & Fees  
-2️⃣ Registration Assistance  
-3️⃣ Payment & NTSA Requirements  
-4️⃣ License Prerequisites`,
+  🔄 REFRESHER COURSES (3 Weeks)
+  Light Vehicle: KSh 10,000  
+  Light & Medium Truck: KSh 11,500  
+  Premier Refresher: KSh 20,000
+  
+  📋 ASSESSMENT COURSES (1-2 Days)
+  Class B (Saloon): KSh 5,000  
+  Class C (Trucks): KSh 6,000
+  
+  💳 PAYMENT METHODS
+  • Course Fees — M-Pesa / Bank Transfer ONLY  
+  • NTSA Fees — via eCitizen  
+  (Cash NOT accepted at branch)
+  
+  Choose another option:
+  1️⃣ Course Information & Fees  
+  2️⃣ Registration Assistance  
+  3️⃣ Payment & NTSA Requirements`,
 
   // ==================== 2️⃣ REGISTRATION ASSISTANCE ====================
   "registration": `📝 REGISTRATION OPTIONS:
-
-a) Online Self-Registration (Fastest)
-➡️ 🔗 Register directly here: 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-https://edereva.aakenya.co.ke/students/
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-b) Contact AA Ngong Town Directly  
-📞 Phone: 0759963210  
-📧 Email: aangongtown@aakenya.co.ke  
-☎️ AA Call Center: 0709 933 000 / 999  
-
-c) I Can Help You Get Started!  
-I'll open a registration form for you to fill out, and we'll contact you within 24 hours! 📋✨
-
-*(Type "form" or "start registration" to open the form)*
-
-Choose another option:
-1️⃣ Course Information & Fees  
-2️⃣ Registration Assistance  
-3️⃣ Payment & NTSA Requirements  
-4️⃣ License Prerequisites`,
+  
+  a) Online Self-Registration (Fastest)
+  ➡️ 🔗 Register directly here: 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  https://edereva.aakenya.co.ke/students/
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  
+  b) Contact AA Ngong Town Directly  
+  📞 Phone: 0759963210  
+  📧 Email: aangongtown@aakenya.co.ke  
+  ☎️ AA Call Center: 0709 933 000 / 999  
+  
+  c) I Can Help You Get Started!  
+  I'll open a registration form for you to fill out, and we'll contact you within 24 hours! 📋✨
+  
+  *(Type "form" or "start registration" to open the form)*
+  
+  Choose another option:
+  1️⃣ Course Information & Fees  
+  2️⃣ Registration Assistance  
+  3️⃣ Payment & NTSA Requirements`,
 
   // ==================== 3️⃣ PAYMENT & NTSA REQUIREMENTS ====================
   "payment_ntsa": `💳 PAYMENT & NTSA REQUIREMENTS
@@ -151,8 +144,7 @@ For help with NTSA setup, call 0759963210.
 Choose another option:
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Payment & NTSA Requirements  
-4️⃣ License Prerequisites`,
+3️⃣ Payment & NTSA Requirements`,
 
   // ==================== 4️⃣ LICENSE PREREQUISITES ====================
   "license_prerequisites": `📋 LICENSE PREREQUISITES
@@ -208,16 +200,7 @@ Once you submit the form, we'll:
 ✅ Answer any questions you have  
 ✅ Help with NTSA requirements
 
-You can also continue browsing other options while the form is open.`,
-
-  // ==================== DEFAULT RESPONSE ====================
-  "default": `Hello! 👋 Welcome to AA Ngong Town Driving School! 🚗
-
-Please choose an option:  
-1️⃣ Course Information & Fees  
-2️⃣ Registration Assistance  
-3️⃣ Payment & NTSA Requirements  
-4️⃣ License Prerequisites`
+You can also continue browsing other options while the form is open.`
 };
 
 // Function to generate WhatsApp URL
@@ -249,107 +232,115 @@ Please contact within 24 hours!`;
 }
 
 // Function to find the best matching response
-function findBestResponse(userMessage: string): string {
+function findBestResponse(userMessage: string): string | null {
   const lowerMessage = userMessage.toLowerCase().trim();
-  
+
   // ==================== GREETING TRIGGERS ====================
   const greetingTriggers = [
-    'hi', 'hello', 'hey', 'mambo', 'habari', 'good morning', 'good afternoon', 
+    'hi', 'hello', 'hey', 'mambo', 'habari', 'good morning', 'good afternoon',
     'good evening', 'morning', 'afternoon', 'evening', 'start', 'begin'
   ];
-  
-  if (greetingTriggers.some(greet => lowerMessage.includes(greet))) {
+
+  if (greetingTriggers.some(greet => lowerMessage === greet || (greet.length > 3 && lowerMessage.includes(greet)))) {
     return responseDatabase["greeting"];
   }
-  
+
   // ==================== MENU OPTION 1 - COURSE INFO ====================
   const courseTriggers = [
-    '1', 'course', 'fees', 'price', 'charges', 'cost', 'how much', 
-    'fee', 'pricing', 'charges', 'tuition', 'payment'
+    '1', 'course', 'fees', 'price', 'charges', 'cost', 'how much',
+    'fee', 'pricing', 'tuition', 'course information'
   ];
-  
+
   if (courseTriggers.some(trigger => lowerMessage.includes(trigger))) {
     return responseDatabase["course_info"];
   }
-  
+
   // ==================== MENU OPTION 2 - REGISTRATION ====================
   const registrationTriggers = [
     '2', 'register', 'join', 'apply', 'sign up', 'enroll', 'enrollment',
     'admission', 'admissions', 'how to join', 'how to apply', 'registration assistance'
   ];
-  
+
   if (registrationTriggers.some(trigger => lowerMessage.includes(trigger))) {
     return responseDatabase["registration"];
   }
-  
+
   // ==================== MENU OPTION 3 - PAYMENT & NTSA ====================
   const paymentTriggers = [
-    '3', 'ntsa', 'payment', 'requirements', 'documents', 'what do i need',
-    'requirements', 'prerequisites', 'documents needed', 'eye test'
+    '3', 'ntsa', 'payment & ntsa', 'payment method', 'how to pay', 'mpesa',
+    'ecitizen', 'documents', 'what do i need', 'requirements',
+    'prerequisites', 'documents needed', 'eye test'
   ];
-  
+
   if (paymentTriggers.some(trigger => lowerMessage.includes(trigger))) {
     return responseDatabase["payment_ntsa"];
   }
-  
+
   // ==================== MENU OPTION 4 - LICENSE PREREQUISITES ====================
   const licenseTriggers = [
-    '4', 'license', 'prerequisite', 'requirement', 'eligibility', 
+    '4', 'license', 'prerequisite', 'requirement', 'eligibility',
     'qualified', 'qualifications', 'what do i need for license',
     'license requirements', 'driving license', 'categories'
   ];
-  
+
   if (licenseTriggers.some(trigger => lowerMessage.includes(trigger))) {
     return responseDatabase["license_prerequisites"];
   }
-  
+
   // ==================== FORM TRIGGER ====================
   const formTriggers = [
     'form', 'help me get started', 'get started', 'fill form',
     'registration form', 'start registration', 'c)', 'option c'
   ];
-  
+
   if (formTriggers.some(trigger => lowerMessage.includes(trigger))) {
     return responseDatabase["start_registration"];
   }
-  
-  // ==================== FALLBACK TO GREETING ====================
-  return responseDatabase["greeting"];
+
+  // ==================== NO MATCH ====================
+  return null;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
       const { messages, formData, action }: ChatRequestBody = req.body;
-      
+
       // Handle form submission
       if (action === 'submitRegistration' && formData) {
         console.log("📝 Processing registration form...");
-        
+
+        // Save to Database
+        try {
+          await db.userLead.create({
+            data: {
+              fullName: formData.fullName,
+              dateOfBirth: formData.dateOfBirth,
+              idNumber: formData.idNumber,
+              phoneNumber: formData.phoneNumber,
+              email: formData.email || null,
+              emergencyContactName: formData.emergencyContactName,
+              emergencyContactPhone: formData.emergencyContactPhone,
+              preferredCourse: formData.preferredCourse,
+              preferredIntake: formData.preferredIntake,
+              additionalNotes: formData.additionalNotes || null,
+            }
+          });
+          console.log("✅ Lead saved to database");
+        } catch (dbError) {
+          console.error("❌ Failed to save lead to database:", dbError);
+          // Continue execution to return response to user even if DB fails
+        }
+
         // Generate WhatsApp URL
         const whatsappUrl = generateWhatsAppURL(formData);
-        
-        console.log('📱 WHATSAPP NOTIFICATION READY:');
-        console.log('🔗 URL:', whatsappUrl);
-        console.log('📋 REGISTRATION DETAILS:');
-        console.log('👤 Full Name:', formData.fullName);
-        console.log('🎂 Date of Birth:', formData.dateOfBirth);
-        console.log('🆔 ID Number:', formData.idNumber);
-        console.log('📞 Phone:', formData.phoneNumber);
-        console.log('📧 Email:', formData.email || 'Not provided');
-        console.log('🆘 Emergency Contact:', formData.emergencyContactName);
-        console.log('🆘 Emergency Phone:', formData.emergencyContactPhone);
-        console.log('🎓 Course:', formData.preferredCourse);
-        console.log('📅 Intake:', formData.preferredIntake);
-        console.log('💬 Notes:', formData.additionalNotes || 'None');
-        console.log('⏰ Submitted:', new Date().toLocaleString('en-KE'));
-        
-        return res.status(200).json({ 
+
+        return res.status(200).json({
           reply: `✅ Registration submitted successfully! We're opening WhatsApp to send your details to our team. Please click "Send" to complete the process.\n\nWe will contact you within 24 hours at **${formData.phoneNumber}**.\n\n📞 **Direct Contact:** 0759963210\n📍 **Location:** AA Ngong Town Driving School`,
           whatsappUrl: whatsappUrl
         });
       }
-      
+
       // Handle regular chat messages
       if (!messages || !Array.isArray(messages)) {
         return res.status(400).json({ message: "Invalid messages format" });
@@ -361,21 +352,60 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       console.log("💬 User asked:", userMessage);
-      
-      // Find the best response
-      const reply = findBestResponse(userMessage);
-      
-      console.log("✅ Sending menu response");
-      
-      // Simulate slight delay for natural feel
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      res.status(200).json({ reply });
-      
+
+      // 1. Try Hardcoded Responses (Fast & Deterministic)
+      const hardcodedReply = findBestResponse(userMessage);
+
+      if (hardcodedReply) {
+        console.log("✅ Sending hardcoded response");
+        await new Promise(resolve => setTimeout(resolve, 500)); // Slight delay
+        return res.status(200).json({ reply: hardcodedReply });
+      }
+
+      // 2. Fallback to OpenAI (Generative)
+      console.log("🤖 No hardcoded match. Asking OpenAI...");
+
+      if (!process.env.OPENAI_API_KEY) {
+        console.warn("⚠️ OPENAI_API_KEY not set. Returning fallback greeting.");
+        return res.status(200).json({ reply: responseDatabase["greeting"] });
+      }
+
+      try {
+        const completion = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: `You are EricBot, a helpful assistant for AA Ngong Town Driving School. 
+              Your goal is to answer questions about driving courses, fees, and requirements based on general knowledge of Kenyan driving schools, but prioritize the specific info provided below if relevant.
+              
+              Key Info:
+              - Location: Ngong Town
+              - Phone: 0759963210
+              - Beginner Course (Saloon): KSh 18,780 (5 weeks)
+              - Refresher: KSh 10,000
+              - NTSA Fees: KSh 2,450
+              
+              Keep answers concise, friendly, and professional. Use emojis sparingly.
+              If you don't know the answer, ask them to call 0759963210.`
+            },
+            ...messages.map(m => ({ role: m.role as "user" | "assistant", content: m.content }))
+          ],
+          max_tokens: 300,
+        });
+
+        const aiReply = completion.choices[0]?.message?.content || "I'm sorry, I didn't catch that. Please try again or call us at 0759963210.";
+        return res.status(200).json({ reply: aiReply });
+
+      } catch (aiError) {
+        console.error("💥 OpenAI API Error:", aiError);
+        return res.status(200).json({ reply: responseDatabase["greeting"] });
+      }
+
     } catch (error: unknown) {
       console.error("💥 Error in chat handler:", error);
-      
-      res.status(200).json({ 
+
+      res.status(200).json({
         reply: responseDatabase["greeting"]
       });
     }
