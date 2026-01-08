@@ -634,8 +634,8 @@ export default function ChatPage() {
                 type="submit"
                 disabled={loading || !input.trim()}
                 className={`shrink-0 w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all active:scale-95 ${!input.trim() || loading
-                  ? 'bg-gray-100 text-gray-400 opacity-50'
-                  : 'bg-primary-blue text-white shadow-blue-200 ring-2 ring-primary-blue ring-offset-2'
+                    ? 'bg-gray-100 text-gray-400 opacity-50'
+                    : 'bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-lg shadow-green-100 ring-2 ring-emerald-500 ring-offset-2'
                   }`}
                 aria-label="Send"
               >
