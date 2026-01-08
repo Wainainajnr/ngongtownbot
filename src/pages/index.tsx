@@ -369,17 +369,13 @@ export default function ChatPage() {
       content: content.trim()
     };
 
-    let snapshotMessages: Message[] = [];
-    setMessages((prev) => {
-      snapshotMessages = [...prev, userMessage];
-      return snapshotMessages;
-    });
-
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInput("");
 
     try {
       const response = await axios.post<ChatResponse>("/api/chat", {
-        messages: snapshotMessages,
+        messages: updatedMessages,
         language
       });
 
@@ -426,7 +422,7 @@ export default function ChatPage() {
       setLoading(false);
       loadingRef.current = false;
     }
-  }, [language, t]);
+  }, [messages, language, t]);
 
   const handleFormSubmit = async (formData: RegistrationFormData) => {
     setFormSubmitting(true);
