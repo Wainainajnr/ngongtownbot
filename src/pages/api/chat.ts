@@ -250,27 +250,26 @@ function findBestResponse(userMessage: string): string | null {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const method = req.method ? req.method.toUpperCase() : "UNKNOWN";
+  const method = req.method?.toUpperCase() ?? "UNKNOWN";
 
-  // LOGGING: Identify the incoming request in Vercel logs
-  console.log(`[${new Date().toISOString()}] Incoming ${method} request to /api/chat`);
+  // Log incoming requests for Vercel diagnostic visibility
+  console.log(`[${new Date().toISOString()}] ${method} request to /api/chat`);
 
-  // 1. Handle OPTIONS for CORS preflight
+  // 1. Allow CORS preflight
   if (method === "OPTIONS") {
-    res.setHeader('Allow', 'POST, GET, OPTIONS');
+    res.setHeader("Allow", "POST, GET, OPTIONS");
     return res.status(200).end();
   }
 
-  // 2. Handle GET for health check
+  // 2. Health check / Verification
   if (method === "GET") {
     return res.status(200).json({
       status: "operational",
-      message: "AA Ngong Town Bot API is live",
-      version: "1.0.2" // Update this when pushing to verify deployment
+      version: "1.0.3" // Incremented to verify deployment
     });
   }
 
-  // 3. Handle POST for Chat & Registration
+  // 3. Main chat & registration handling
   if (method === "POST") {
     try {
       const { messages, formData, action }: ChatRequestBody = req.body;
@@ -312,7 +311,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ message: "Invalid messages format" });
       }
 
-      const userMessage = messages[messages.length - 1]?.content?.trim();
+      const userMessage = messages[messages.length - 1]?.content?.trim() ?? "";
       if (!userMessage) {
         return res.status(400).json({ message: "Empty message" });
       }
@@ -371,12 +370,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   }
 
-  // 4. Default 405 for all other methods
-  console.warn(`🚫 Method ${method} not allowed on /api/chat`);
-  res.setHeader('Allow', 'POST, GET, OPTIONS');
+  // 4. Default 405 for unsupported methods
+  res.setHeader("Allow", "POST, GET, OPTIONS");
   return res.status(405).json({
     error: "Method Not Allowed",
-    message: `The method ${method} is not supported for this endpoint. Please use POST.`,
-    receivedMethod: method
+    message: `The method ${method} is not supported. Please use POST.`
   });
 }
