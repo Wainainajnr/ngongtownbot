@@ -26,8 +26,7 @@ const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void
         {[
           "Course Information & Fees",
           "Registration Assistance",
-          "Payment & NTSA Requirements",
-          "License Prerequisites"
+          "Payment & NTSA Requirements"
         ].map((item, idx) => (
           <li key={idx}>
             <button
