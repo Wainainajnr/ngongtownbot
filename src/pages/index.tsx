@@ -54,7 +54,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
 
       {/* Saloon Car */}
       <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
-        <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2">🚗 Saloon Car (Category B) <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Beginner's Course</span></h4>
+        <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2">🚗 Saloon Car (Category B) <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Beginner&apos;s Course</span></h4>
         <div className="space-y-1.5 text-xs">
           <p><span className="font-semibold">Course Fee:</span> KSh 18,780</p>
           <p><span className="font-semibold">Deposit Option:</span> KSh 12,000 (balance after 1 week)</p>
@@ -218,7 +218,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
       {/* Option C */}
       <div className="space-y-2">
         <h4 className="text-sm font-semibold text-gray-800">c) I Can Help You Get Started!</h4>
-        <p className="text-xs text-gray-500">I'll open a form for you, and we'll contact you within 24 hours.</p>
+        <p className="text-xs text-gray-500">I&apos;ll open a form for you, and we&apos;ll contact you within 24 hours.</p>
         <button
           onClick={onStartForm}
           className="w-full py-2.5 border-2 border-primary-blue text-primary-blue rounded-xl text-sm font-bold hover:bg-blue-50 transition-colors"
@@ -348,7 +348,6 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false);
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
-  const [rateLimit, setRateLimit] = useState<{ remaining: number; reset: number } | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -384,10 +383,6 @@ export default function ChatPage() {
         type: 'text'
       };
       setMessages((prev) => [...prev, assistantMessage]);
-
-      if (response.data.rateLimit) {
-        setRateLimit(response.data.rateLimit);
-      }
 
       const formTriggers = [
         'fill form', 'get started', 'start registration', 'c)', 'option c',
@@ -634,8 +629,8 @@ export default function ChatPage() {
                 type="submit"
                 disabled={loading || !input.trim()}
                 className={`shrink-0 w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all active:scale-95 ${!input.trim() || loading
-                    ? 'bg-gray-100 text-gray-400 opacity-50'
-                    : 'bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-lg shadow-green-100 ring-2 ring-emerald-500 ring-offset-2'
+                  ? 'bg-gray-100 text-gray-400 opacity-50'
+                  : 'bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-lg shadow-green-100 ring-2 ring-emerald-500 ring-offset-2'
                   }`}
                 aria-label="Send"
               >

@@ -382,7 +382,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                         {t('cancel')}
                     </button>
                     <button
-                        onClick={(e) => handleSubmit(e as any)}
+                        onClick={handleSubmit}
                         disabled={isSubmitting}
                         className="flex-1 px-4 py-3 text-sm font-bold text-white bg-cta-green rounded-xl hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center active:scale-95 touch-manipulation"
                     >
