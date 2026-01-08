@@ -507,7 +507,7 @@ export default function ChatPage() {
                 </div>
                 <div className="flex flex-col">
                   <h1 className="text-[14px] sm:text-[16px] font-semibold leading-tight">EricBot Assistant</h1>
-                  <span className="text-[10px] sm:text-[11px] text-blue-100 opacity-90 font-medium whitespace-nowrap">AA Ngong Town Driving School</span>
+                  <span className="text-[10px] sm:text-[11px] text-white/90 font-medium whitespace-nowrap">AA Ngong Town Driving School</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
