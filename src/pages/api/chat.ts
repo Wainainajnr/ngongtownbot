@@ -250,18 +250,28 @@ function findBestResponse(userMessage: string): string | null {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  // Handle OPTIONS for CORS preflight
-  if (req.method === "OPTIONS") {
-    res.setHeader('Allow', ['POST', 'GET', 'OPTIONS']);
+  const method = req.method ? req.method.toUpperCase() : "UNKNOWN";
+
+  // LOGGING: Identify the incoming request in Vercel logs
+  console.log(`[${new Date().toISOString()}] Incoming ${method} request to /api/chat`);
+
+  // 1. Handle OPTIONS for CORS preflight
+  if (method === "OPTIONS") {
+    res.setHeader('Allow', 'POST, GET, OPTIONS');
     return res.status(200).end();
   }
 
-  // Handle GET for health check
-  if (req.method === "GET") {
-    return res.status(200).json({ message: "Chat API is operational" });
+  // 2. Handle GET for health check
+  if (method === "GET") {
+    return res.status(200).json({
+      status: "operational",
+      message: "AA Ngong Town Bot API is live",
+      version: "1.0.2" // Update this when pushing to verify deployment
+    });
   }
 
-  if (req.method === "POST") {
+  // 3. Handle POST for Chat & Registration
+  if (method === "POST") {
     try {
       const { messages, formData, action }: ChatRequestBody = req.body;
 
@@ -288,12 +298,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           console.log("✅ Lead saved to database");
         } catch (dbError) {
           console.error("❌ Failed to save lead to database:", dbError);
-          // Continue execution to return response to user even if DB fails
         }
 
-        // Generate WhatsApp URL
         const whatsappUrl = generateWhatsAppURL(formData);
-
         return res.status(200).json({
           reply: `✅ Registration submitted successfully! We're opening WhatsApp to send your details to our team. Please click "Send" to complete the process.\n\nWe will contact you within 24 hours at **${formData.phoneNumber}**.\n\n📞 **Direct Contact:** 0759963210\n📍 **Location:** AA Ngong Town Driving School`,
           whatsappUrl: whatsappUrl
@@ -312,18 +319,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       console.log("💬 User asked:", userMessage);
 
-      // 1. Try Hardcoded Responses (Fast & Deterministic)
+      // 1. Try Hardcoded Responses
       const hardcodedReply = findBestResponse(userMessage);
-
       if (hardcodedReply) {
         console.log("✅ Sending hardcoded response");
-        await new Promise(resolve => setTimeout(resolve, 500)); // Slight delay
+        await new Promise(resolve => setTimeout(resolve, 500));
         return res.status(200).json({ reply: hardcodedReply });
       }
 
-      // 2. Fallback to OpenAI (Generative)
-      console.log("🤖 No hardcoded match. Asking OpenAI...");
-
+      // 2. Fallback to OpenAI
       if (!process.env.OPENAI_API_KEY) {
         console.warn("⚠️ OPENAI_API_KEY not set. Returning fallback greeting.");
         return res.status(200).json({ reply: responseDatabase["greeting"] });
@@ -363,14 +367,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     } catch (error: unknown) {
       console.error("💥 Error in chat handler:", error);
-
-      res.status(200).json({
-        reply: responseDatabase["greeting"]
-      });
+      return res.status(200).json({ reply: responseDatabase["greeting"] });
     }
-  } else {
-    console.error(`🚫 Method ${req.method} not allowed on /api/chat`);
-    res.setHeader('Allow', ['POST', 'GET', 'OPTIONS']);
-    return res.status(405).json({ message: `Method ${req.method} not allowed. Please use POST.` });
   }
+
+  // 4. Default 405 for all other methods
+  console.warn(`🚫 Method ${method} not allowed on /api/chat`);
+  res.setHeader('Allow', 'POST, GET, OPTIONS');
+  return res.status(405).json({
+    error: "Method Not Allowed",
+    message: `The method ${method} is not supported for this endpoint. Please use POST.`,
+    receivedMethod: method
+  });
 }
