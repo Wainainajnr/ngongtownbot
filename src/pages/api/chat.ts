@@ -250,6 +250,17 @@ function findBestResponse(userMessage: string): string | null {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Handle OPTIONS for CORS preflight
+  if (req.method === "OPTIONS") {
+    res.setHeader('Allow', ['POST', 'GET', 'OPTIONS']);
+    return res.status(200).end();
+  }
+
+  // Handle GET for health check
+  if (req.method === "GET") {
+    return res.status(200).json({ message: "Chat API is operational" });
+  }
+
   if (req.method === "POST") {
     try {
       const { messages, formData, action }: ChatRequestBody = req.body;
@@ -358,6 +369,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
     }
   } else {
-    return res.status(405).json({ message: "Method not allowed" });
+    console.error(`🚫 Method ${req.method} not allowed on /api/chat`);
+    res.setHeader('Allow', ['POST', 'GET', 'OPTIONS']);
+    return res.status(405).json({ message: `Method ${req.method} not allowed. Please use POST.` });
   }
 }
