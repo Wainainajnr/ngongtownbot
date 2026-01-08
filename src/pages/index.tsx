@@ -17,12 +17,12 @@ interface LocalAxiosError {
 }
 
 const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
-  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[90%] w-full">
-    <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10">
+  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[95%] sm:max-w-[90%] w-full">
+    <div className="bg-primary-blue/5 p-3 sm:p-4 border-b border-primary-blue/10">
       <h3 className="font-semibold text-primary-blue text-sm">Welcome to AA Ngong Town Driving School</h3>
     </div>
-    <div className="p-4 space-y-3">
-      <ul className="space-y-2 text-sm text-gray-600">
+    <div className="p-2 sm:p-4">
+      <ul className="space-y-1.5 sm:space-y-2 text-sm text-gray-600">
         {[
           "Course Information & Fees",
           "Registration Assistance",
@@ -31,10 +31,12 @@ const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void
           <li key={idx}>
             <button
               onClick={() => onOptionSelect(item)}
-              className="flex items-start gap-2 w-full text-left hover:bg-gray-50 p-1.5 -ml-1.5 rounded-lg transition-colors group"
+              className="flex items-center gap-3 w-full text-left bg-gray-50/50 hover:bg-gray-100 p-3 sm:p-2.5 rounded-xl transition-all active:scale-[0.98] border border-gray-100/50 group touch-manipulation"
             >
-              <span className="text-cta-green mt-0.5 group-hover:scale-110 transition-transform">✓</span>
-              <span className="group-hover:text-primary-blue transition-colors">{item}</span>
+              <div className="w-6 h-6 rounded-full bg-cta-green/10 flex items-center justify-center shrink-0">
+                <span className="text-cta-green text-[10px] font-bold group-hover:scale-110 transition-transform">✓</span>
+              </div>
+              <span className="text-gray-700 font-medium group-hover:text-primary-blue transition-colors text-[13px] sm:text-[14px]">{item}</span>
             </button>
           </li>
         ))}
@@ -157,10 +159,9 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
       </div>
 
     </div>
-    {/* Navigation Footer */}
-    <div className="bg-gray-50 p-3 border-t border-gray-100">
-      <p className="text-[10px] text-gray-400 font-medium uppercase mb-2 tracking-wider">Choose another option</p>
-      <div className="flex flex-wrap gap-2">
+    <div className="bg-gray-50/50 p-4 border-t border-gray-100/50">
+      <p className="text-[10px] text-gray-400 font-bold uppercase mb-3 tracking-widest pl-1">Choose another option</p>
+      <div className="grid grid-cols-2 gap-2">
         {[
           "Registration",
           "Payment & NTSA"
@@ -168,7 +169,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt)}
-            className="px-3 py-1.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-medium text-gray-600 hover:text-primary-blue hover:border-primary-blue/30 transition-all"
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation"
           >
             {opt}
           </button>
@@ -228,8 +229,8 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
 
     </div>
     {/* Navigation Footer */}
-    <div className="bg-gray-50 p-3 border-t border-gray-100">
-      <div className="flex flex-wrap gap-2 justify-center">
+    <div className="bg-gray-50/50 p-4 border-t border-gray-100/50">
+      <div className="grid grid-cols-2 gap-2">
         {[
           "Course Info",
           "Payment & NTSA"
@@ -237,7 +238,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt)}
-            className="px-3 py-1.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-medium text-gray-600 hover:text-primary-blue hover:border-primary-blue/30 transition-all"
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation"
           >
             {opt}
           </button>
@@ -288,10 +289,9 @@ const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => 
       </div>
 
     </div>
-    {/* Navigation Footer */}
-    <div className="bg-gray-50 p-3 border-t border-gray-100">
-      <p className="text-[10px] text-gray-400 font-medium uppercase mb-2 tracking-wider">Choose another option</p>
-      <div className="flex flex-wrap gap-2">
+    <div className="bg-gray-50/50 p-4 border-t border-gray-100/50">
+      <p className="text-[10px] text-gray-400 font-bold uppercase mb-3 tracking-widest pl-1">Choose another option</p>
+      <div className="grid grid-cols-2 gap-2">
         {[
           "Course Info",
           "Registration"
@@ -299,7 +299,7 @@ const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => 
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt)}
-            className="px-3 py-1.5 bg-white border border-gray-200 shadow-sm rounded-lg text-xs font-medium text-gray-600 hover:text-primary-blue hover:border-primary-blue/30 transition-all"
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation"
           >
             {opt}
           </button>
@@ -478,16 +478,17 @@ export default function ChatPage() {
       <Head>
         <title>EricBot Assistant - AA Ngong Town Driving School</title>
         <meta name="description" content={t('metaDescription')} />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
       </Head>
 
       <div className="min-h-screen bg-bg-slate flex items-center justify-center p-0 sm:p-4 font-sans text-gray-900">
         <div className="w-full max-w-[480px] bg-white sm:rounded-2xl shadow-xl flex flex-col h-[100dvh] sm:h-[85vh] border-x sm:border border-gray-200 relative overflow-hidden">
 
           {/* Header */}
-          <header className="bg-gradient-to-r from-primary-blue to-indigo-600 text-white p-4 shadow-md z-10 shrink-0">
+          <header className="bg-gradient-to-r from-primary-blue to-indigo-600 text-white p-3 sm:p-4 shadow-md z-10 shrink-0">
             <div className="flex justify-between items-center">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden shrink-0">
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-sm overflow-hidden shrink-0">
                   <Image
                     src="/ericbot.png"
                     alt="EricBot"
@@ -501,8 +502,8 @@ export default function ChatPage() {
                   <div className="absolute w-2 h-2 bg-green-500 rounded-full bottom-0 right-0 border-2 border-white"></div>
                 </div>
                 <div className="flex flex-col">
-                  <h1 className="text-[16px] font-semibold leading-tight">EricBot Assistant</h1>
-                  <span className="text-[11px] text-blue-100 opacity-90 font-medium">AA Ngong Town Driving School</span>
+                  <h1 className="text-[14px] sm:text-[16px] font-semibold leading-tight">EricBot Assistant</h1>
+                  <span className="text-[10px] sm:text-[11px] text-blue-100 opacity-90 font-medium whitespace-nowrap">AA Ngong Town Driving School</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -598,14 +599,14 @@ export default function ChatPage() {
           </main>
 
           {/* Primary Action Buttons */}
-          <div className="bg-white border-t border-gray-100 p-3 pb-0">
+          <div className="bg-white border-t border-gray-100 p-3 pb-0 shrink-0">
             <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
               {primaryActions.map((action, idx) => (
                 <button
                   key={idx}
                   onClick={() => sendMessage(action.message, 'text')}
                   disabled={loading}
-                  className="flex-1 min-w-[100px] bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white text-xs font-bold py-3 px-4 rounded-xl shadow-md transition-all transform hover:scale-[1.02] whitespace-nowrap text-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 min-w-[110px] bg-gradient-to-r from-emerald-500 to-green-600 active:from-emerald-600 active:to-green-700 text-white text-[11px] font-bold py-3 px-2 rounded-xl shadow-md transition-all active:scale-95 whitespace-nowrap text-center disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
                 >
                   {action.label}
                 </button>
@@ -614,35 +615,35 @@ export default function ChatPage() {
           </div>
 
           {/* Input Area */}
-          <footer className="bg-white p-3 pt-2">
+          <footer className="bg-white border-t border-gray-100 shrink-0 z-50 p-3 pb-[env(safe-area-inset-bottom,12px)]">
             <form
               onSubmit={(e) => { e.preventDefault(); sendMessage(input); }}
-              className="flex items-center gap-2 relative"
+              className="flex items-center gap-2 w-full"
             >
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask about courses, fees, or NTSA..."
-                disabled={loading}
-                className="w-full bg-white border border-gray-300 text-gray-900 font-medium text-sm rounded-full py-3 pl-4 pr-12 focus:ring-2 focus:ring-primary-blue/20 focus:border-primary-blue transition-all placeholder:text-gray-500 shadow-sm"
-              />
+              <div className="flex-1 min-w-0 bg-gray-50 border border-gray-200 rounded-full flex items-center px-4 focus-within:ring-2 focus-within:ring-primary-blue/20 focus-within:bg-white transition-all shadow-inner">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Type a message..."
+                  disabled={loading}
+                  className="w-full bg-transparent text-gray-900 font-medium text-[16px] py-3.5 outline-none placeholder:text-gray-400"
+                />
+              </div>
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="absolute right-1.5 p-2 bg-cta-green text-white rounded-full hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm"
+                className={`shrink-0 w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all active:scale-95 ${!input.trim() || loading
+                  ? 'bg-gray-100 text-gray-400 opacity-50'
+                  : 'bg-primary-blue text-white shadow-blue-200 ring-2 ring-primary-blue ring-offset-2'
+                  }`}
+                aria-label="Send"
               >
-                <svg className="w-4 h-4 transform rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 19V5m0 0l-7 7m7-7l7 7" /></svg>
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
               </button>
             </form>
-
-            <div className="mt-4 mb-1">
-              <div className="flex justify-center gap-4 text-[10px] text-gray-400 font-medium uppercase tracking-wider">
-                <span className="flex items-center gap-1"><svg className="w-3 h-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>NTSA Approved</span>
-                <span>•</span>
-                <span>Certified Instructors</span>
-              </div>
-            </div>
           </footer>
 
         </div>

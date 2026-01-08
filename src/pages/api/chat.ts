@@ -146,47 +146,6 @@ Choose another option:
 2️⃣ Registration Assistance  
 3️⃣ Payment & NTSA Requirements`,
 
-  // ==================== 4️⃣ LICENSE PREREQUISITES ====================
-  "license_prerequisites": `📋 LICENSE PREREQUISITES
-
-🚦 NO PREREQUISITES (Entry-Level):
-✅ Category A – Motorcycles  
-Minimum Age: 18 years  
-No prior license needed  
-
-✅ Category B – Saloon Cars  
-Minimum Age: 18 years  
-No prior license needed  
-
-🧾 REQUIRES CATEGORY B FIRST:
-🔹 Category C1 – Light Trucks  
-Minimum Age: 18 years  
-Must have: Category B license with 2 years experience 
-
-🔹 Category D1 – Small Passenger Vans (PSV)  
-Minimum Age: 21 years  
-Must have: Category B and C1 license  
-
-🚚 REQUIRES LOWER TRUCK CATEGORY:
-🔹 Category C – Medium Trucks  
-Minimum Age: 21 years  
-Must have: Category C1 license with 2 years experience
-
-🔹 Category CE – Heavy Trucks/Articulated  
-Minimum Age: 24 years  
-Must have: Category C license with 2 years experience
-
-🚌 REQUIRES LOWER PSV CATEGORY:
-🔹 Category D – Large Passenger Vehicles  
-Minimum Age: 24 years  
-Must have: Category D1 license 2 years experience 
-
-Choose another option:
-1️⃣ Course Information & Fees  
-2️⃣ Registration Assistance  
-3️⃣ Payment & NTSA Requirements  
-4️⃣ License Prerequisites`,
-
   // ==================== FORM TRIGGER RESPONSE ====================
   "start_registration": `📋 REGISTRATION FORM
 
@@ -274,17 +233,6 @@ function findBestResponse(userMessage: string): string | null {
 
   if (paymentTriggers.some(trigger => lowerMessage.includes(trigger))) {
     return responseDatabase["payment_ntsa"];
-  }
-
-  // ==================== MENU OPTION 4 - LICENSE PREREQUISITES ====================
-  const licenseTriggers = [
-    '4', 'license', 'prerequisite', 'requirement', 'eligibility',
-    'qualified', 'qualifications', 'what do i need for license',
-    'license requirements', 'driving license', 'categories'
-  ];
-
-  if (licenseTriggers.some(trigger => lowerMessage.includes(trigger))) {
-    return responseDatabase["license_prerequisites"];
   }
 
   // ==================== FORM TRIGGER ====================

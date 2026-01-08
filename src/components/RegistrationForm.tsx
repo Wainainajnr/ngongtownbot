@@ -133,10 +133,10 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
 
     return (
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden flex flex-col border border-gray-100">
+            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[95dvh] sm:max-h-[90vh] overflow-hidden flex flex-col border border-gray-100">
                 {/* Header */}
-                <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10 flex justify-between items-center shrink-0">
-                    <h2 className="text-base sm:text-lg font-bold text-primary-blue flex items-center gap-2">
+                <div className="bg-primary-blue/5 p-3 sm:p-4 border-b border-primary-blue/10 flex justify-between items-center shrink-0">
+                    <h2 className="text-sm sm:text-lg font-bold text-primary-blue flex items-center gap-2">
                         📋 {t('registrationForm')}
                     </h2>
                     <button
@@ -148,8 +148,8 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                     </button>
                 </div>
 
-                <div className="overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-200">
-                    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" noValidate>
+                <div className="overflow-y-auto p-4 sm:p-6 scrollbar-thin scrollbar-thumb-gray-200">
+                    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5 sm:space-y-6" noValidate>
                         {/* Personal Information Section */}
                         <div className="space-y-4">
                             <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2 mb-4">
@@ -377,14 +377,14 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="flex-1 px-4 py-3 text-sm font-semibold text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 hover:text-primary-blue hover:border-primary-blue/30 transition-all shadow-sm"
+                        className="flex-1 px-4 py-3 text-sm font-semibold text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 hover:text-primary-blue hover:border-primary-blue/30 transition-all shadow-sm active:scale-95 touch-manipulation"
                     >
                         {t('cancel')}
                     </button>
                     <button
                         onClick={(e) => handleSubmit(e as any)}
                         disabled={isSubmitting}
-                        className="flex-1 px-4 py-3 text-sm font-bold text-white bg-cta-green rounded-xl hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center"
+                        className="flex-1 px-4 py-3 text-sm font-bold text-white bg-cta-green rounded-xl hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center active:scale-95 touch-manipulation"
                     >
                         {isSubmitting ? (
                             <>
