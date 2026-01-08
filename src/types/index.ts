@@ -1,4 +1,5 @@
 export interface Message {
+    id?: string;
     role: "user" | "assistant";
     content: string;
     type?: "text" | "welcome" | "course_beginner" | "info_cards";

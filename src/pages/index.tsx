@@ -349,6 +349,8 @@ export default function ChatPage() {
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const loadingRef = useRef(false);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -356,19 +358,28 @@ export default function ChatPage() {
 
   const sendMessage = useCallback(async (content: string, type: Message['type'] = 'text') => {
     if (!content.trim() && type === 'text') return;
-    if (loading) return;
+    if (loadingRef.current) return;
 
-    // For special buttons that act as user messages
-    const userMessage: Message = { role: "user", content: content.trim() };
-    const updatedMessages = [...messages, userMessage];
-
-    setMessages(updatedMessages);
-    setInput("");
+    loadingRef.current = true;
     setLoading(true);
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: "user",
+      content: content.trim()
+    };
+
+    let snapshotMessages: Message[] = [];
+    setMessages((prev) => {
+      snapshotMessages = [...prev, userMessage];
+      return snapshotMessages;
+    });
+
+    setInput("");
 
     try {
       const response = await axios.post<ChatResponse>("/api/chat", {
-        messages: updatedMessages,
+        messages: snapshotMessages,
         language
       });
 
@@ -376,8 +387,8 @@ export default function ChatPage() {
         throw new Error(response.data.message || response.data.error);
       }
 
-      // Automatically detect type from backend response if possible, or fallback to text
       const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
         role: "assistant",
         content: response.data.reply,
         type: 'text'
@@ -406,14 +417,16 @@ export default function ChatPage() {
         }
       }
       const fallbackMessage: Message = {
+        id: (Date.now() + 2).toString(),
         role: "assistant",
         content: errorMessage,
       };
       setMessages((prev) => [...prev, fallbackMessage]);
     } finally {
       setLoading(false);
+      loadingRef.current = false;
     }
-  }, [loading, messages, language, t]);
+  }, [language, t]);
 
   const handleFormSubmit = async (formData: RegistrationFormData) => {
     setFormSubmitting(true);
@@ -456,8 +469,8 @@ export default function ChatPage() {
   };
 
   useEffect(() => {
-    if (messages.length === 0) {
-      // Initialize with a hidden "hi" to trigger the backend greeting
+    if (!initializedRef.current && messages.length === 0) {
+      initializedRef.current = true;
       sendMessage("hi");
     }
   }, [messages.length, sendMessage]);
@@ -507,7 +520,12 @@ export default function ChatPage() {
                   <button onClick={() => handleLanguageChange('sw')} className={`px-2 py-0.5 text-[10px] font-medium rounded-full transition-colors ${language === 'sw' ? 'bg-white text-primary-blue' : 'text-white hover:bg-white/10'}`}>SW</button>
                 </div>
                 <button
-                  onClick={() => { setMessages([]); setInput(""); }}
+                  onClick={() => {
+                    setMessages([]);
+                    setInput("");
+                    initializedRef.current = false;
+                    loadingRef.current = false;
+                  }}
                   className="p-1.5 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-colors"
                   title="New Chat"
                 >
@@ -568,7 +586,7 @@ export default function ChatPage() {
               }
 
               return (
-                <div key={index} className={`flex w-full ${isUser ? "justify-end" : "justify-start"}`}>
+                <div key={message.id || index} className={`flex w-full ${isUser ? "justify-end" : "justify-start"}`}>
                   {!isUser && (
                     <div className="w-8 h-8 rounded-full bg-white border border-gray-100 shadow-sm flex items-center justify-center mr-2 shrink-0 self-end mb-1 overflow-hidden">
                       <Image src="/ericbot.png" alt="Bot" width={32} height={32} className="object-cover" />
