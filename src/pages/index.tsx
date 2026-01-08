@@ -283,7 +283,7 @@ const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => 
       <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
         <p className="text-xs text-gray-600">
           <span className="font-semibold">Need help with NTSA setup?</span> Call us at{' '}
-          <a href="tel:0759963210" className="text-primary-blue font-bold hover:underline">0759963210</a>
+          <a href="tel:0759963210" className="text-primary-blue font-bold">0759963210</a>
         </p>
       </div>
 

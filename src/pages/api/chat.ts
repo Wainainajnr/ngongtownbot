@@ -247,7 +247,7 @@ function findBestResponse(userMessage: string): string | null {
 
   // ==================== MENU OPTION 1 - COURSE INFO ====================
   const courseTriggers = [
-    '1', 'course', 'fees', 'price', 'charges', 'cost', 'how much',
+    '1', 'course information & fees', 'course', 'fees', 'price', 'charges', 'cost', 'how much',
     'fee', 'pricing', 'tuition', 'course information'
   ];
 
@@ -257,8 +257,8 @@ function findBestResponse(userMessage: string): string | null {
 
   // ==================== MENU OPTION 2 - REGISTRATION ====================
   const registrationTriggers = [
-    '2', 'register', 'join', 'apply', 'sign up', 'enroll', 'enrollment',
-    'admission', 'admissions', 'how to join', 'how to apply', 'registration assistance'
+    '2', 'registration assistance', 'register', 'join', 'apply', 'sign up', 'enroll', 'enrollment',
+    'admission', 'admissions', 'how to join', 'how to apply'
   ];
 
   if (registrationTriggers.some(trigger => lowerMessage.includes(trigger))) {
@@ -267,7 +267,7 @@ function findBestResponse(userMessage: string): string | null {
 
   // ==================== MENU OPTION 3 - PAYMENT & NTSA ====================
   const paymentTriggers = [
-    '3', 'ntsa', 'payment & ntsa', 'payment method', 'how to pay', 'mpesa',
+    '3', 'payment & ntsa requirements', 'payment & ntsa', 'ntsa', 'payment method', 'how to pay', 'mpesa',
     'ecitizen', 'documents', 'what do i need', 'requirements',
     'prerequisites', 'documents needed', 'eye test'
   ];
