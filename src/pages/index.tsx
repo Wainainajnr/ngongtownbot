@@ -19,7 +19,7 @@ interface LocalAxiosError {
 const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
   <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[95%] sm:max-w-[90%] w-full">
     <div className="bg-primary-blue/5 p-3 sm:p-4 border-b border-primary-blue/10">
-      <h3 className="font-semibold text-primary-blue text-sm">Welcome to AA Ngong Town Driving School</h3>
+      <h3 className="font-semibold text-primary-blue text-sm">Welcome to AA Kenya - Ngong Town Branch</h3>
     </div>
     <div className="p-2 sm:p-4">
       <ul className="space-y-1.5 sm:space-y-2 text-sm text-gray-600">
@@ -202,7 +202,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
 
       {/* Option B */}
       <div className="space-y-2">
-        <h4 className="text-sm font-semibold text-gray-800">b) Contact AA Ngong Town Directly</h4>
+        <h4 className="text-sm font-semibold text-gray-800">b) Contact AA Kenya - Ngong Town Branch Directly</h4>
         <div className="bg-slate-50 rounded-xl p-3 text-sm space-y-2 border border-slate-100">
           <a href="tel:0759963210" className="flex items-center gap-2 text-gray-600 hover:text-primary-blue transition-colors">
             <span>📞</span> <span className="font-medium">0759963210</span>
@@ -480,7 +480,7 @@ export default function ChatPage() {
   return (
     <>
       <Head>
-        <title>EricBot Assistant - AA Ngong Town Driving School</title>
+        <title>EricBot Assistant - AA Kenya - Ngong Town Branch</title>
         <meta name="description" content={t('metaDescription')} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
       </Head>
@@ -507,7 +507,7 @@ export default function ChatPage() {
                 </div>
                 <div className="flex flex-col">
                   <h1 className="text-[14px] sm:text-[16px] font-semibold leading-tight">EricBot Assistant</h1>
-                  <span className="text-[10px] sm:text-[11px] text-white/90 font-medium whitespace-nowrap">AA Ngong Town Driving School</span>
+                  <span className="text-[10px] sm:text-[11px] text-white/90 font-medium whitespace-nowrap">AA Kenya - Ngong Town Branch</span>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -557,7 +557,7 @@ export default function ChatPage() {
               if (!isUser) {
                 const lowerContent = message.content.toLowerCase();
                 // Broader matching for Welcome
-                if (lowerContent.includes("welcome to aa ngong town") || lowerContent.includes("driving school!")) {
+                if (lowerContent.includes("welcome to aa kenya") || lowerContent.includes("driving school!")) {
                   Content = <WelcomeCard onOptionSelect={(opt) => sendMessage(opt, 'text')} />;
                 }
                 // Custom Card for Course Info

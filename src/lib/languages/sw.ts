@@ -1,6 +1,6 @@
 export const sw = {
   // Greeting
-  greeting: `Hujambo! 👋 Karibu AA Ngong Town Driving School! 🚗
+  greeting: `Hujambo! 👋 Karibu AA Kenya - Ngong Town Branch! 🚗
 
 Tunatoa kozi kamili za udereva na walimu walioidhinishwa hapa Ngong Town.
 
@@ -11,14 +11,14 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
 
 ⚠️ Muhimu: Angalia mahitaji ya NTSA kabla ya kutumia kozi yoyote.
 
-📞 Wasiliana na AA Ngong Town:
+📞 Wasiliana na AA Kenya - Ngong Town Branch:
 • Simu: 0759963210`,
 
   // Menu Options
   menuOptions: "Tafadhali chagua chaguo:",
   option1: "1️⃣ Taarifa za Kozi & Ada",
   option2: "2️⃣ Usaidizi wa Usajili",
-  option3: "3️⃣ Malipo & Mahitaji ya NTSA", 
+  option3: "3️⃣ Malipo & Mahitaji ya NTSA",
   option4: "4️⃣ Mahitaji ya Leseni",
 
   // Quick Access
@@ -34,7 +34,7 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
   emergencyContact: "🆘 Mawasiliano ya Dharura",
   courseInfo: "🎓 Taarifa za Kozi",
   fullName: "Jina Kamili *",
-  dateOfBirth: "Tarehe ya Kuzaliwa *", 
+  dateOfBirth: "Tarehe ya Kuzaliwa *",
   idNumber: "Nambari ya Kitambulisho *",
   phoneNumber: "Nambari ya Simu *",
   email: "Barua Pepe",
@@ -47,7 +47,7 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
   // Messages
   thinking: "Inafikiri",
   sending: "Inatuma",
-  submitRegistration: "Wasilisha Usajili", 
+  submitRegistration: "Wasilisha Usajili",
   submitting: "Inawasilisha...",
   cancel: "Ghairi",
   typeMessage: "Uliza kuhusu kozi za udereva...",
@@ -55,7 +55,7 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
   tip: "💡 Kidokezo: Andika nambari 1–4 kwa ufikiaji wa haraka",
 
   // Responses
-  registrationSuccess: "✅ Usajili umewasilishwa kwa mafanikio! Tunafungua WhatsApp kutuma maelezo yako kwa timu yetu. Tafadhali bofya \"Tuma\" kukamilisha mchakato.\n\nTutawasiliana nawe ndani ya masaa 24 kwa **{phoneNumber}**.\n\n📞 **Mawasiliano ya Moja kwa Moja:** 0759963210\n📍 **Eneo:** AA Ngong Town Driving School",
+  registrationSuccess: "✅ Usajili umewasilishwa kwa mafanikio! Tunafungua WhatsApp kutuma maelezo yako kwa timu yetu. Tafadhali bofya \"Tuma\" kukamilisha mchakato.\n\nTutawasiliana nawe ndani ya masaa 24 kwa **{phoneNumber}**.\n\n📞 **Mawasiliano ya Moja kwa Moja:** 0759963210\n📍 **Eneo:** AA Kenya - Ngong Town Branch",
 
   // Course Information
   course_info: `📚 KOZI ZA KAWADA (Muda wa Majuma 5)
@@ -78,8 +78,8 @@ Transmission: Automatic au Manual`,
   validationFailed: "Uthibitishaji umeshindwa",
   offlineMode: "Hali ya Nje ya Mtandao",
   registrationForm: "Fomu ya Usajili",
-  metaDescription: "Msaidizi wa AI kwa AA Ngong Town Driving School - Pata taarifa kuhusu kozi za udereva, ada, usajili, na mahitaji ya NTSA.",
-  
+  metaDescription: "Msaidizi wa AI kwa AA Kenya - Ngong Town Branch - Pata taarifa kuhusu kozi za udereva, ada, usajili, na mahitaji ya NTSA.",
+
   // Footer Note
-  footerNote: "Inaendeshwa na Nexeric Innovations - AA Ngong Town Driving School"
+  footerNote: "Inaendeshwa na Nexeric Innovations - AA Kenya - Ngong Town Branch"
 } as const;

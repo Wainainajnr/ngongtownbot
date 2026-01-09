@@ -59,7 +59,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 // English translations
 const enTranslations: Record<TranslationKey, string> = {
-  greeting: `Hello! 👋 Welcome to AA Ngong Town Driving School! 🚗
+  greeting: `Hello! 👋 Welcome to AA Kenya - Ngong Town Branch! 🚗
 
 We offer comprehensive driving courses with certified instructors right here in Ngong Town.
 
@@ -70,7 +70,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
 
 ⚠️ Important: Check NTSA requirements before applying for any class.
 
-📞 Contact AA Ngong Town:
+📞 Contact AA Kenya - Ngong Town Branch:
 • Phone: 0759963210`,
 
   menuOptions: "Please choose an option:",
@@ -109,7 +109,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
   send: "Send",
   tip: "💡 Tip: Type numbers 1–4 for instant access",
 
-  registrationSuccess: "Great! Your registration is all set! 🎉\n\nWe're opening WhatsApp now to send your details over to our team. Just hit \"Send\" when it opens and you're done!\n\nYou'll hear from us within the next 24 hours on 0759963210.\n\nNeed to reach us sooner? Give us a call at 0759963210 or swing by our office at AA Ngong Town Driving School.",
+  registrationSuccess: "Great! Your registration is all set! 🎉\n\nWe're opening WhatsApp now to send your details over to our team. Just hit \"Send\" when it opens and you're done!\n\nYou'll hear from us within the next 24 hours on 0759963210.\n\nNeed to reach us sooner? Give us a call at 0759963210 or swing by our office at AA Kenya - Ngong Town Branch.",
 
   rateLimitExceeded: "Too many requests. Please wait a moment before sending another message.",
   invalidMessage: "Invalid message. Please try again.",
@@ -119,10 +119,10 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
   validationFailed: "Validation failed",
   offlineMode: "Offline Mode",
   registrationForm: "Registration Form",
-  metaDescription: "AI assistant for AA Ngong Town Driving School - Get information about driving courses, fees, registration, and NTSA requirements.",
+  metaDescription: "AI assistant for AA Kenya - Ngong Town Branch - Get information about driving courses, fees, registration, and NTSA requirements.",
 
   // ADD THIS MISSING KEY:
-  footerNote: "Powered by EricBot Assistant - AA Ngong Town Driving School"
+  footerNote: "Powered by EricBot Assistant - AA Kenya - Ngong Town Branch"
 };
 
 // Swahili translations (simplified for now)
@@ -130,7 +130,7 @@ const swTranslations: Record<TranslationKey, string> = {
   ...enTranslations, // Use English as fallback for now
 
   // Override with Swahili translations:
-  greeting: `Hujambo! 👋 Karibu AA Ngong Town Driving School! 🚗
+  greeting: `Hujambo! 👋 Karibu AA Kenya - Ngong Town Branch! 🚗
 
 Tunatoa kozi kamili za udereva na walimu walioidhinishwa hapa Ngong Town.
 
@@ -141,7 +141,7 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
 
 ⚠️ Muhimu: Angalia mahitaji ya NTSA kabla ya kutumia kozi yoyote.
 
-📞 Wasiliana na AA Ngong Town:
+📞 Wasiliana na AA Kenya - Ngong Town Branch:
 • Simu: 0759963210`,
 
   menuOptions: "Tafadhali chagua chaguo:",
@@ -180,10 +180,10 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
   send: "Tuma",
   tip: "💡 Kidokezo: Andika nambari 1–4 kwa ufikiaji wa haraka",
 
-  registrationSuccess: "✅ Usajili umewasilishawa kwa mafanikio! Tunafungua WhatsApp kutuma maelezo yako kwa timu yetu. Tafadhali bofya \"Tuma\" kukamilisha mchakato.\n\nTutawasiliana nawe ndani ya masaa 24 kwa **{phoneNumber}**.\n\n📞 **Mawasiliano ya Moja kwa Moja:** 0759963210\n📍 **Eneo:** AA Ngong Town Driving School",
+  registrationSuccess: "✅ Usajili umewasilishawa kwa mafanikio! Tunafungua WhatsApp kutuma maelezo yako kwa timu yetu. Tafadhali bofya \"Tuma\" kukamilisha mchakato.\n\nTutawasiliana nawe ndani ya masaa 24 kwa **{phoneNumber}**.\n\n📞 **Mawasiliano ya Moja kwa Moja:** 0759963210\n📍 **Eneo:** AA Kenya - Ngong Town Branch",
 
   // ADD THIS MISSING KEY:
-  footerNote: "Inaendeshwa na EricBot Assistant - AA Ngong Town Driving School"
+  footerNote: "Inaendeshwa na EricBot Assistant - AA Kenya - Ngong Town Branch"
 };
 
 const translations = {

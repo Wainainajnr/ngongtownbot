@@ -1,6 +1,6 @@
 export const en = {
   // Greeting
-  greeting: `Hello! 👋 Welcome to AA Ngong Town Driving School! 🚗
+  greeting: `Hello! 👋 Welcome to AA Kenya - Ngong Town Branch! 🚗
 
 We offer comprehensive driving courses with certified instructors right here in Ngong Town.
 
@@ -11,27 +11,27 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
 
 ⚠️ Important: Check NTSA requirements before applying for any class.
 
-📞 Contact AA Ngong Town:
+📞 Contact AA Kenya - Ngong Town Branch:
 • Phone: 0759963210`,
 
   // Menu Options
   menuOptions: "Please choose an option:",
   option1: "1️⃣ Course Information & Fees",
-  option2: "2️⃣ Registration Assistance", 
+  option2: "2️⃣ Registration Assistance",
   option3: "3️⃣ Payment & NTSA Requirements",
   option4: "4️⃣ License Prerequisites",
 
   // Quick Access
   quickAccess: "Quick Access",
   courses: "Courses",
-  register: "Register", 
+  register: "Register",
   ntsa: "NTSA",
   license: "License",
   startForm: "Start Form",
 
   // Form Labels
   personalInfo: "👤 Personal Information",
-  emergencyContact: "🆘 Emergency Contact", 
+  emergencyContact: "🆘 Emergency Contact",
   courseInfo: "🎓 Course Information",
   fullName: "Full Name *",
   dateOfBirth: "Date of Birth *",
@@ -46,7 +46,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
 
   // Messages
   thinking: "Thinking",
-  sending: "Sending", 
+  sending: "Sending",
   submitRegistration: "Submit Registration",
   submitting: "Submitting...",
   cancel: "Cancel",
@@ -55,7 +55,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
   tip: "💡 Tip: Type numbers 1–4 for instant access",
 
   // Responses
-  registrationSuccess: "✅ Registration submitted successfully! We're opening WhatsApp to send your details to our team. Please click \"Send\" to complete the process.\n\nWe will contact you within 24 hours at **{phoneNumber}**.\n\n📞 **Direct Contact:** 0759963210\n📍 **Location:** AA Ngong Town Driving School",
+  registrationSuccess: "✅ Registration submitted successfully! We're opening WhatsApp to send your details to our team. Please click \"Send\" to complete the process.\n\nWe will contact you within 24 hours at **{phoneNumber}**.\n\n📞 **Direct Contact:** 0759963210\n📍 **Location:** AA Kenya - Ngong Town Branch",
 
   // Course Information
   course_info: `📚 STANDARD COURSES (5 Weeks Duration)
@@ -78,8 +78,8 @@ Transmission: Automatic or Manual`,
   validationFailed: "Validation failed",
   offlineMode: "Offline Mode",
   registrationForm: "Registration Form",
-  metaDescription: "AI assistant for AA Ngong Town Driving School - Get information about driving courses, fees, registration, and NTSA requirements.",
-  
+  metaDescription: "AI assistant for AA Kenya - Ngong Town Branch - Get information about driving courses, fees, registration, and NTSA requirements.",
+
   // Footer Note
-  footerNote: "Powered by Nexeric Innovations - AA Ngong Town Driving School"
+  footerNote: "Powered by Nexeric Innovations - AA Kenya - Ngong Town Branch"
 } as const;

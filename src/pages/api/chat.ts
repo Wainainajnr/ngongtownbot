@@ -15,10 +15,10 @@ interface ChatRequestBody {
   action?: string;
 }
 
-// Comprehensive response database for AA Ngong Town Driving School
+// Comprehensive response database for AA Kenya - Ngong Town Branch
 const responseDatabase: { [key: string]: string } = {
   // ==================== GREETING TRIGGER ====================
-  "greeting": `Hello! 👋 Welcome to AA Ngong Town Driving School! 🚗
+  "greeting": `Hello! 👋 Welcome to AA Kenya - Ngong Town Branch! 🚗
 
 We offer comprehensive driving courses with certified instructors right here in Ngong Town.
 
@@ -29,7 +29,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
 
 ⚠️ Important: Check NTSA requirements before applying for any class.
 
-📞 Contact AA Ngong Town:
+📞 Contact AA Kenya - Ngong Town Branch:
 • Phone: 0759963210  
 
 Please choose an option:  
@@ -112,7 +112,7 @@ Please choose an option:
   https://edereva.aakenya.co.ke/students/
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   
-  b) Contact AA Ngong Town Directly  
+  b) Contact AA Kenya - Ngong Town Branch Directly  
   📞 Phone: 0759963210  
   📧 Email: aangongtown@aakenya.co.ke  
   ☎️ AA Call Center: 0709 933 000 / 999  
@@ -200,7 +200,7 @@ ${formData.additionalNotes ? `• Additional Notes:\n  ${formData.additionalNote
 ✅ Verify student information
 ✅ Provide next steps
 
-🏫 *AA Ngong Town Driving School*`;
+🏫 *AA Kenya - Ngong Town Branch*`;
 
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/254759963210?text=${encodedMessage}`;
@@ -317,7 +317,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const whatsappUrl = generateWhatsAppURL(formData);
         return res.status(200).json({
-          reply: `✅ Registration submitted successfully! We're opening WhatsApp to send your details to our team. Please click "Send" to complete the process.\n\nWe will contact you within 24 hours at **${formData.phoneNumber}**.\n\n📞 **Direct Contact:** 0759963210\n📍 **Location:** AA Ngong Town Driving School`,
+          reply: `✅ Registration submitted successfully! We're opening WhatsApp to send your details to our team. Please click "Send" to complete the process.\n\nWe will contact you within 24 hours at **${formData.phoneNumber}**.\n\n📞 **Direct Contact:** 0759963210\n📍 **Location:** AA Kenya - Ngong Town Branch`,
           whatsappUrl: whatsappUrl
         });
       }
@@ -354,7 +354,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           messages: [
             {
               role: "system",
-              content: `You are EricBot, a helpful assistant for AA Ngong Town Driving School. 
+              content: `You are EricBot, a helpful assistant for AA Kenya - Ngong Town Branch. 
               Your goal is to answer questions about driving courses, fees, and requirements based on general knowledge of Kenyan driving schools, but prioritize the specific info provided below if relevant.
               
               Key Info:
