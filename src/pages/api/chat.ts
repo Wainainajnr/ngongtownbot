@@ -164,27 +164,43 @@ You can also continue browsing other options while the form is open.`
 
 // Function to generate WhatsApp URL
 function generateWhatsAppURL(formData: RegistrationFormData): string {
-  const message = `🚗 NEW DRIVING SCHOOL REGISTRATION
+  const message = `╔════════════════════════════╗
+║  NEW STUDENT REGISTRATION  ║
+╚════════════════════════════╝
 
-👤 PERSONAL DETAILS:
-Name: ${formData.fullName}
-Date of Birth: ${formData.dateOfBirth}
-ID/Passport: ${formData.idNumber}
-Phone: ${formData.phoneNumber}
-Email: ${formData.email || 'Not provided'}
+👤 *PERSONAL INFORMATION*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Full Name: *${formData.fullName}*
+• Date of Birth: ${formData.dateOfBirth}
+• ID/Passport: ${formData.idNumber}
+• Phone: ${formData.phoneNumber}
+• Email: ${formData.email || 'Not provided'}
 
-🆘 EMERGENCY CONTACT:
-Name: ${formData.emergencyContactName}
-Phone: ${formData.emergencyContactPhone}
+🆘 *EMERGENCY CONTACT*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Contact Name: *${formData.emergencyContactName}*
+• Contact Phone: ${formData.emergencyContactPhone}
 
-🎓 COURSE INFORMATION:
-Course: ${formData.preferredCourse}
-Intake: ${formData.preferredIntake}
-Notes: ${formData.additionalNotes || 'None'}
+🎓 *COURSE DETAILS*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Selected Course: *${formData.preferredCourse}*
+• Preferred Intake: ${formData.preferredIntake}
+${formData.additionalNotes ? `• Additional Notes:\n  ${formData.additionalNotes}` : '• Additional Notes: None'}
 
-📅 Submitted: ${new Date().toLocaleString('en-KE')}
+📅 *SUBMISSION INFO*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Date & Time: ${new Date().toLocaleString('en-KE', {
+    dateStyle: 'full',
+    timeStyle: 'short'
+  })}
 
-Please contact within 24 hours!`;
+⏰ *ACTION REQUIRED*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Please contact within 24 hours
+✅ Verify student information
+✅ Provide next steps
+
+🏫 *AA Ngong Town Driving School*`;
 
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/254759963210?text=${encodedMessage}`;

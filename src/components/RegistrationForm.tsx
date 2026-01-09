@@ -65,8 +65,15 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
 
             case 'preferredIntake':
                 if (!value) return t('preferredIntake') + " is required";
-                if (new Date(value) < new Date(new Date().toDateString())) {
+                const date = new Date(value);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                if (date < today) {
                     return "Intake date cannot be in the past";
+                }
+                if (date.getDay() !== 3) {
+                    return "Intakes are only on Wednesdays";
                 }
                 break;
 
@@ -132,7 +139,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
     };
 
     return (
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[95dvh] sm:max-h-[90vh] overflow-hidden flex flex-col border border-gray-100">
                 {/* Header */}
                 <div className="bg-primary-blue/5 p-3 sm:p-4 border-b border-primary-blue/10 flex justify-between items-center shrink-0">
@@ -336,7 +343,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
 
                                 <div>
                                     <label htmlFor="preferredIntake" className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase">
-                                        {t('preferredIntake')}
+                                        {t('preferredIntake')} <span className="text-cta-green normal-case">(Wednesdays Only)</span>
                                     </label>
                                     <input
                                         id="preferredIntake"
@@ -346,6 +353,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                         value={formData.preferredIntake}
                                         onChange={(e) => handleFieldChange('preferredIntake', e.target.value)}
                                         onBlur={(e) => handleFieldBlur('preferredIntake', e.target.value)}
+                                        min={new Date().toISOString().split('T')[0]}
                                         className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all ${formErrors.preferredIntake ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
                                     />
                                     {formErrors.preferredIntake && <p className="mt-1 text-xs text-red-500 font-medium">{formErrors.preferredIntake}</p>}
@@ -384,7 +392,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                     <button
                         onClick={handleSubmit}
                         disabled={isSubmitting}
-                        className="flex-1 px-4 py-3 text-sm font-bold text-white bg-cta-green rounded-xl hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center active:scale-95 touch-manipulation"
+                        className="flex-1 px-4 py-3 text-sm font-bold text-white bg-green-600 rounded-xl hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center active:scale-95 touch-manipulation"
                     >
                         {isSubmitting ? (
                             <>

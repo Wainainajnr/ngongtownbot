@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export type Language = 'en' | 'sw';
-export type TranslationKey = 
+export type TranslationKey =
   | 'greeting'
   | 'menuOptions'
   | 'option1'
@@ -75,19 +75,19 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
 
   menuOptions: "Please choose an option:",
   option1: "1️⃣ Course Information & Fees",
-  option2: "2️⃣ Registration Assistance", 
+  option2: "2️⃣ Registration Assistance",
   option3: "3️⃣ Payment & NTSA Requirements",
   option4: "4️⃣ License Prerequisites",
 
   quickAccess: "Quick Access",
   courses: "Courses",
-  register: "Register", 
+  register: "Register",
   ntsa: "NTSA",
   license: "License",
   startForm: "Start Form",
 
   personalInfo: "👤 Personal Information",
-  emergencyContact: "🆘 Emergency Contact", 
+  emergencyContact: "🆘 Emergency Contact",
   courseInfo: "🎓 Course Information",
   fullName: "Full Name *",
   dateOfBirth: "Date of Birth *",
@@ -101,7 +101,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
   additionalNotes: "Additional Notes",
 
   thinking: "Thinking",
-  sending: "Sending", 
+  sending: "Sending",
   submitRegistration: "Submit Registration",
   submitting: "Submitting...",
   cancel: "Cancel",
@@ -109,7 +109,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
   send: "Send",
   tip: "💡 Tip: Type numbers 1–4 for instant access",
 
-  registrationSuccess: "✅ Registration submitted successfully! We're opening WhatsApp to send your details to our team. Please click \"Send\" to complete the process.\n\nWe will contact you within 24 hours at **{phoneNumber}**.\n\n📞 **Direct Contact:** 0759963210\n📍 **Location:** AA Ngong Town Driving School",
+  registrationSuccess: "Great! Your registration is all set! 🎉\n\nWe're opening WhatsApp now to send your details over to our team. Just hit \"Send\" when it opens and you're done!\n\nYou'll hear from us within the next 24 hours on 0759963210.\n\nNeed to reach us sooner? Give us a call at 0759963210 or swing by our office at AA Ngong Town Driving School.",
 
   rateLimitExceeded: "Too many requests. Please wait a moment before sending another message.",
   invalidMessage: "Invalid message. Please try again.",
@@ -120,7 +120,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
   offlineMode: "Offline Mode",
   registrationForm: "Registration Form",
   metaDescription: "AI assistant for AA Ngong Town Driving School - Get information about driving courses, fees, registration, and NTSA requirements.",
-  
+
   // ADD THIS MISSING KEY:
   footerNote: "Powered by EricBot Assistant - AA Ngong Town Driving School"
 };
@@ -128,7 +128,7 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
 // Swahili translations (simplified for now)
 const swTranslations: Record<TranslationKey, string> = {
   ...enTranslations, // Use English as fallback for now
-  
+
   // Override with Swahili translations:
   greeting: `Hujambo! 👋 Karibu AA Ngong Town Driving School! 🚗
 
@@ -147,7 +147,7 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
   menuOptions: "Tafadhali chagua chaguo:",
   option1: "1️⃣ Taarifa za Kozi & Ada",
   option2: "2️⃣ Usaidizi wa Usajili",
-  option3: "3️⃣ Malipo & Mahitaji ya NTSA", 
+  option3: "3️⃣ Malipo & Mahitaji ya NTSA",
   option4: "4️⃣ Mahitaji ya Leseni",
 
   quickAccess: "Ufikiaji wa Haraka",
@@ -161,7 +161,7 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
   emergencyContact: "🆘 Mawasiliano ya Dharura",
   courseInfo: "🎓 Taarifa za Kozi",
   fullName: "Jina Kamili *",
-  dateOfBirth: "Tarehe ya Kuzaliwa *", 
+  dateOfBirth: "Tarehe ya Kuzaliwa *",
   idNumber: "Nambari ya Kitambulisho *",
   phoneNumber: "Nambari ya Simu *",
   email: "Barua Pepe",
@@ -173,7 +173,7 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
 
   thinking: "Inafikiri",
   sending: "Inatuma",
-  submitRegistration: "Wasilisha Usajili", 
+  submitRegistration: "Wasilisha Usajili",
   submitting: "Inawasilisha...",
   cancel: "Ghairi",
   typeMessage: "Uliza kuhusu kozi za udereva...",
@@ -181,7 +181,7 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
   tip: "💡 Kidokezo: Andika nambari 1–4 kwa ufikiaji wa haraka",
 
   registrationSuccess: "✅ Usajili umewasilishawa kwa mafanikio! Tunafungua WhatsApp kutuma maelezo yako kwa timu yetu. Tafadhali bofya \"Tuma\" kukamilisha mchakato.\n\nTutawasiliana nawe ndani ya masaa 24 kwa **{phoneNumber}**.\n\n📞 **Mawasiliano ya Moja kwa Moja:** 0759963210\n📍 **Eneo:** AA Ngong Town Driving School",
-  
+
   // ADD THIS MISSING KEY:
   footerNote: "Inaendeshwa na EricBot Assistant - AA Ngong Town Driving School"
 };
