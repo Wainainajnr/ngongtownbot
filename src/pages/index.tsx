@@ -18,7 +18,7 @@ interface LocalAxiosError {
 
 const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
   <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden max-w-[95%] sm:max-w-[90%] w-full">
-    <div className="bg-aa-red p-3 sm:p-4 border-b border-aa-red/10">
+    <div className="bg-aa-green p-3 sm:p-4 border-b border-aa-green/10">
       <h3 className="font-bold text-white text-sm">Welcome to AA Kenya - Ngong Town Branch</h3>
     </div>
     <div className="p-2 sm:p-4">
@@ -35,9 +35,9 @@ const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void
               className="flex items-center gap-3 w-full text-left bg-gray-50/50 hover:bg-aa-yellow/10 p-3 sm:p-2.5 rounded-xl transition-all active:scale-[0.98] border border-gray-100/50 group touch-manipulation"
             >
               <div className="w-6 h-6 rounded-full bg-aa-yellow flex items-center justify-center shrink-0 shadow-sm">
-                <span className="text-aa-red text-[10px] font-black group-hover:scale-110 transition-transform">✓</span>
+                <span className="text-aa-green text-[10px] font-black group-hover:scale-110 transition-transform">✓</span>
               </div>
-              <span className="text-aa-black font-semibold group-hover:text-aa-red transition-colors text-[13px] sm:text-[14px]">{item}</span>
+              <span className="text-aa-black font-semibold group-hover:text-aa-green transition-colors text-[13px] sm:text-[14px]">{item}</span>
             </button>
           </li>
         ))}
@@ -48,45 +48,45 @@ const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void
 
 const BenefitsCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
   <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden max-w-[95%] w-full">
-    <div className="bg-aa-red p-4 border-b border-aa-red/10">
+    <div className="bg-aa-green p-4 border-b border-aa-green/10">
       <h3 className="font-bold text-white text-sm">⭐ Benefits of Training with AA</h3>
     </div>
     <div className="p-4 bg-aa-yellow/5 text-xs">
       <ul className="space-y-2.5 text-aa-black">
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">1.</span>
+          <span className="text-aa-green font-bold mt-0.5">1.</span>
           <div><span className="font-bold">Certificate of competency</span>-Receive a globally recognised certification upon completion & licensing.</div>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">2.</span>
+          <span className="text-aa-green font-bold mt-0.5">2.</span>
           <div><span className="font-bold">Access to 170 professionally-trained instructors</span> who provide comprehensive training designed to build competent & confident drivers</div>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">3.</span>
+          <span className="text-aa-green font-bold mt-0.5">3.</span>
           <div><span className="font-bold">Basic mechanics & vehicle maintenance training</span></div>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">4.</span>
+          <span className="text-aa-green font-bold mt-0.5">4.</span>
           <div><span className="font-bold">Train from anywhere</span>-Access training from any of our 95 branches countrywide.</div>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">5.</span>
+          <span className="text-aa-green font-bold mt-0.5">5.</span>
           <div><span className="font-bold">Driver employment opportunities</span>-Learners benefits from AA Kenya’s driver recruitment bureau-connecting qualified drivers to employment</div>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">6.</span>
+          <span className="text-aa-green font-bold mt-0.5">6.</span>
           <div><span className="font-bold">Access to learning materials</span>- Learners receive road safety booklets & digital resorces</div>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">7.</span>
+          <span className="text-aa-green font-bold mt-0.5">7.</span>
           <div><span className="font-bold">Exclusive FIA opportunities</span>-With AA Kenyas affiliation to FIA, learners get access to participate in international Best Young Driver competition.</div>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">8.</span>
+          <span className="text-aa-green font-bold mt-0.5">8.</span>
           <div><span className="font-bold">International mobility benefits</span>-Learner get easy access to drive internationaly using AA International drivers permit.</div>
         </li>
         <li className="flex items-start gap-2">
-          <span className="text-aa-red font-bold mt-0.5">9.</span>
+          <span className="text-aa-green font-bold mt-0.5">9.</span>
           <div><span className="font-bold">Road safety & defensive driving</span>-Receive foundational training in defensive driving principles & risk-avoidance driving strategies.</div>
         </li>
       </ul>
@@ -103,7 +103,7 @@ const BenefitsCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => voi
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Brochure" ? "brochure" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-red hover:border-aa-red/30 active:bg-aa-red/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
           >
             {opt}
           </button>
@@ -112,9 +112,9 @@ const BenefitsCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => voi
       <a
         href="/AA_Brochure.pdf"
         download
-        className="mt-3 flex items-center justify-center gap-3 w-full py-3.5 bg-white hover:bg-aa-red/5 text-aa-red rounded-xl font-bold text-sm shadow-md transition-all active:scale-[0.98] outline-none border-2 border-aa-red border-dashed group"
+        className="mt-3 flex items-center justify-center gap-3 w-full py-3.5 bg-white hover:bg-aa-green/5 text-aa-green rounded-xl font-bold text-sm shadow-md transition-all active:scale-[0.98] outline-none border-2 border-aa-green border-dashed group"
       >
-        <div className="bg-aa-red/10 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
+        <div className="bg-aa-green/10 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
           📥
         </div>
         <span>Download Full Brochure (PDF)</span>
@@ -125,7 +125,7 @@ const BenefitsCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => voi
 
 const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
   <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden max-w-[95%] w-full">
-    <div className="bg-aa-red p-4 border-b border-aa-red/10">
+    <div className="bg-aa-green p-4 border-b border-aa-green/10">
       <h3 className="font-bold text-white text-sm">Course Information & Fees</h3>
     </div>
     <div className="p-4 space-y-4 text-sm text-gray-700 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300">
@@ -249,7 +249,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-red hover:border-aa-red/30 active:bg-aa-red/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
           >
             {opt}
           </button>
@@ -258,9 +258,9 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
       <a
         href="/AA_Brochure.pdf"
         download
-        className="mt-3 flex items-center justify-center gap-3 w-full py-3.5 bg-white hover:bg-aa-red/5 text-aa-red rounded-xl font-bold text-sm shadow-md transition-all active:scale-[0.98] outline-none border-2 border-aa-red border-dashed group"
+        className="mt-3 flex items-center justify-center gap-3 w-full py-3.5 bg-white hover:bg-aa-green/5 text-aa-green rounded-xl font-bold text-sm shadow-md transition-all active:scale-[0.98] outline-none border-2 border-aa-green border-dashed group"
       >
-        <div className="bg-aa-red/10 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
+        <div className="bg-aa-green/10 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
           📥
         </div>
         <span>Download Course Brochure (PDF)</span>
@@ -271,7 +271,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
 
 const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSelect: (opt: string) => void, onStartForm: () => void }) => (
   <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden max-w-[90%] w-full">
-    <div className="bg-aa-red p-4 border-b border-aa-red/10">
+    <div className="bg-aa-green p-4 border-b border-aa-green/10">
       <h3 className="font-bold text-white text-sm">Registration Assistance</h3>
     </div>
     <div className="p-4 space-y-4">
@@ -282,7 +282,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
           href="https://edereva.aakenya.co.ke/students/"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full text-center py-2.5 bg-white border-2 border-aa-red text-aa-red rounded-xl text-sm font-bold shadow-sm hover:bg-aa-red hover:text-white transition-all active:scale-[0.98]"
+          className="block w-full text-center py-2.5 bg-white border-2 border-aa-green text-aa-green rounded-xl text-sm font-bold shadow-sm hover:bg-aa-green hover:text-white transition-all active:scale-[0.98]"
         >
           🔗 Register Online Here
         </a>
@@ -309,7 +309,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
       <div className="space-y-2">
         <button
           onClick={onStartForm}
-          className="w-full py-2.5 bg-aa-red text-white rounded-xl text-sm font-bold shadow-sm hover:bg-aa-red/90 transition-all active:scale-[0.98]"
+          className="w-full py-2.5 bg-aa-green text-white rounded-xl text-sm font-bold shadow-sm hover:bg-aa-green/90 transition-all active:scale-[0.98]"
         >
           📋 Open Registration Form
         </button>
@@ -328,7 +328,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-red hover:border-aa-red/30 active:bg-aa-red/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
           >
             {opt}
           </button>
@@ -340,7 +340,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
 
 const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
   <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden max-w-[90%] w-full">
-    <div className="bg-aa-red p-4 border-b border-aa-red/10">
+    <div className="bg-aa-green p-4 border-b border-aa-green/10">
       <h3 className="font-bold text-white text-sm">💳 Payment & NTSA Requirements</h3>
     </div>
     <div className="p-4 space-y-4">
@@ -391,7 +391,7 @@ const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => 
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-red hover:border-aa-red/30 active:bg-aa-red/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
           >
             {opt}
           </button>
@@ -403,20 +403,20 @@ const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => 
 
 const BrochureCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
   <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden max-w-[95%] w-full">
-    <div className="bg-aa-red p-4 border-b border-aa-red/10">
+    <div className="bg-aa-green p-4 border-b border-aa-green/10">
       <h3 className="font-bold text-white text-sm text-center">📄 Course Brochure & Fees</h3>
     </div>
     <div className="p-5 text-center space-y-4">
-      <div className="w-16 h-16 bg-aa-red/5 rounded-full flex items-center justify-center mx-auto mb-2 border border-aa-red/10">
+      <div className="w-16 h-16 bg-aa-green/5 rounded-full flex items-center justify-center mx-auto mb-2 border border-aa-green/10">
         <span className="text-3xl">📄</span>
       </div>
       <p className="text-sm text-aa-black leading-relaxed">Download our official 2026 brochure including all categories, fees, and requirements.</p>
       <a
         href="/AA_Brochure.pdf"
         download
-        className="flex items-center justify-center gap-3 w-full py-5 bg-white hover:bg-aa-red/5 text-aa-red rounded-2xl font-black text-base shadow-xl hover:shadow-2xl transition-all active:scale-[0.98] animate-pulse no-underline border-4 border-aa-red border-dashed group"
+        className="flex items-center justify-center gap-3 w-full py-5 bg-white hover:bg-aa-green/5 text-aa-green rounded-2xl font-black text-base shadow-xl hover:shadow-2xl transition-all active:scale-[0.98] animate-pulse no-underline border-4 border-aa-green border-dashed group"
       >
-        <div className="bg-aa-red/10 p-2 rounded-xl text-2xl shadow-inner group-hover:rotate-12 transition-transform border border-aa-red/20">
+        <div className="bg-aa-green/10 p-2 rounded-xl text-2xl shadow-inner group-hover:rotate-12 transition-transform border border-aa-green/20">
           📥
         </div>
         <div className="flex flex-col items-start leading-tight">
@@ -436,7 +436,7 @@ const BrochureCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => voi
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt)}
-            className="px-2 py-2 bg-white border border-gray-200 shadow-sm rounded-lg text-[10px] font-bold text-aa-black hover:text-aa-red active:bg-aa-red/5 transition-all text-center whitespace-nowrap"
+            className="px-2 py-2 bg-white border border-gray-200 shadow-sm rounded-lg text-[10px] font-bold text-aa-black hover:text-aa-green active:bg-aa-green/5 transition-all text-center whitespace-nowrap"
           >
             {opt}
           </button>
@@ -638,10 +638,10 @@ export default function ChatPage() {
         <div className="w-full max-w-[480px] bg-white sm:rounded-2xl shadow-xl flex flex-col h-[100dvh] sm:h-[85vh] border-x sm:border border-gray-200 relative overflow-hidden">
 
           {/* Header */}
-          <header className="bg-gradient-to-r from-aa-red to-aa-red/90 text-white p-3 sm:p-4 shadow-lg z-10 shrink-0 border-b border-aa-yellow/30">
+          <header className="bg-gradient-to-r from-aa-green to-aa-green/90 text-white p-3 sm:p-4 shadow-lg z-10 shrink-0 border-b border-aa-yellow/30">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-2 sm:space-x-3">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-md overflow-hidden shrink-0 relative border-2 border-aa-red/10">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-md overflow-hidden shrink-0 relative border-2 border-aa-green/10">
                   <Image
                     src="/ericbot.png"
                     alt="EricBot"
@@ -652,7 +652,7 @@ export default function ChatPage() {
                       (e.target as HTMLImageElement).style.display = 'none';
                     }}
                   />
-                  <div className="absolute w-2.5 h-2.5 bg-aa-yellow rounded-full bottom-0 right-0 border-2 border-aa-red ring-1 ring-white/20"></div>
+                  <div className="absolute w-2.5 h-2.5 bg-aa-yellow rounded-full bottom-0 right-0 border-2 border-aa-green ring-1 ring-white/20"></div>
                 </div>
                 <div className="flex flex-col">
                   <h1 className="text-[14px] sm:text-[16px] font-black leading-tight tracking-tight uppercase">EricBot Assistant</h1>
@@ -661,8 +661,8 @@ export default function ChatPage() {
               </div>
               <div className="flex items-center gap-2">
                 <div className="flex bg-black/20 rounded-full p-0.5 backdrop-blur-md border border-white/10">
-                  <button onClick={() => handleLanguageChange('en')} className={`px-2 py-0.5 text-[10px] font-bold rounded-full transition-all ${language === 'en' ? 'bg-aa-yellow text-aa-red shadow-sm' : 'text-white hover:bg-white/10'}`}>EN</button>
-                  <button onClick={() => handleLanguageChange('sw')} className={`px-2 py-0.5 text-[10px] font-bold rounded-full transition-all ${language === 'sw' ? 'bg-aa-yellow text-aa-red shadow-sm' : 'text-white hover:bg-white/10'}`}>SW</button>
+                  <button onClick={() => handleLanguageChange('en')} className={`px-2 py-0.5 text-[10px] font-bold rounded-full transition-all ${language === 'en' ? 'bg-aa-yellow text-aa-green shadow-sm' : 'text-white hover:bg-white/10'}`}>EN</button>
+                  <button onClick={() => handleLanguageChange('sw')} className={`px-2 py-0.5 text-[10px] font-bold rounded-full transition-all ${language === 'sw' ? 'bg-aa-yellow text-aa-green shadow-sm' : 'text-white hover:bg-white/10'}`}>SW</button>
                 </div>
                 <button
                   onClick={() => {
@@ -696,7 +696,7 @@ export default function ChatPage() {
               const isUser = message.role === "user";
               let Content = (
                 <div className={`max-w-[85%] text-sm leading-relaxed shadow-md ${isUser
-                  ? "bg-aa-red text-white font-bold rounded-2xl rounded-tr-none px-4 py-3 sm:px-5"
+                  ? "bg-aa-green text-white font-bold rounded-2xl rounded-tr-none px-4 py-3 sm:px-5"
                   : "bg-white text-aa-black border border-gray-100 rounded-2xl rounded-tl-none px-4 py-3 shadow-sm"
                   }`}>
                   <div className="whitespace-pre-wrap font-medium">{message.content}</div>

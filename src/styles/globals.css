@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-aa-red: #AF1E23;
+  --color-aa-green: #034F31;
   --color-aa-yellow: #FFD400;
   --color-aa-black: #1A1A1B;
   --color-aa-white: #FFFFFF;
@@ -21,12 +21,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-aa-red);
+  background: var(--color-aa-green);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #91161a;
+  background: #023621;
 }
 
 /* Custom animations */
@@ -61,7 +61,7 @@
 }
 
 .gradient-bg {
-  background: linear-gradient(-45deg, var(--color-aa-red), #91161a, var(--color-aa-black), var(--color-aa-red));
+  background: linear-gradient(-45deg, var(--color-aa-green), #023621, var(--color-aa-black), var(--color-aa-green));
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
@@ -102,7 +102,7 @@ input:focus,
 button:focus {
   outline: none;
   ring: 2px;
-  ring-color: var(--color-aa-red);
+  ring-color: var(--color-aa-green);
   ring-opacity: 0.2;
 }
 

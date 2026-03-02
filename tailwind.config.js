@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'aa-red': '#E31E24',
+        'aa-green': '#034F31',
         'aa-yellow': '#FFD400',
         'aa-black': '#1A1A1B',
         'aa-white': '#FFFFFF',
