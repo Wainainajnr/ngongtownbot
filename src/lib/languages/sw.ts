@@ -5,7 +5,7 @@ export const sw = {
 Tunatoa kozi kamili za udereva na walimu walioidhinishwa hapa Ngong Town.
 
 🚗 Mwanzo wa Kuanzia:
-Ikiwa unaanza tu, utaanza na gari ya saloon — ama ya automatic au manual. Ada ya mafunzo ni KSh 18,780, na chaguo la kulipa akiba ya KSh 12,000 na kulipa mabaki baada ya wiki moja. Zaidi ya hayo, malipo ya NTSA ya KSh 2,450, yanajumuisha PDL, mtihani wa kuendesha, na leseni ya muda wa kuendesha.
+Ikiwa unaanza tu, utaanza na gari ya saloon — ama ya automatic au manual. Ada ya mafunzo ni KSh 24,900, na chaguo la kulipa akiba ya KSh 15,000 na kulipa mabaki baada ya wiki mbili. Zaidi ya hayo, malipo ya NTSA ya KSh 2,450, yanajumuisha PDL, mtihani wa kuendesha, na leseni ya muda wa kuendesha.
 
 Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua kati ya vipindi viwili vya muda: 9:00–10:00 AM au 12:00–1:00 PM.
 
@@ -61,8 +61,8 @@ Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua ka
   course_info: `📚 KOZI ZA KAWADA (Muda wa Majuma 5)
 
 🚗 Gari ya Saloon (Kitengo B) - Kozi ya Mwanzo
-Ada ya Kozi: KSh 18,780  
-Chaguo la Akiba: KSh 12,000 (mabaki baada ya wiki 1)  
+Ada ya Kozi: KSh 24,900  
+Chaguo la Akiba: KSh 15,000 (mabaki baada ya wiki 2)  
 Ada ya NTSA: KSh 2,450 (kupitia eCitizen)  
 Muda: Majuma 5  
 Usajili: Kila Jumatano  

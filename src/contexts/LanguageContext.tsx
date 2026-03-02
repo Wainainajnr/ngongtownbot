@@ -64,7 +64,7 @@ const enTranslations: Record<TranslationKey, string> = {
 We offer comprehensive driving courses with certified instructors right here in Ngong Town.
 
 🚗 BEGINNER'S STARTING POINT:
-If you're just getting started, you'll begin with a saloon car—either automatic or manual. The training fee is KSh 18,780, with an option to pay a deposit of KSh 12,000 and settle the balance after one week. Additionally, NTSA charges of KSh 2,450 apply, covering the PDL, driving test, and interim driving license.
+If you're just getting started, you'll begin with a saloon car—either automatic or manual. The training fee is KSh 24,900, with an option to pay a deposit of KSh 15,000 and settle the balance after two weeks. Additionally, NTSA charges of KSh 2,450 apply, covering the PDL, driving test, and interim driving license.
 
 The course runs for 5 weeks, with new intakes every Wednesday. You can choose between two time slots: 9:00–10:00 AM or 12:00–1:00 PM.
 
@@ -135,7 +135,7 @@ const swTranslations: Record<TranslationKey, string> = {
 Tunatoa kozi kamili za udereva na walimu walioidhinishwa hapa Ngong Town.
 
 🚗 Mwanzo wa Kuanzia:
-Ikiwa unaanza tu, utaanza na gari ya saloon — ama ya automatic au manual. Ada ya mafunzo ni KSh 18,780, na chaguo la kulipa akiba ya KSh 12,000 na kulipa mabaki baada ya wiki moja. Zaidi ya hayo, malipo ya NTSA ya KSh 2,450, yanajumuisha PDL, mtihani wa kuendesha, na leseni ya muda wa kuendesha.
+Ikiwa unaanza tu, utaanza na gari ya saloon — ama ya automatic au manual. Ada ya mafunzo ni KSh 24,900, na chaguo la kulipa akiba ya KSh 15,000 na kulipa mabaki baada ya wiki mbili. Zaidi ya hayo, malipo ya NTSA ya KSh 2,450, yanajumuisha PDL, mtihani wa kuendesha, na leseni ya muda wa kuendesha.
 
 Kozi inaendelea kwa majuma 5, na usajili mpya kila Jumatano. Unaweza kuchagua kati ya vipindi viwili vya muda: 9:00–10:00 AM au 12:00–1:00 PM.
 

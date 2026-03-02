@@ -26,7 +26,8 @@ const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void
         {[
           "Course Information & Fees",
           "Registration Assistance",
-          "Payment & NTSA Requirements"
+          "Payment & NTSA Requirements",
+          "Benefits of Training with AA"
         ].map((item, idx) => (
           <li key={idx}>
             <button
@@ -45,6 +46,83 @@ const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void
   </div>
 );
 
+const BenefitsCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
+  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[95%] w-full">
+    <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10">
+      <h3 className="font-semibold text-primary-blue text-sm">⭐ Benefits of Training with AA</h3>
+    </div>
+    <div className="p-4 bg-blue-50 text-xs">
+      <ul className="space-y-2.5 text-blue-800">
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">1.</span>
+          <div><span className="font-semibold">Certificate of competency</span>-Receive a globally recognised certification upon completion & licensing.</div>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">2.</span>
+          <div><span className="font-semibold">Access to 170 professionally-trained instructors</span> who provide comprehensive training designed to build competent & confident drivers</div>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">3.</span>
+          <div><span className="font-semibold">Basic mechanics & vehicle maintenance training</span></div>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">4.</span>
+          <div><span className="font-semibold">Train from anywhere</span>-Access training from any of our 95 branches countrywide.</div>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">5.</span>
+          <div><span className="font-semibold">Driver employment opportunities</span>-Learners benefits from AA Kenya’s driver recruitment bureau-connecting qualified drivers to employment</div>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">6.</span>
+          <div><span className="font-semibold">Access to learning materials</span>- Learners receive road safety booklets & digital resorces</div>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">7.</span>
+          <div><span className="font-semibold">Exclusive FIA opportunities</span>-With AA Kenyas affiliation to FIA, learners get access to participate in international Best Young Driver competition.</div>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">8.</span>
+          <div><span className="font-semibold">International mobility benefits</span>-Learner get easy access to drive internationaly using AA International drivers permit.</div>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="text-blue-600 mt-0.5">9.</span>
+          <div><span className="font-semibold">Road safety & defensive driving</span>-Receive foundational training in defensive driving principles & risk-avoidance driving strategies.</div>
+        </li>
+      </ul>
+    </div>
+    <div className="bg-gray-50/50 p-4 border-t border-gray-100/50">
+      <p className="text-[10px] text-gray-400 font-bold uppercase mb-3 tracking-widest pl-1">Choose another option</p>
+      <div className="grid grid-cols-2 gap-2">
+        {[
+          "Course Info",
+          "Registration",
+          "Payment & NTSA",
+          "Brochure"
+        ].map((opt, i) => (
+          <button
+            key={i}
+            onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Brochure" ? "brochure" : opt)}
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+      <a
+        href="/AA_Brochure.pdf"
+        download
+        className="mt-3 flex items-center justify-center gap-3 w-full py-3.5 bg-cta-green hover:bg-cta-green/90 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all active:scale-[0.98] outline-none border-2 border-white/20 border-dashed group"
+      >
+        <div className="bg-white/20 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
+          📥
+        </div>
+        <span>Download Full Brochure (PDF)</span>
+      </a>
+    </div>
+  </div>
+);
+
 const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
   <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[95%] w-full">
     <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10">
@@ -56,8 +134,8 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
       <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
         <h4 className="font-bold text-gray-900 mb-2 flex items-center gap-2">🚗 Saloon Car (Category B) <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Beginner&apos;s Course</span></h4>
         <div className="space-y-1.5 text-xs">
-          <p><span className="font-semibold">Course Fee:</span> KSh 18,780</p>
-          <p><span className="font-semibold">Deposit Option:</span> KSh 12,000 (balance after 1 week)</p>
+          <p><span className="font-semibold">Course Fee:</span> KSh 24,900</p>
+          <p><span className="font-semibold">Deposit Option:</span> KSh 15,000 (balance after 2 weeks)</p>
           <p><span className="font-semibold">NTSA Fee:</span> KSh 2,450 (via eCitizen)</p>
           <p><span className="font-semibold">Duration:</span> 5 weeks</p>
           <p><span className="font-semibold">Intake:</span> Every Wednesday</p>
@@ -71,7 +149,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
         <h4 className="font-bold text-amber-900 mb-1 flex items-center gap-2">⭐ Premier Driving <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">Beginner</span></h4>
         <div className="space-y-1 text-xs">
           <p className="text-amber-800"><span className="font-semibold">Course Fee:</span> KSh 50,000</p>
-          <p className="text-amber-800"><span className="font-semibold">NTSA Fee:</span> Included in fees + smart driving license</p>
+          <p className="text-amber-800"><span className="font-semibold">NTSA Fee:</span> KSh 2,450</p>
           <p className="text-amber-800"><span className="font-semibold">Duration:</span> 5 weeks</p>
           <p className="text-amber-800 italic">Private lessons</p>
         </div>
@@ -80,7 +158,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
       {/* Motorcycle */}
       <div className="grid grid-cols-1 gap-3">
         <div className="border border-gray-100 p-3 rounded-xl">
-          <h4 className="font-bold text-gray-900 mb-1">🏍️ Motorcycle (Category A-Riders who know how to ride)</h4>
+          <h4 className="font-bold text-gray-900 mb-1">🏍️ Motorcycle (Category A - Experienced Riders)</h4>
           <div className="space-y-1 text-xs">
             <p><span className="font-semibold">Course Fee:</span> KSh 3,000</p>
             <p><span className="font-semibold">NTSA Fee:</span> KSh 2,450 (via eCitizen)</p>
@@ -102,7 +180,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
         <div className="border border-gray-100 p-3 rounded-xl">
           <h4 className="font-bold text-gray-900 mb-1">🚐 Passenger Light Vehicle (Category B3)</h4>
           <div className="space-y-1 text-xs">
-            <p><span className="font-semibold">Course Fee:</span> KSh 10,780</p>
+            <p><span className="font-semibold">Course Fee:</span> KSh 10,000</p>
             <p><span className="font-semibold">NTSA Fee:</span> KSh 2,350</p>
             <p><span className="font-semibold">Duration:</span> 3 weeks</p>
             <p className="text-amber-700 italic">Requires Category B license with 2 years experience.</p>
@@ -112,7 +190,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
         <div className="border border-gray-100 p-3 rounded-xl">
           <h4 className="font-bold text-gray-900 mb-1">🚚 Light & Medium Trucks (Category C1/C)</h4>
           <div className="space-y-1 text-xs">
-            <p><span className="font-semibold">Course Fee:</span> KSh 12,780</p>
+            <p><span className="font-semibold">Course Fee:</span> KSh 10,000</p>
             <p><span className="font-semibold">NTSA Fee:</span> KSh 2,350</p>
             <p><span className="font-semibold">Duration:</span> 3 weeks</p>
             <p className="text-amber-700 italic">Requires Category B license with 2 years experience.</p>
@@ -122,7 +200,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
         <div className="border border-gray-100 p-3 rounded-xl">
           <h4 className="font-bold text-gray-900 mb-1">🚌 Public Service Vehicle (Category D1/D)</h4>
           <div className="space-y-1 text-xs">
-            <p><span className="font-semibold">Course Fee:</span> KSh 12,780</p>
+            <p><span className="font-semibold">Course Fee:</span> KSh 10,000</p>
             <p><span className="font-semibold">NTSA Fee:</span> KSh 2,350</p>
             <p><span className="font-semibold">Duration:</span> 3 weeks</p>
             <p className="text-amber-700 italic">Requires Category B and C license</p>
@@ -164,17 +242,29 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
       <div className="grid grid-cols-2 gap-2">
         {[
           "Registration",
-          "Payment & NTSA"
+          "Payment & NTSA",
+          "Benefits",
+          "Brochure"
         ].map((opt, i) => (
           <button
             key={i}
-            onClick={() => onOptionSelect(opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation"
+            onClick={() => onOptionSelect(opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
           >
             {opt}
           </button>
         ))}
       </div>
+      <a
+        href="/AA_Brochure.pdf"
+        download
+        className="mt-3 flex items-center justify-center gap-3 w-full py-3.5 bg-cta-green hover:bg-cta-green/90 text-white rounded-xl font-bold text-sm shadow-lg hover:shadow-xl transition-all active:scale-[0.98] outline-none border-2 border-white/20 border-dashed group"
+      >
+        <div className="bg-white/20 p-1.5 rounded-lg group-hover:scale-110 transition-transform">
+          📥
+        </div>
+        <span>Download Course Brochure (PDF)</span>
+      </a>
     </div>
   </div>
 );
@@ -233,12 +323,14 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
       <div className="grid grid-cols-2 gap-2">
         {[
           "Course Info",
-          "Payment & NTSA"
+          "Payment & NTSA",
+          "Benefits",
+          "Brochure"
         ].map((opt, i) => (
           <button
             key={i}
-            onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation"
+            onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
           >
             {opt}
           </button>
@@ -294,12 +386,59 @@ const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => 
       <div className="grid grid-cols-2 gap-2">
         {[
           "Course Info",
-          "Registration"
+          "Registration",
+          "Benefits",
+          "Brochure"
         ].map((opt, i) => (
           <button
             key={i}
-            onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation"
+            onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
+            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-gray-600 hover:text-primary-blue active:bg-blue-50 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const BrochureCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
+  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-[95%] w-full">
+    <div className="bg-primary-blue/5 p-4 border-b border-primary-blue/10">
+      <h3 className="font-semibold text-primary-blue text-sm text-center">📄 Course Brochure & Fees</h3>
+    </div>
+    <div className="p-5 text-center space-y-4">
+      <div className="w-16 h-16 bg-cta-green/10 rounded-full flex items-center justify-center mx-auto mb-2">
+        <span className="text-3xl">📄</span>
+      </div>
+      <p className="text-sm text-gray-600">Download our official 2026 brochure including all categories, fees, and requirements.</p>
+      <a
+        href="/AA_Brochure.pdf"
+        download
+        className="flex items-center justify-center gap-3 w-full py-5 bg-cta-green hover:bg-cta-green/90 text-white rounded-2xl font-black text-base shadow-xl hover:shadow-2xl transition-all active:scale-[0.98] animate-pulse no-underline border-4 border-white/30 border-dashed group"
+      >
+        <div className="bg-white p-2 rounded-xl text-2xl shadow-inner group-hover:rotate-12 transition-transform">
+          📥
+        </div>
+        <div className="flex flex-col items-start leading-tight">
+          <span className="text-xs opacity-90 font-medium">OFFICIAL DOCUMENT</span>
+          <span>DOWNLOAD NOW (PDF)</span>
+        </div>
+      </a>
+      <p className="text-[10px] text-gray-400 italic">File size: ~2.4MB PDF</p>
+    </div>
+    <div className="bg-gray-50/50 p-4 border-t border-gray-100/50">
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          "Course Info",
+          "Payment",
+          "Benefits"
+        ].map((opt, i) => (
+          <button
+            key={i}
+            onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt)}
+            className="px-2 py-2 bg-white border border-gray-200 shadow-sm rounded-lg text-[10px] font-bold text-gray-500 hover:text-primary-blue active:bg-blue-50 transition-all text-center whitespace-nowrap"
           >
             {opt}
           </button>
@@ -322,11 +461,11 @@ const BeginnerCourseCard = ({ onAction }: { onAction: () => void }) => (
       </div>
       <div>
         <span className="block text-xs text-gray-400 uppercase tracking-wide">Fee</span>
-        <span className="font-medium text-gray-800">KSh 18,780</span>
+        <span className="font-medium text-gray-800">KSh 24,900</span>
       </div>
       <div>
         <span className="block text-xs text-gray-400 uppercase tracking-wide">Deposit</span>
-        <span className="font-medium text-gray-800">KSh 12,000</span>
+        <span className="font-medium text-gray-800">KSh 15,000</span>
       </div>
       <div>
         <span className="block text-xs text-gray-400 uppercase tracking-wide">NTSA</span>
@@ -358,6 +497,18 @@ export default function ChatPage() {
 
   const sendMessage = useCallback(async (content: string, type: Message['type'] = 'text') => {
     if (!content.trim() && type === 'text') return;
+
+    // Automatic Brochure Download Trigger
+    const brochureTriggers = ['brochure', 'download brochure', 'pdf', 'pamphlet', 'leaflet', 'course list pdf'];
+    if (brochureTriggers.some(trigger => content.toLowerCase().includes(trigger))) {
+      const link = document.createElement('a');
+      link.href = '/AA_Brochure.pdf';
+      link.download = 'AA_Brochure.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
     if (loadingRef.current) return;
 
     loadingRef.current = true;
@@ -571,12 +722,20 @@ export default function ChatPage() {
                     onStartForm={() => { sendMessage('start registration', 'text'); }}
                   />;
                 }
+                // Custom Card for Brochure logic
+                else if (lowerContent.includes("official aa kenya brochure")) {
+                  Content = <BrochureCard onOptionSelect={(opt) => sendMessage(opt, 'text')} />;
+                }
+                // Custom Card for Benefits - Check this BEFORE Payment to avoid footer menu matching overlap
+                else if (lowerContent.includes("benefits of training with aa kenya") || lowerContent.includes("⭐ benefits")) {
+                  Content = <BenefitsCard onOptionSelect={(opt) => sendMessage(opt, 'text')} />;
+                }
                 // Custom Card for Payment & NTSA
-                else if (lowerContent.includes("payment & ntsa requirements") || lowerContent.includes("payment methods")) {
+                else if (lowerContent.includes("💳 payment & ntsa requirements") || (lowerContent.includes("payment methods") && !lowerContent.includes("benefits"))) {
                   Content = <PaymentInfoCard onOptionSelect={(opt) => sendMessage(opt, 'text')} />;
                 }
-                // Broader matching for Beginner Course - matching "18,780" which is in the backend response "KSh 18,780"
-                else if (lowerContent.includes("beginner's course") || lowerContent.includes("18,780")) {
+                // Broader matching for Beginner Course - matching "24,900" which is in the backend response "KSh 24,900"
+                else if (lowerContent.includes("beginner's course") || lowerContent.includes("24,900")) {
                   Content = <BeginnerCourseCard onAction={() => sendMessage('Tell me more about the fee structure', 'text')} />;
                 }
               }

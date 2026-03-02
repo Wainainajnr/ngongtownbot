@@ -23,7 +23,7 @@ const responseDatabase: { [key: string]: string } = {
 We offer comprehensive driving courses with certified instructors right here in Ngong Town.
 
 🚗 BEGINNER'S STARTING POINT:
-If you're just getting started, you'll begin with a saloon car—either automatic or manual. The training fee is KSh 18,780, with an option to pay a deposit of KSh 12,000 and settle the balance after one week. Additionally, NTSA charges of KSh 2,450 apply, covering the PDL, driving test, and interim driving license.
+If you're just getting started, you'll begin with a saloon car—either automatic or manual. The training fee is KSh 24,900, with an option to pay a deposit of KSh 15,000 and settle the balance after two weeks. Additionally, NTSA charges of KSh 2,450 apply, covering the PDL, driving test, and interim driving license.
 
 The course runs for 5 weeks, with new intakes every Wednesday. You can choose between two time slots: 9:00–10:00 AM or 12:00–1:00 PM.
 
@@ -35,14 +35,15 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
 Please choose an option:  
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Payment & NTSA Requirements`,
+3️⃣ Payment & NTSA Requirements  
+4️⃣ Benefits of Training with AA`,
 
   // ==================== 1️⃣ COURSE INFORMATION & FEES ====================
   "course_info": `📚 STANDARD COURSES (5 Weeks Duration)
   
   🚗 Saloon Car (Category B) - Beginner's Course
-  Course Fee: KSh 18,780  
-  Deposit Option: KSh 12,000 (balance after 1 week)  
+  Course Fee: KSh 24,900  
+  Deposit Option: KSh 15,000 (balance after 2 weeks)  
   NTSA Fee: KSh 2,450 (via eCitizen)  
   Duration: 5 weeks  
   Intake: Every Wednesday  
@@ -51,34 +52,34 @@ Please choose an option:
   
   ⭐ Premier Driving (Beginner Course)
   Course Fee: KSh 50,000  
-  NTSA Fee: Included in fees + smart driving license  
+  NTSA Fee: KSh 2,450  
   Duration: 5 weeks  
   Private lessons
   
-  🏍️ Motorcycle (Category A-Riders who know how to ride)
+  🏍️ Motorcycle (Category A - Experienced Riders)
   Course Fee: KSh 3,000  
   NTSA Fee: KSh 2,450 (via eCitizen)  
   Duration: 3 weeks
   
-  🏍️ Motorcycle (Category A)
+  🏍️ Motorcycle (Category A - Beginner Course)
   Course Fee: KSh 5,780  
   NTSA Fee: KSh 2,450 (via eCitizen)  
   Duration: 5 weeks
   
   🚐 Passenger Light Vehicle (Category B3)
-  Course Fee: KSh 10,780  
+  Course Fee: KSh 10,000  
   NTSA Fee: KSh 2,350  
   Duration: 3 weeks  
   Requires Category B license with 2 years experience.
   
   🚚 Light & Medium Trucks (Category C1/C)
-  Course Fee: KSh 12,780  
+  Course Fee: KSh 10,000  
   NTSA Fee: KSh 2,350  
   Duration: 3 weeks  
   Requires Category B license with 2 years experience.
   
   🚌 Public Service Vehicle (Category D1/D)
-  Course Fee: KSh 12,780  
+  Course Fee: KSh 10,000  
   NTSA Fee: KSh 2,350  
   Duration: 3 weeks  
   Requires Category B and C license
@@ -101,7 +102,8 @@ Please choose an option:
   Choose another option:
   1️⃣ Course Information & Fees  
   2️⃣ Registration Assistance  
-  3️⃣ Payment & NTSA Requirements`,
+  3️⃣ Payment & NTSA Requirements
+  4️⃣ Benefits of Training with AA`,
 
   // ==================== 2️⃣ REGISTRATION ASSISTANCE ====================
   "registration": `📝 REGISTRATION OPTIONS:
@@ -125,7 +127,8 @@ Please choose an option:
   Choose another option:
   1️⃣ Course Information & Fees  
   2️⃣ Registration Assistance  
-  3️⃣ Payment & NTSA Requirements`,
+  3️⃣ Payment & NTSA Requirements
+  4️⃣ Benefits of Training with AA`,
 
   // ==================== 3️⃣ PAYMENT & NTSA REQUIREMENTS ====================
   "payment_ntsa": `💳 PAYMENT & NTSA REQUIREMENTS
@@ -144,7 +147,8 @@ For help with NTSA setup, call 0759963210.
 Choose another option:
 1️⃣ Course Information & Fees  
 2️⃣ Registration Assistance  
-3️⃣ Payment & NTSA Requirements`,
+3️⃣ Payment & NTSA Requirements
+4️⃣ Benefits of Training with AA`,
 
   // ==================== FORM TRIGGER RESPONSE ====================
   "start_registration": `📋 REGISTRATION FORM
@@ -159,7 +163,38 @@ Once you submit the form, we'll:
 ✅ Answer any questions you have  
 ✅ Help with NTSA requirements
 
-You can also continue browsing other options while the form is open.`
+You can also continue browsing other options while the form is open.`,
+
+  // ==================== 4️⃣ BENEFITS OF TRAINING ====================
+  "benefits_info": `⭐ BENEFITS OF TRAINING WITH AA KENYA
+
+1. Certificate of competency-Receive a globally recognised certification upon completion & licensing.
+2. Access to 170 professionally-trained instructors who provide comprehensive training designed to build competent & confident drivers
+3. Basic mechanics & vehicle maintenance training
+4. Train from anywhere-Access training from any of our 95 branches countrywide. 
+5. Driver employment opportunities-Learners benefits from AA Kenya’s driver recruitment bureau-connecting qualified drivers to employment
+6. Access to learning materials- Learners receive road safety booklets & digital resorces
+7. Exclusive FIA opportunities-With AA Kenyas affiliation to FIA, learners get access to participate in international Best Young Driver competition.
+8. International mobility benefits-Learner get easy access to drive internationaly using AA International drivers permit.
+9. Road safety & defensive driving-Receive foundational training in defensive driving principles & risk-avoidance driving strategies.
+
+Choose another option:
+1️⃣ Course Information & Fees  
+2️⃣ Registration Assistance  
+3️⃣ Payment & NTSA Requirements
+4️⃣ Download Course Brochure`,
+
+  "brochure_download": `📄 OFFICIAL AA KENYA BROCHURE
+
+You can download our latest course brochure and fee structure using the button below.
+
+The brochure contains:
+✅ Full list of categories and requirements
+✅ Detailed fee structure for all courses
+✅ Branch locations and contacts
+✅ Training schedules
+
+Is there anything else I can help you with?`
 };
 
 // Function to generate WhatsApp URL
@@ -261,6 +296,24 @@ function findBestResponse(userMessage: string): string | null {
     return responseDatabase["start_registration"];
   }
 
+  // ==================== MENU OPTION 4 - BENEFITS ====================
+  const benefitTriggers = [
+    '4', 'benefits of training with aa', 'benefits', 'why train', 'advantages', 'why choose aa', 'benefit'
+  ];
+
+  if (benefitTriggers.some(trigger => lowerMessage.includes(trigger))) {
+    return responseDatabase["benefits_info"];
+  }
+
+  // ==================== BROCHURE TRIGGER ====================
+  const brochureTriggers = [
+    'brochure', 'download brochure', 'pdf', 'pamphlet', 'leaflet', 'course list pdf'
+  ];
+
+  if (brochureTriggers.some(trigger => lowerMessage.includes(trigger))) {
+    return responseDatabase["brochure_download"];
+  }
+
   // ==================== NO MATCH ====================
   return null;
 }
@@ -360,7 +413,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
               Key Info:
               - Location: Ngong Town
               - Phone: 0759963210
-              - Beginner Course (Saloon): KSh 18,780 (5 weeks)
+              - Beginner Course (Saloon): KSh 24,900 (5 weeks)
               - Refresher: KSh 10,000
               - NTSA Fees: KSh 2,450
               

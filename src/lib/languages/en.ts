@@ -5,7 +5,7 @@ export const en = {
 We offer comprehensive driving courses with certified instructors right here in Ngong Town.
 
 🚗 BEGINNER'S STARTING POINT:
-If you're just getting started, you'll begin with a saloon car—either automatic or manual. The training fee is KSh 18,780, with an option to pay a deposit of KSh 12,000 and settle the balance after one week. Additionally, NTSA charges of KSh 2,450 apply, covering the PDL, driving test, and interim driving license.
+If you're just getting started, you'll begin with a saloon car—either automatic or manual. The training fee is KSh 24,900, with an option to pay a deposit of KSh 15,000 and settle the balance after two weeks. Additionally, NTSA charges of KSh 2,450 apply, covering the PDL, driving test, and interim driving license.
 
 The course runs for 5 weeks, with new intakes every Wednesday. You can choose between two time slots: 9:00–10:00 AM or 12:00–1:00 PM.
 
@@ -61,8 +61,8 @@ The course runs for 5 weeks, with new intakes every Wednesday. You can choose be
   course_info: `📚 STANDARD COURSES (5 Weeks Duration)
 
 🚗 Saloon Car (Category B) - Beginner's Course
-Course Fee: KSh 18,780  
-Deposit Option: KSh 12,000 (balance after 1 week)  
+Course Fee: KSh 24,900  
+Deposit Option: KSh 15,000 (balance after 2 weeks)  
 NTSA Fee: KSh 2,450 (via eCitizen)  
 Duration: 5 weeks  
 Intake: Every Wednesday  
