@@ -8,8 +8,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary-blue': '#2563EB',
-        'cta-green': '#16A34A',
+        'aa-red': '#E31E24',
+        'aa-yellow': '#FFD400',
+        'aa-black': '#1A1A1B',
+        'aa-white': '#FFFFFF',
         'bg-slate': '#F8FAFC',
       },
       fontFamily: {

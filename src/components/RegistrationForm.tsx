@@ -142,13 +142,13 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
         <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[95dvh] sm:max-h-[90vh] overflow-hidden flex flex-col border border-gray-100">
                 {/* Header */}
-                <div className="bg-primary-blue/5 p-3 sm:p-4 border-b border-primary-blue/10 flex justify-between items-center shrink-0">
-                    <h2 className="text-sm sm:text-lg font-bold text-primary-blue flex items-center gap-2">
+                <div className="bg-aa-red p-3 sm:p-4 border-b border-aa-red/10 flex justify-between items-center shrink-0">
+                    <h2 className="text-sm sm:text-lg font-bold text-white flex items-center gap-2 uppercase tracking-tight">
                         📋 {t('registrationForm')}
                     </h2>
                     <button
                         onClick={onCancel}
-                        className="text-gray-400 hover:text-red-500 p-2 rounded-full hover:bg-white transition-all transition-colors"
+                        className="text-white/80 hover:text-white p-2 rounded-full hover:bg-white/10 transition-all transition-colors"
                         aria-label="Close registration form"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -176,7 +176,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                         value={formData.fullName}
                                         onChange={(e) => handleFieldChange('fullName', e.target.value)}
                                         onBlur={(e) => handleFieldBlur('fullName', e.target.value)}
-                                        className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all ${formErrors.fullName ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
+                                        className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 transition-all ${formErrors.fullName ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-aa-red'}`}
                                         placeholder="Enter your full name"
                                     />
                                     {formErrors.fullName && <p className="mt-1 text-xs text-red-500 font-medium">{formErrors.fullName}</p>}
@@ -195,7 +195,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                             value={formData.dateOfBirth}
                                             onChange={(e) => handleFieldChange('dateOfBirth', e.target.value)}
                                             onBlur={(e) => handleFieldBlur('dateOfBirth', e.target.value)}
-                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all ${formErrors.dateOfBirth ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
+                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 transition-all ${formErrors.dateOfBirth ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-aa-red'}`}
                                         />
                                         {formErrors.dateOfBirth && <p className="mt-1 text-xs text-red-500 font-medium">{formErrors.dateOfBirth}</p>}
                                     </div>
@@ -212,7 +212,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                             value={formData.idNumber}
                                             onChange={(e) => handleFieldChange('idNumber', e.target.value)}
                                             onBlur={(e) => handleFieldBlur('idNumber', e.target.value)}
-                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all ${formErrors.idNumber ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
+                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 transition-all ${formErrors.idNumber ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-aa-red'}`}
                                             placeholder="ID or Passport No."
                                         />
                                         {formErrors.idNumber && <p className="mt-1 text-xs text-red-500 font-medium">{formErrors.idNumber}</p>}
@@ -232,7 +232,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                             value={formData.phoneNumber}
                                             onChange={(e) => handleFieldChange('phoneNumber', e.target.value)}
                                             onBlur={(e) => handleFieldBlur('phoneNumber', e.target.value)}
-                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all ${formErrors.phoneNumber ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
+                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 transition-all ${formErrors.phoneNumber ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-aa-red'}`}
                                             placeholder="07XXXXXXXX"
                                         />
                                         {formErrors.phoneNumber && <p className="mt-1 text-xs text-red-500 font-medium">{formErrors.phoneNumber}</p>}
@@ -249,7 +249,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                             value={formData.email}
                                             onChange={(e) => handleFieldChange('email', e.target.value)}
                                             onBlur={(e) => handleFieldBlur('email', e.target.value)}
-                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all ${formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
+                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 transition-all ${formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-aa-red'}`}
                                             placeholder="name@email.com"
                                         />
                                         {formErrors.email && <p className="mt-1 text-xs text-red-500 font-medium">{formErrors.email}</p>}
@@ -295,7 +295,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                         value={formData.emergencyContactPhone}
                                         onChange={(e) => handleFieldChange('emergencyContactPhone', e.target.value)}
                                         onBlur={(e) => handleFieldBlur('emergencyContactPhone', e.target.value)}
-                                        className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all ${formErrors.emergencyContactPhone ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
+                                        className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 transition-all ${formErrors.emergencyContactPhone ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-aa-red'}`}
                                         placeholder="07XXXXXXXX"
                                     />
                                     {formErrors.emergencyContactPhone && <p className="mt-1 text-xs text-red-500 font-medium">{formErrors.emergencyContactPhone}</p>}
@@ -322,7 +322,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                             value={formData.preferredCourse}
                                             onChange={(e) => handleFieldChange('preferredCourse', e.target.value)}
                                             onBlur={(e) => handleFieldBlur('preferredCourse', e.target.value)}
-                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all appearance-none cursor-pointer ${formErrors.preferredCourse ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
+                                            className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 transition-all appearance-none cursor-pointer ${formErrors.preferredCourse ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-aa-red'}`}
                                         >
                                             <option value="">Select a course...</option>
                                             <option value="Motorcycle (Category A)">Motorcycle (Category A)</option>
@@ -343,7 +343,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
 
                                 <div>
                                     <label htmlFor="preferredIntake" className="block text-xs font-semibold text-gray-700 mb-1.5 uppercase">
-                                        {t('preferredIntake')} <span className="text-cta-green normal-case">(Wednesdays Only)</span>
+                                        {t('preferredIntake')} <span className="text-aa-red font-bold normal-case">(Wednesdays Only)</span>
                                     </label>
                                     <input
                                         id="preferredIntake"
@@ -354,7 +354,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                         onChange={(e) => handleFieldChange('preferredIntake', e.target.value)}
                                         onBlur={(e) => handleFieldBlur('preferredIntake', e.target.value)}
                                         min={new Date().toISOString().split('T')[0]}
-                                        className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 transition-all ${formErrors.preferredIntake ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-primary-blue'}`}
+                                        className={`w-full bg-slate-50 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 transition-all ${formErrors.preferredIntake ? 'border-red-500 focus:border-red-500' : 'border-gray-200 focus:border-aa-red'}`}
                                     />
                                     {formErrors.preferredIntake && <p className="mt-1 text-xs text-red-500 font-medium">{formErrors.preferredIntake}</p>}
                                 </div>
@@ -370,7 +370,7 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                                         onChange={(e) => handleFieldChange('additionalNotes', e.target.value)}
                                         onBlur={(e) => handleFieldBlur('additionalNotes', e.target.value)}
                                         rows={3}
-                                        className="w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-blue/20 focus:border-primary-blue transition-all"
+                                        className="w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-aa-red/20 focus:border-aa-red transition-all"
                                         placeholder="Any specific requests or questions?"
                                     />
                                 </div>
@@ -385,14 +385,14 @@ export default function RegistrationForm({ onSubmit, onCancel, isSubmitting }: R
                     <button
                         type="button"
                         onClick={onCancel}
-                        className="flex-1 px-4 py-3 text-sm font-semibold text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 hover:text-primary-blue hover:border-primary-blue/30 transition-all shadow-sm active:scale-95 touch-manipulation"
+                        className="flex-1 px-4 py-3 text-sm font-semibold text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 hover:text-aa-red hover:border-aa-red/30 transition-all shadow-sm active:scale-95 touch-manipulation"
                     >
                         {t('cancel')}
                     </button>
                     <button
                         onClick={handleSubmit}
                         disabled={isSubmitting}
-                        className="flex-1 px-4 py-3 text-sm font-bold text-white bg-green-600 rounded-xl hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center active:scale-95 touch-manipulation"
+                        className="flex-1 px-4 py-3 text-sm font-bold text-white bg-aa-red rounded-xl hover:bg-aa-red/90 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-sm flex justify-center items-center active:scale-95 touch-manipulation"
                     >
                         {isSubmitting ? (
                             <>

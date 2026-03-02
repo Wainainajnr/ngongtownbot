@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --color-aa-red: #AF1E23;
+  --color-aa-yellow: #FFD400;
+  --color-aa-black: #1A1A1B;
+  --color-aa-white: #FFFFFF;
+  --color-bg-slate: #f8fafc;
+
+  --font-sans: "Inter", "sans-serif";
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -11,12 +21,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #2563eb, #7c3aed);
+  background: var(--color-aa-red);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #1d4ed8, #6d28d9);
+  background: #91161a;
 }
 
 /* Custom animations */
@@ -25,6 +35,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -35,9 +46,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -48,7 +61,7 @@
 }
 
 .gradient-bg {
-  background: linear-gradient(-45deg, #2563eb, #7c3aed, #0ea5e9, #6366f1);
+  background: linear-gradient(-45deg, var(--color-aa-red), #91161a, var(--color-aa-black), var(--color-aa-red));
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
@@ -63,6 +76,7 @@
     opacity: 0;
     transform: translateY(20px) scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -73,28 +87,33 @@
 body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  color: #1e293b;
+  color: var(--color-aa-black);
   min-height: 100vh;
 }
 
 /* Smooth transitions for interactive elements */
-button, input {
+button,
+input {
   transition: all 0.2s ease-in-out;
 }
 
 /* Focus states for accessibility */
-input:focus, button:focus {
+input:focus,
+button:focus {
   outline: none;
   ring: 2px;
-  ring-color: #2563eb;
+  ring-color: var(--color-aa-red);
   ring-opacity: 0.2;
 }
 
 /* Loading animation enhancement */
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
