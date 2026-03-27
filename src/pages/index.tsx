@@ -32,7 +32,7 @@ const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void
           <li key={idx}>
             <button
               onClick={() => onOptionSelect(item)}
-              className="flex items-center gap-3 w-full text-left bg-gray-50/50 hover:bg-aa-yellow/10 p-3 sm:p-2.5 rounded-xl transition-all active:scale-[0.98] border border-gray-100/50 group touch-manipulation"
+              className="flex items-center gap-3 w-full text-left bg-gray-50/50 hover:bg-aa-yellow/10 p-4 sm:p-2.5 rounded-xl transition-all active:scale-[0.98] border border-gray-100/50 group touch-manipulation min-h-[44px]"
             >
               <div className="w-6 h-6 rounded-full bg-aa-yellow flex items-center justify-center shrink-0 shadow-sm">
                 <span className="text-aa-green text-[10px] font-black group-hover:scale-110 transition-transform">✓</span>
@@ -103,7 +103,7 @@ const BenefitsCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => voi
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Brochure" ? "brochure" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+            className="px-3 py-3 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1 min-h-[44px]"
           >
             {opt}
           </button>
@@ -249,7 +249,7 @@ const CourseInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => v
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Registration" ? "Registration Assistance" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+            className="px-3 py-3 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1 min-h-[44px]"
           >
             {opt}
           </button>
@@ -309,7 +309,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
       <div className="space-y-2">
         <button
           onClick={onStartForm}
-          className="w-full py-2.5 bg-aa-green text-white rounded-xl text-sm font-bold shadow-sm hover:bg-aa-green/90 transition-all active:scale-[0.98]"
+          className="w-full py-3 bg-aa-green text-white rounded-xl text-sm font-bold shadow-sm hover:bg-aa-green/90 transition-all active:scale-[0.98] min-h-[44px]"
         >
           📋 Open Registration Form
         </button>
@@ -328,7 +328,7 @@ const RegistrationOptionsCard = ({ onOptionSelect, onStartForm }: { onOptionSele
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment & NTSA" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+            className="px-3 py-3 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1 min-h-[44px]"
           >
             {opt}
           </button>
@@ -391,7 +391,7 @@ const PaymentInfoCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => 
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Registration" ? "Registration Assistance" : opt === "Benefits" ? "Benefits of Training with AA" : opt === "Brochure" ? "brochure" : opt)}
-            className="px-3 py-2.5 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1"
+            className="px-3 py-3 bg-white border border-gray-200 shadow-sm rounded-xl text-[12px] font-bold text-aa-black hover:text-aa-green hover:border-aa-green/30 active:bg-aa-green/5 active:scale-95 transition-all text-center whitespace-nowrap touch-manipulation col-span-1 min-h-[44px]"
           >
             {opt}
           </button>
@@ -436,7 +436,7 @@ const BrochureCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => voi
           <button
             key={i}
             onClick={() => onOptionSelect(opt === "Course Info" ? "Course Information & Fees" : opt === "Payment" ? "Payment & NTSA Requirements" : opt === "Benefits" ? "Benefits of Training with AA" : opt)}
-            className="px-2 py-2 bg-white border border-gray-200 shadow-sm rounded-lg text-[10px] font-bold text-aa-black hover:text-aa-green active:bg-aa-green/5 transition-all text-center whitespace-nowrap"
+            className="px-2 py-2 bg-white border border-gray-200 shadow-sm rounded-lg text-[10px] font-bold text-aa-black hover:text-aa-green active:bg-aa-green/5 transition-all text-center whitespace-nowrap min-h-[44px]"
           >
             {opt}
           </button>
@@ -471,7 +471,7 @@ const BeginnerCourseCard = ({ onAction }: { onAction: () => void }) => (
       </div>
     </div>
     <div className="p-4 pt-0">
-      <button onClick={onAction} className="w-full py-2 border border-primary-blue text-primary-blue rounded-lg text-sm font-medium hover:bg-blue-50 transition-colors">
+      <button onClick={onAction} className="w-full py-3 border border-primary-blue text-primary-blue rounded-lg text-sm font-medium hover:bg-blue-50 transition-colors min-h-[44px]">
         View Full Details
       </button>
     </div>
@@ -491,9 +491,12 @@ export default function ChatPage() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, loading]);
 
-  const sendMessage = useCallback(async (content: string, type: Message['type'] = 'text') => {
+  // Helper for synthetic delay to improve UX feel
+  const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+  const sendMessage = useCallback(async (content: string, type: Message['type'] = 'text', silent: boolean = false) => {
     if (!content.trim() && type === 'text') return;
 
     // Automatic Brochure Download Trigger
@@ -518,13 +521,20 @@ export default function ChatPage() {
       content: content.trim()
     };
 
-    const updatedMessages = [...messages, userMessage];
-    setMessages(updatedMessages);
+    const updatedMessages = silent ? messages : [...messages, userMessage];
+    if (!silent) {
+      setMessages(updatedMessages);
+    }
     setInput("");
+
+    // Add a small synthetic delay for button clicks to make "Processing..." visible
+    if (!silent && (content.length === 1 || ['hi', 'getting started'].includes(content.toLowerCase()))) {
+      await delay(600);
+    }
 
     try {
       const response = await axios.post<ChatResponse>("/api/chat", {
-        messages: updatedMessages,
+        messages: silent ? [userMessage] : updatedMessages,
         language
       });
 
@@ -616,7 +626,7 @@ export default function ChatPage() {
   useEffect(() => {
     if (!initializedRef.current && messages.length === 0) {
       initializedRef.current = true;
-      sendMessage("hi");
+      sendMessage("hi", 'text', true); // Use silent mode for initial greeting
     }
   }, [messages.length, sendMessage]);
 
@@ -706,7 +716,7 @@ export default function ChatPage() {
               if (!isUser) {
                 const lowerContent = message.content.toLowerCase();
                 // Broader matching for Welcome
-                if (lowerContent.includes("welcome to aa kenya") || lowerContent.includes("driving school!")) {
+                if (lowerContent.includes("ericbot") || lowerContent.includes("welcome to aa kenya") || lowerContent.includes("driving school!")) {
                   Content = <WelcomeCard onOptionSelect={(opt) => sendMessage(opt, 'text')} />;
                 }
                 // Custom Card for Course Info
@@ -772,7 +782,7 @@ export default function ChatPage() {
                   key={idx}
                   onClick={() => sendMessage(action.message, 'text')}
                   disabled={loading}
-                  className="flex-1 min-w-[110px] bg-gradient-to-r from-emerald-500 to-green-600 active:from-emerald-600 active:to-green-700 text-white text-[11px] font-bold py-3 px-2 rounded-xl shadow-md transition-all active:scale-95 whitespace-nowrap text-center disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+                  className="flex-1 min-w-[110px] min-h-[48px] bg-gradient-to-r from-emerald-500 to-green-600 active:from-emerald-600 active:to-green-700 text-white text-[12px] font-bold py-3 px-2 rounded-xl shadow-md transition-all active:scale-95 whitespace-nowrap text-center disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation flex items-center justify-center"
                 >
                   {action.label}
                 </button>
@@ -791,7 +801,7 @@ export default function ChatPage() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type a message..."
+                  placeholder={t('typeMessage')}
                   disabled={loading}
                   className="w-full bg-transparent text-gray-900 font-medium text-[16px] py-3.5 outline-none placeholder:text-gray-400"
                 />
@@ -799,17 +809,14 @@ export default function ChatPage() {
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className={`shrink-0 w-12 h-12 flex items-center justify-center rounded-full shadow-lg transition-all active:scale-95 ${!input.trim() || loading
-                  ? 'bg-gray-100 text-gray-400 opacity-50'
-                  : 'bg-gradient-to-br from-emerald-500 to-green-600 text-white shadow-lg shadow-green-100 ring-2 ring-emerald-500 ring-offset-2'
-                  }`}
-                aria-label="Send"
+                className="w-12 h-12 bg-aa-green text-white rounded-full flex items-center justify-center shadow-lg active:scale-90 transition-all disabled:opacity-50 disabled:shadow-none shrink-0"
               >
-                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                </svg>
+                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
               </button>
             </form>
+            <p className="text-[11px] text-gray-500 text-center mt-2 font-medium opacity-80">
+              {t('inputHelper')}
+            </p>
           </footer>
 
         </div>
