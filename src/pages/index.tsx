@@ -642,6 +642,14 @@ export default function ChatPage() {
         <title>EricBot Assistant - AA Kenya - Ngong Town Branch</title>
         <meta name="description" content={t('metaDescription')} />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <style>{`
+          .font-friendly {
+            font-family: 'Outfit', sans-serif !important;
+          }
+        `}</style>
       </Head>
 
       <div className="min-h-screen bg-bg-slate flex items-center justify-center p-0 sm:p-4 font-sans text-gray-900">
@@ -803,7 +811,7 @@ export default function ChatPage() {
                   onChange={(e) => setInput(e.target.value)}
                   placeholder={t('typeMessage')}
                   disabled={loading}
-                  className="w-full bg-transparent text-gray-900 font-medium text-[16px] py-3.5 outline-none placeholder:text-gray-400"
+                  className="w-full bg-transparent text-gray-900 font-medium text-[16px] py-3.5 outline-none placeholder:text-gray-400 font-friendly"
                 />
               </div>
               <button
@@ -814,7 +822,7 @@ export default function ChatPage() {
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
               </button>
             </form>
-            <p className="text-[11px] text-gray-500 text-center mt-2 font-medium opacity-80">
+            <p className="text-[11px] text-gray-500 text-center mt-2 font-medium opacity-80 font-friendly">
               {t('inputHelper')}
             </p>
           </footer>
