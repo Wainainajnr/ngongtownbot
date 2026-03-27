@@ -60,7 +60,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 // English translations
 const enTranslations: Record<TranslationKey, string> = {
-  greeting: "Hello! I'm EricBot, your AA Kenya Ngong Town assistant. I can help you with: Courses, Registration, NTSA services, and answer any questions you have.",
+  greeting: "Hello! I'm EricBot, your AA Kenya Ngong Town assistant.\n\nI can help you with:\n- Courses\n- Registration\n- NTSA services",
 
   menuOptions: "Please choose an option:",
   option1: "1️⃣ Course Information & Fees",
@@ -120,7 +120,7 @@ const swTranslations: Record<TranslationKey, string> = {
   ...enTranslations, // Use English as fallback for now
 
   // Override with Swahili translations:
-  greeting: "Hujambo! Mimi ni EricBot, msaidizi wako wa AA Kenya Ngong Town. Naweza kukusaidia na: Kozi, Usajili, huduma za NTSA, na kujibu maswali yoyote uliyo nayo.",
+  greeting: "Hujambo! Mimi ni EricBot, msaidizi wako wa AA Kenya Ngong Town.\n\nNaweza kukusaidia na:\n- Kozi (Courses)\n- Usajili (Registration)\n- Huduma za NTSA",
 
   menuOptions: "Tafadhali chagua chaguo:",
   option1: "1️⃣ Taarifa za Kozi & Ada",

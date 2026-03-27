@@ -19,19 +19,20 @@ interface LocalAxiosError {
 const WelcomeCard = ({ onOptionSelect }: { onOptionSelect: (opt: string) => void }) => (
   <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden max-w-[95%] sm:max-w-[90%] w-full">
     <div className="bg-aa-green p-3 sm:p-4 border-b border-aa-green/10">
-      <h3 className="font-bold text-white text-sm">Welcome to AA Kenya - Ngong Town Branch</h3>
+      <h3 className="font-bold text-white text-sm">Hello! I'm EricBot, your AA Kenya Ngong Town assistant.</h3>
     </div>
-    <div className="p-2 sm:p-4">
+    <div className="p-3 sm:p-4">
+      <p className="text-sm text-aa-black font-semibold mb-3">I can help you with:</p>
       <ul className="space-y-1.5 sm:space-y-2 text-sm text-gray-600">
         {[
-          "Course Information & Fees",
-          "Registration Assistance",
-          "Payment & NTSA Requirements",
+          "Courses",
+          "Registration",
+          "NTSA services",
           "Benefits of Training with AA"
         ].map((item, idx) => (
           <li key={idx}>
             <button
-              onClick={() => onOptionSelect(item)}
+              onClick={() => onOptionSelect(item === "Courses" ? "Course Information & Fees" : item === "Registration" ? "Registration Assistance" : item === "NTSA services" ? "Payment & NTSA Requirements" : item)}
               className="flex items-center gap-3 w-full text-left bg-gray-50/50 hover:bg-aa-yellow/10 p-4 sm:p-2.5 rounded-xl transition-all active:scale-[0.98] border border-gray-100/50 group touch-manipulation min-h-[44px]"
             >
               <div className="w-6 h-6 rounded-full bg-aa-yellow flex items-center justify-center shrink-0 shadow-sm">
