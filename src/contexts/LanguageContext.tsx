@@ -48,7 +48,8 @@ export type TranslationKey =
   | 'registrationForm'
   | 'metaDescription'
   | 'footerNote'
-  | 'inputHelper';
+  | 'inputHelper'
+  | 'chatError';
 
 interface LanguageContextType {
   language: Language;
@@ -108,6 +109,7 @@ const enTranslations: Record<TranslationKey, string> = {
   submissionFailed: "Failed to submit registration. Please call us directly at 0759963210 or try again later.",
   validationFailed: "Validation failed",
   offlineMode: "Offline Mode",
+  chatError: "Something went wrong, please try again",
   registrationForm: "Registration Form",
   metaDescription: "AI assistant for AA Kenya - Ngong Town Branch - Get information about driving courses, fees, registration, and NTSA requirements.",
 
@@ -161,7 +163,7 @@ const swTranslations: Record<TranslationKey, string> = {
 
   registrationSuccess: "✅ Usajili umewasilishawa kwa mafanikio! Tunafungua WhatsApp kutuma maelezo yako kwa timu yetu. Tafadhali bofya \"Tuma\" kukamilisha mchakato.\n\nTutawasiliana nawe ndani ya masaa 24 kwa **{phoneNumber}**.\n\n📞 **Mawasiliano ya Moja kwa Moja:** 0759963210\n📍 **Eneo:** AA Kenya - Ngong Town Branch",
 
-  // ADD THIS MISSING KEY:
+  chatError: "Kuna kitu kimeenda vibaya, tafadhali jaribu tena",
   footerNote: "Inaendeshwa na EricBot Assistant - AA Kenya - Ngong Town Branch"
 };
 
